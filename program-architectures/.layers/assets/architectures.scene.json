@@ -1022,12 +1022,259 @@
       ]
     },
     {
+      "id": "externes",
+      "label": "services externes",
+      "chapter": "plusieurs programmes",
+      "title": "Des programmes qui ne sont pas à vous",
+      "body": [
+        "La bibliothèque veut accepter la carte bancaire, et ne plus retaper le titre de chaque nouveau livre. Elle n'écrit aucun de ces deux programmes : ils existent déjà, chez d'autres.",
+        "L'appli Prêts s'en sert à distance, en passant par leur **API** : le guichet qu'un programme ouvre aux autres programmes."
+      ],
+      "callout": {
+        "title": "idée clé",
+        "text": "Un service externe fait une tâche à votre place. En contrepartie, vous dépendez de lui."
+      },
+      "hud": [
+        {
+          "label": "à vous",
+          "value": 2
+        },
+        {
+          "label": "chez d'autres",
+          "value": 2
+        }
+      ],
+      "show": [
+        {
+          "id": "zp",
+          "kind": "zone",
+          "at": [
+            -8,
+            8
+          ],
+          "size": [
+            3.8,
+            3.8
+          ],
+          "label": "poste"
+        },
+        {
+          "id": "nav1",
+          "kind": "node",
+          "at": [
+            -8,
+            8
+          ],
+          "tone": "b",
+          "title": "Navigateur",
+          "roles": [
+            "afficher"
+          ],
+          "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
+        },
+        {
+          "id": "zweb",
+          "kind": "zone",
+          "at": [
+            -2.5,
+            2.5
+          ],
+          "size": [
+            3.8,
+            3.8
+          ],
+          "label": "serveur web"
+        },
+        {
+          "id": "web",
+          "kind": "node",
+          "at": [
+            -2.5,
+            2.5
+          ],
+          "tone": "v",
+          "title": "Appli Prêts",
+          "roles": [
+            "décider"
+          ],
+          "detail": "Le **serveur web** fait tourner l'appli Prêts. Il **décide** : il applique les règles de la bibliothèque, puis lit ou écrit dans la base de données."
+        },
+        {
+          "id": "zdb",
+          "kind": "zone",
+          "at": [
+            7,
+            -7
+          ],
+          "size": [
+            4.2,
+            4.2
+          ],
+          "label": "serveur BDD"
+        },
+        {
+          "id": "db",
+          "kind": "store",
+          "at": [
+            7,
+            -7
+          ],
+          "tone": "n",
+          "title": "Base de données",
+          "roles": [
+            "stocker"
+          ],
+          "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
+        },
+        {
+          "id": "zbnf",
+          "kind": "zone",
+          "at": [
+            -3,
+            -7
+          ],
+          "size": [
+            3.8,
+            3.8
+          ],
+          "tone": "r",
+          "label": "à la BnF"
+        },
+        {
+          "id": "bnf",
+          "kind": "node",
+          "at": [
+            -3,
+            -7
+          ],
+          "tone": "r",
+          "title": "Catalogue BnF",
+          "sub": "les fiches des livres",
+          "detail": "La **Bibliothèque nationale de France** (BnF) tient un catalogue de tous les livres publiés en France. Elle ouvre une **API** : un programme lui donne un numéro ISBN, elle répond avec le titre et l'auteur."
+        },
+        {
+          "id": "zpay",
+          "kind": "zone",
+          "at": [
+            7.5,
+            3.5
+          ],
+          "size": [
+            3.8,
+            3.8
+          ],
+          "tone": "r",
+          "label": "chez un prestataire"
+        },
+        {
+          "id": "payx",
+          "kind": "node",
+          "at": [
+            7.5,
+            3.5
+          ],
+          "tone": "r",
+          "title": "Paiement par carte",
+          "sub": "un prestataire",
+          "detail": "Un **prestataire de paiement** encaisse les cartes bancaires pour le compte de milliers de sites. La bibliothèque ne voit jamais le numéro de carte : elle demande l'encaissement, le prestataire répond « payé » ou « refusé »."
+        },
+        {
+          "id": "biblio",
+          "kind": "actor",
+          "at": [
+            -12,
+            4
+          ],
+          "tone": "y",
+          "label": "bibliothécaire",
+          "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+        }
+      ],
+      "links": [
+        {
+          "from": "nav1",
+          "to": "web"
+        },
+        {
+          "from": "web",
+          "to": "db"
+        },
+        {
+          "from": "web",
+          "to": "bnf"
+        },
+        {
+          "from": "web",
+          "to": "payx"
+        }
+      ],
+      "script": [
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "send",
+          "path": [
+            "biblio",
+            "nav1",
+            "web",
+            "bnf"
+          ],
+          "label": "ISBN",
+          "reply": "titre, auteur",
+          "explain": [
+            "La bibliothécaire ajoute un livre : elle saisit son numéro ISBN dans le **navigateur**.",
+            "Le navigateur l'envoie à l'**appli Prêts**.",
+            "L'appli Prêts ne connaît pas ce livre : elle demande sa fiche au **catalogue de la BnF**.",
+            "La BnF répond avec le titre et l'auteur : personne n'a rien eu à retaper."
+          ]
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "send",
+          "path": [
+            "biblio",
+            "nav1",
+            "web",
+            "payx"
+          ],
+          "label": "amende par carte",
+          "reply": "payé",
+          "explain": [
+            "Un lecteur règle son amende par carte bancaire, au comptoir.",
+            "Le navigateur envoie le paiement à l'**appli Prêts**.",
+            "Encaisser une carte est un métier : l'appli Prêts le confie au **prestataire de paiement**.",
+            "Le prestataire répond « payé »."
+          ]
+        },
+        {
+          "do": "send",
+          "path": [
+            "web",
+            "db"
+          ],
+          "label": "amende réglée",
+          "explain": [
+            "C'est l'appli Prêts qui note l'amende réglée dans **sa** base : le prestataire n'y a pas accès."
+          ]
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
       "id": "recap",
       "label": "Récap",
       "chapter": "récap",
       "title": "La bibliothèque sous ses quatre formes",
       "body": [
-        "- **Un poste** : les trois rôles sur la même machine ; les données ne se partagent pas.\n- **Client lourd** (2 tiers) : l'appli sur chaque poste, la base sur un serveur ; mise à jour poste par poste.\n- **Client léger** (3 tiers) : afficher dans le navigateur, décider sur le serveur web, stocker dans la base.\n- **n tiers** : plusieurs programmes qui collaborent, chacun sa tâche."
+        "- **Un poste** : les trois rôles sur la même machine ; les données ne se partagent pas.\n- **Client lourd** (2 tiers) : l'appli sur chaque poste, la base sur un serveur ; mise à jour poste par poste.\n- **Client léger** (3 tiers) : afficher dans le navigateur, décider sur le serveur web, stocker dans la base.\n- **n tiers** : plusieurs programmes qui collaborent, chacun sa tâche ; certains sont des services externes, tenus par d'autres."
       ],
       "callout": {
         "title": "à venir",

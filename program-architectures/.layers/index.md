@@ -96,6 +96,19 @@ Chaque programme a une seule tâche : on peut le modifier, le remplacer ou lui d
 
 > 📖 [La relation client-serveur (MDN)](https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview) · [Comment fonctionne le Web (MDN)](https://developer.mozilla.org/fr/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works)
 
+## Des programmes qui ne sont pas à vous : les services externes
+
+La bibliothèque veut accepter la carte bancaire, et ne plus retaper le titre de chaque nouveau livre. Elle n'écrit aucun de ces deux programmes : ils **existent déjà, chez d'autres**.
+
+```scene
+lesson: assets/architectures.scene.json
+step: externes
+```
+
+Un programme tenu par une autre organisation, dont on se sert à distance, est un **service externe**. Pour lui parler, l'appli Prêts passe par son **API** : le guichet qu'un programme ouvre aux autres programmes, avec la liste des demandes qu'il accepte. Vous n'avez rien à écrire ni à héberger. En contrepartie, vous dépendez de lui : prestataire en panne, plus de paiement par carte.
+
+> 💡 **Remarque.** La plupart de ces échanges passent aujourd'hui par le web. Comment, ce sera l'objet du module sur le réseau.
+
 ## Récap
 
 - Tout programme tient trois rôles : afficher, décider, stocker. Son architecture dit où vit chacun.
@@ -103,6 +116,7 @@ Chaque programme a une seule tâche : on peut le modifier, le remplacer ou lui d
 - **Client lourd** (deux tiers) : l'appli installée sur chaque poste, la base de données sur un serveur ; les données sont partagées, mais chaque mise à jour se fait poste par poste.
 - **Client léger** (trois tiers) : afficher dans le navigateur, décider sur le serveur web, stocker dans la base ; rien à installer sur les postes.
 - **n tiers** : plusieurs programmes qui collaborent, chacun sa tâche, comme une brigade en cuisine.
+- **Service externe** : un programme tenu par quelqu'un d'autre, dont on se sert à travers son **API**.
 
 Le schéma pose la bibliothèque sous ses quatre formes, côte à côte. Reste une question : comment ces programmes se parlent-ils, d'une machine à l'autre ? Ce sera l'objet d'un module sur le réseau, à venir.
 
