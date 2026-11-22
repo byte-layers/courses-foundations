@@ -97,14 +97,16 @@ La mise à jour change tout : le technicien installe la nouvelle version **une s
 
 ## Le n tiers : on compte les machines
 
-Le « n » de **n tiers** compte les **machines**, les serveurs par lesquels passe une demande, pas les programmes ni les couches de code. Dans la très grande majorité des cas, il reste **une seule base de données**, même si elle est parfois répartie sur plusieurs machines : on parle alors d'un **cluster** de base de données.
+Quand l'appli grandit, on ajoute des machines, chacune avec sa tâche. Voici l'architecture complète de la bibliothèque : on la garde jusqu'à la fin du bit.
 
 ```scene
 lesson: assets/architectures.scene.json
 step: n-tiers
 ```
 
-Deux exemples courants :
+Le « n » de **n tiers** compte les **machines**, les serveurs par lesquels passe une demande, pas les programmes ni les couches de code. Ici, **cinq**. Il reste **une seule base de données**, même si elle est parfois répartie sur plusieurs machines : on parle alors d'un **cluster** de base de données.
+
+Retirez le serveur de mails et vous obtenez l'autre forme courante :
 
 | Tiers | Les machines, dans l'ordre |
 |---|---|
@@ -117,7 +119,7 @@ Chaque machine de plus a une tâche précise, et on peut lui donner plus de puis
 
 ## Des programmes qui ne sont pas à vous : les services externes
 
-La bibliothèque veut accepter la carte bancaire, et ne plus retaper le titre de chaque nouveau livre. Elle n'écrit aucun de ces deux programmes : ils **existent déjà, chez d'autres**.
+On repart des cinq machines de la bibliothèque. Elle veut maintenant accepter la carte bancaire, et ne plus retaper le titre de chaque nouveau livre. Elle n'écrit aucun de ces deux programmes : ils **existent déjà, chez d'autres**, et s'ajoutent à côté de son architecture.
 
 ```scene
 lesson: assets/architectures.scene.json
@@ -130,7 +132,7 @@ Un programme tenu par une autre organisation, dont on se sert à distance, est u
 
 ## Pour aller plus loin : services et micro-services
 
-Les grandes applications vont plus loin que le n tiers : elles se découpent en **services**. Pensez à un restaurant qui passe du cuisinier seul à une **brigade** : chacun son poste, et ils se passent les assiettes.
+Les grandes applications vont plus loin que le n tiers : elles se découpent en **services**. Prenez le réseau de transport d'une grande métropole : l'application mobile et les bornes pour les voyageurs, les logiciels de vente et de support en agence, les alertes de trafic, les équipements embarqués dans les bus, trams et métros, les newsletters. Tout cela est **relié**, mais ne peut pas être **une seule application** : chaque partie a son équipe, son rythme et ses données.
 
 ```scene
 lesson: assets/architectures.scene.json

@@ -875,17 +875,17 @@
    "chapter": "n tiers",
    "title": "Le n tiers : on compte les machines",
    "body": [
-    "Le « n » de **n tiers** compte les machines, les serveurs, pas les programmes. Ici, un serveur web en façade s'ajoute devant le serveur d'application : quatre tiers.",
-    "Un cinquième s'ajoute pour envoyer les mails. La base, elle, reste une seule."
+    "Le « n » de **n tiers** compte les machines, les serveurs, pas les programmes. Ici, cinq : le poste, un serveur web en façade, le serveur d'application, la base de données et un serveur pour les mails.",
+    "Une seule base, et chaque machine a sa tâche."
    ],
    "callout": {
     "title": "idée clé",
-    "text": "n tiers = le nombre de machines par lesquelles passe une demande."
+    "text": "n tiers = le nombre de machines de l'architecture."
    },
    "hud": [
     {
      "label": "tiers",
-     "value": 4
+     "value": 5
     }
    ],
    "show": [
@@ -1006,6 +1006,41 @@
      "tone": "y",
      "label": "bibliothécaire",
      "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    },
+    {
+     "id": "zmail",
+     "kind": "zone",
+     "at": [
+      11,
+      5
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur de mails"
+    },
+    {
+     "id": "mail",
+     "kind": "node",
+     "at": [
+      11,
+      5
+     ],
+     "tone": "y",
+     "title": "Envoi des mails",
+     "detail": "Le **serveur de mails** envoie les messages aux lecteurs. D'autres installations ajoutent, à la place ou en plus, une **file d'attente** de messages ou un **serveur d'intégration**, qui relie l'appli à d'autres logiciels."
+    },
+    {
+     "id": "lecteur",
+     "kind": "actor",
+     "at": [
+      14.5,
+      1.5
+     ],
+     "tone": "y",
+     "label": "lecteur",
+     "detail": "Un **lecteur** de la bibliothèque. Il reçoit le mail quand son livre est en retard."
     }
    ],
    "links": [
@@ -1020,6 +1055,14 @@
     {
      "from": "appsrv",
      "to": "db"
+    },
+    {
+     "from": "appsrv",
+     "to": "mail"
+    },
+    {
+     "from": "mail",
+     "to": "lecteur"
     }
    ],
    "script": [
@@ -1047,71 +1090,12 @@
       "Le navigateur l'envoie au **serveur web**, en façade.",
       "Le serveur web passe la demande au **serveur d'application**, qui applique les règles.",
       "Le serveur d'application écrit le prêt dans la **base de données**.",
-      "La confirmation remonte par les mêmes machines : quatre tiers."
+      "La confirmation remonte par les mêmes machines."
      ]
     },
     {
      "do": "wait",
      "ms": 700
-    },
-    {
-     "do": "scene",
-     "show": [
-      {
-       "id": "zmail",
-       "kind": "zone",
-       "at": [
-        11,
-        5
-       ],
-       "size": [
-        3.8,
-        3.8
-       ],
-       "label": "serveur de mails"
-      },
-      {
-       "id": "mail",
-       "kind": "node",
-       "at": [
-        11,
-        5
-       ],
-       "tone": "y",
-       "title": "Envoi des mails",
-       "detail": "Le **serveur de mails** envoie les messages aux lecteurs. D'autres installations ajoutent, à la place ou en plus, une **file d'attente** de messages ou un **serveur d'intégration**, qui relie l'appli à d'autres logiciels."
-      },
-      {
-       "id": "lecteur",
-       "kind": "actor",
-       "at": [
-        14.5,
-        1.5
-       ],
-       "tone": "y",
-       "label": "lecteur",
-       "detail": "Un **lecteur** de la bibliothèque. Il reçoit le mail quand son livre est en retard."
-      }
-     ],
-     "link": [
-      {
-       "from": "appsrv",
-       "to": "mail"
-      },
-      {
-       "from": "mail",
-       "to": "lecteur"
-      }
-     ],
-     "hud": [
-      {
-       "label": "tiers",
-       "value": 5,
-       "tone": "g"
-      }
-     ],
-     "say": "La bibliothèque veut écrire aux lecteurs en retard : un serveur de plus, pour les mails.",
-     "ms": 900
     },
     {
      "do": "send",
@@ -1122,7 +1106,7 @@
      ],
      "label": "mail de retard",
      "explain": [
-      "Chaque nuit, l'appli trouve les retards et confie les mails au **serveur de mails**.",
+      "Chaque nuit, l'appli trouve les retards et confie les mails au **serveur de mails**, le cinquième tiers.",
       "Il écrit à chaque **lecteur** concerné."
      ],
      "tone": "y"
@@ -1148,12 +1132,12 @@
    },
    "hud": [
     {
-     "label": "à vous",
-     "value": 2
+     "label": "chez vous",
+     "value": "5 machines"
     },
     {
      "label": "chez d'autres",
-     "value": 2
+     "value": "2 services"
     }
    ],
    "show": [
@@ -1161,8 +1145,8 @@
      "id": "zp",
      "kind": "zone",
      "at": [
-      -8,
-      8
+      -9,
+      9
      ],
      "size": [
       3.8,
@@ -1174,8 +1158,8 @@
      "id": "nav1",
      "kind": "node",
      "at": [
-      -8,
-      8
+      -9,
+      9
      ],
      "tone": "b",
      "title": "Navigateur",
@@ -1188,8 +1172,8 @@
      "id": "zweb",
      "kind": "zone",
      "at": [
-      -2.5,
-      2.5
+      -3,
+      3
      ],
      "size": [
       3.8,
@@ -1198,25 +1182,51 @@
      "label": "serveur web"
     },
     {
-     "id": "web",
+     "id": "front",
      "kind": "node",
      "at": [
-      -2.5,
-      2.5
+      -3,
+      3
+     ],
+     "tone": "b",
+     "title": "Serveur web",
+     "sub": "en façade",
+     "detail": "Le **serveur web en façade** reçoit toutes les demandes des navigateurs. Il envoie lui-même les fichiers qui ne changent pas (images, styles) et passe le reste au serveur d'application. On l'appelle souvent **reverse proxy**."
+    },
+    {
+     "id": "zapp",
+     "kind": "zone",
+     "at": [
+      3,
+      -3
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur d'application"
+    },
+    {
+     "id": "appsrv",
+     "kind": "node",
+     "at": [
+      3,
+      -3
      ],
      "tone": "v",
      "title": "Appli Prêts",
+     "sub": "les règles",
      "roles": [
       "décider"
      ],
-     "detail": "Le **serveur web** fait tourner l'appli Prêts. Il **décide** : il applique les règles de la bibliothèque, puis lit ou écrit dans la base de données."
+     "detail": "Le **serveur d'application** fait tourner l'appli Prêts : il applique les règles de la bibliothèque. Il ne reçoit que ce que le serveur web lui passe."
     },
     {
      "id": "zdb",
      "kind": "zone",
      "at": [
-      7,
-      -7
+      9,
+      -9
      ],
      "size": [
       4.2,
@@ -1228,8 +1238,8 @@
      "id": "db",
      "kind": "store",
      "at": [
-      7,
-      -7
+      9,
+      -9
      ],
      "tone": "n",
      "title": "Base de données",
@@ -1239,10 +1249,56 @@
      "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
     },
     {
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      -13,
+      5
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    },
+    {
+     "id": "zmail",
+     "kind": "zone",
+     "at": [
+      11,
+      5
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur de mails"
+    },
+    {
+     "id": "mail",
+     "kind": "node",
+     "at": [
+      11,
+      5
+     ],
+     "tone": "y",
+     "title": "Envoi des mails",
+     "detail": "Le **serveur de mails** envoie les messages aux lecteurs. D'autres installations ajoutent, à la place ou en plus, une **file d'attente** de messages ou un **serveur d'intégration**, qui relie l'appli à d'autres logiciels."
+    },
+    {
+     "id": "lecteur",
+     "kind": "actor",
+     "at": [
+      14.5,
+      1.5
+     ],
+     "tone": "y",
+     "label": "lecteur",
+     "detail": "Un **lecteur** de la bibliothèque. Il reçoit le mail quand son livre est en retard."
+    },
+    {
      "id": "zbnf",
      "kind": "zone",
      "at": [
-      -3,
+      -7,
       -7
      ],
      "size": [
@@ -1256,7 +1312,7 @@
      "id": "bnf",
      "kind": "node",
      "at": [
-      -3,
+      -7,
       -7
      ],
      "tone": "r",
@@ -1268,8 +1324,8 @@
      "id": "zpay",
      "kind": "zone",
      "at": [
-      7.5,
-      3.5
+      -1,
+      -13
      ],
      "size": [
       3.8,
@@ -1282,41 +1338,42 @@
      "id": "payx",
      "kind": "node",
      "at": [
-      7.5,
-      3.5
+      -1,
+      -13
      ],
      "tone": "r",
      "title": "Paiement par carte",
      "sub": "un prestataire",
      "detail": "Un **prestataire de paiement** encaisse les cartes bancaires pour le compte de milliers de sites. La bibliothèque ne voit jamais le numéro de carte : elle demande l'encaissement, le prestataire répond « payé » ou « refusé »."
-    },
-    {
-     "id": "biblio",
-     "kind": "actor",
-     "at": [
-      -12,
-      4
-     ],
-     "tone": "y",
-     "label": "bibliothécaire",
-     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
     }
    ],
    "links": [
     {
      "from": "nav1",
-     "to": "web"
+     "to": "front"
     },
     {
-     "from": "web",
+     "from": "front",
+     "to": "appsrv"
+    },
+    {
+     "from": "appsrv",
      "to": "db"
     },
     {
-     "from": "web",
+     "from": "appsrv",
+     "to": "mail"
+    },
+    {
+     "from": "mail",
+     "to": "lecteur"
+    },
+    {
+     "from": "appsrv",
      "to": "bnf"
     },
     {
-     "from": "web",
+     "from": "appsrv",
      "to": "payx"
     }
    ],
@@ -1326,18 +1383,24 @@
      "ms": 800
     },
     {
+     "do": "pulse",
+     "at": "biblio:top"
+    },
+    {
      "do": "send",
      "path": [
       "biblio",
       "nav1",
-      "web",
+      "front",
+      "appsrv",
       "bnf"
      ],
      "label": "ISBN",
      "reply": "titre, auteur",
      "explain": [
       "La bibliothécaire ajoute un livre : elle saisit son numéro ISBN dans le **navigateur**.",
-      "Le navigateur l'envoie à l'**appli Prêts**.",
+      "Le navigateur l'envoie au serveur web…",
+      "… qui le passe à l'**appli Prêts**.",
       "L'appli Prêts ne connaît pas ce livre : elle demande sa fiche au **catalogue de la BnF**.",
       "La BnF répond avec le titre et l'auteur : personne n'a rien eu à retaper."
      ]
@@ -1351,14 +1414,16 @@
      "path": [
       "biblio",
       "nav1",
-      "web",
+      "front",
+      "appsrv",
       "payx"
      ],
      "label": "amende par carte",
      "reply": "payé",
      "explain": [
       "Un lecteur règle son amende par carte bancaire, au comptoir.",
-      "Le navigateur envoie le paiement à l'**appli Prêts**.",
+      "Le navigateur envoie le paiement au serveur web…",
+      "… qui le passe à l'**appli Prêts**.",
       "Encaisser une carte est un métier : l'appli Prêts le confie au **prestataire de paiement**.",
       "Le prestataire répond « payé »."
      ]
@@ -1366,7 +1431,7 @@
     {
      "do": "send",
      "path": [
-      "web",
+      "appsrv",
       "db"
      ],
      "label": "amende réglée",
@@ -1378,7 +1443,8 @@
      "do": "wait",
      "ms": 3000
     }
-   ]
+   ],
+   "labels": "left"
   },
   {
    "id": "services",
