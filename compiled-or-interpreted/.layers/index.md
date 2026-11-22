@@ -38,7 +38,7 @@ Imaginez un livre écrit en français, pour un lecteur qui ne lit que le chinois
 
 **Interprété ne veut pas dire « pas traduit »** : un script `bash` ou un programme Python ne parle pas directement au processeur. Il y a toujours un traducteur ; la seule question, c'est quand il travaille.
 
-Les sections qui suivent reprennent chaque chemin. Leurs schémas ne gardent que deux couches de la pile, le matériel et le noyau : les programmes qui tournent sont posés sur le noyau, les fichiers restent au sol, sur le disque.
+Les sections qui suivent reprennent chaque chemin, avec le dessin du bit précédent : au fond, le **noyau** et le **processeur** ; devant, le **terminal** et le **shell**. Entre les deux, les programmes que le shell lance, comme `ls` ou `date` : ici les compilateurs et les interpréteurs. Les fichiers sont posés à côté de qui les lit.
 
 ## Interprété : un programme lit le script ligne à ligne
 
@@ -53,7 +53,7 @@ Un programme qui lit du code source et fait ce qu'il dit, au fur et à mesure, s
 
 ## Compilé : un compilateur traduit tout, une fois
 
-En langage C, on procède autrement. Un programme, le **compilateur**, lit tout le code source `bonjour.c` et écrit un nouveau fichier, le **binaire** : les mêmes instructions, traduites en code machine. Cette traduction s'appelle compiler. Le schéma ne montre pas la commande qui lance le compilateur C : vous n'en aurez pas besoin dans ce parcours.
+En langage C, on procède autrement. Un programme, le **compilateur**, lit tout le code source `bonjour.c` et écrit un nouveau fichier, le **binaire** : les mêmes instructions, traduites en code machine. Cette traduction s'appelle compiler. Le compilateur est un programme comme un autre, que le shell lance : la commande `cc bonjour.c -o bonjour` de la scène, dont vous n'aurez pas besoin dans ce parcours.
 
 ```scene
 lesson: assets/compile.scene.json
