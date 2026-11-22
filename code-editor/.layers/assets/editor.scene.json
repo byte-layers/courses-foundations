@@ -270,8 +270,12 @@
    ],
    "widgets": [
     {
-     "kind": "editor",
-     "title": "fiche.sh — éditeur de code",
+     "kind": "ide",
+     "title": "foundations — éditeur de code",
+     "files": [
+      "fiche.sh",
+      "notes.md"
+     ],
      "lang": "bash",
      "lines": [
       "#!/bin/bash",
@@ -280,11 +284,7 @@
       "echo \"Utilisateur : $(whoami)",
       "echo \"Date : $(date)\"",
       "df -h ~"
-     ]
-    },
-    {
-     "kind": "terminal",
-     "title": "alice@pc-alice — bash",
+     ],
      "prompt": "alice@pc-alice",
      "cwd": "~/byte-layers/foundations"
     }
