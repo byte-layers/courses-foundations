@@ -8,7 +8,7 @@ tags:
   - terminal
 difficulty: beginner
 duration: 15
-requires: "0.5.0"
+requires: "0.8.0"
 ---
 
 Un ordinateur est fait de couches posées les unes sur les autres, et chacune ne parle qu'à ses voisines. Vous saurez ce que fait chaque couche, pourquoi un serveur se passe d'interface graphique, ce que sont un terminal et un shell, à quoi ressemblent les premières commandes et ce qu'est un script. Ce contenu est écrit pour quelqu'un qui n'a jamais ouvert de terminal : chaque section a son schéma animé, que le bouton ▶ Jouer ouvre en grand.
@@ -105,17 +105,53 @@ lesson: assets/os.scene.json
 step: commandes
 ```
 
-Si vous voulez essayer, ouvrez un terminal comme indiqué dans la section précédente. La première commande affiche le dossier dans lequel le shell travaille.
+Ces commandes, vous allez maintenant les taper vous-même, dans un terminal simulé, dans la page.
 
-```exec
-pwd
+## Ranger un dossier en commandes : mv, cp et rm
+
+Ranger un dossier, à la souris, c'est créer des dossiers, glisser des fichiers dedans, en copier, jeter ce qui ne sert plus. Dans le terminal, trois commandes de plus suffisent.
+
+| Commande | Ce qu'elle fait |
+|---|---|
+| `mv photo.jpg photos/` | déplace `photo.jpg` dans le dossier `photos` (*move*) |
+| `cp facture.pdf sauvegarde/` | copie `facture.pdf` dans `sauvegarde` : l'original reste en place (*copy*) |
+| `rm -r tmp` | supprime le dossier `tmp` et tout ce qu'il contient (*remove*, `-r` pour un dossier) |
+
+> ⚠️ **`rm` ne passe pas par la corbeille** : ce qu'il supprime est perdu. Sur le plateau, rien ne risque rien, et ↺ **Recommencer** remet le dossier comme au départ.
+
+Le dossier `rangement`, dans `~/byte-layers/foundations`, est en désordre : deux photos, une facture, des notes et un dossier `tmp` qui ne sert plus. Commencez par `ls` pour voir ce qu'il contient ; l'arbre, à côté du terminal, change à chaque commande.
+
+```playground
+runtime: shell
+title: Ranger un dossier en commandes
+cwd: ~/byte-layers/foundations/rangement
+show: [files, terminal]
+files:
+  IMG_001.jpg: ""
+  IMG_002.jpg: ""
+  facture.pdf: ""
+  notes.txt: acheter du pain
+  tmp/cache.bin: x
+verify:
+  - label: les deux photos sont dans un dossier `photos`
+    file: [photos/IMG_001.jpg, photos/IMG_002.jpg]
+    hint: "créez le dossier avec `mkdir photos`, puis `mv IMG_001.jpg IMG_002.jpg photos/`"
+  - label: il ne reste plus de photo hors de `photos`
+    absent: [IMG_001.jpg, IMG_002.jpg]
+    hint: "`mv` déplace, `cp` copie : si une photo est encore là, déplacez-la avec `mv`"
+  - label: une copie de la facture est dans `sauvegarde`
+    file: sauvegarde/facture.pdf
+    hint: "créez le dossier avec `mkdir sauvegarde`, puis `cp facture.pdf sauvegarde/`"
+  - label: la facture d'origine est toujours là
+    file: facture.pdf
+    hint: "la facture s'est déplacée : remettez-la avec `mv sauvegarde/facture.pdf .`, puis copiez-la avec `cp`"
+  - label: le dossier `tmp` est supprimé
+    absent: tmp
+    hint: "`rm -r tmp` supprime le dossier et ce qu'il contient"
+solution: assets/ranger.solution.sh
 ```
 
-La seconde liste ce que contient ce dossier. Sous Windows, PowerShell connaît aussi `pwd` et `ls`, avec un affichage différent.
-
-```exec
-ls
-```
+Les contrôles lisent **l'état du dossier**, pas les commandes tapées : plusieurs chemins mènent au même rangement.
 
 ## Un script : des commandes rangées dans un fichier
 
