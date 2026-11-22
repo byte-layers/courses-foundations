@@ -512,7 +512,7 @@
      "link": [
       {
        "from": "bash",
-       "to": "kbox"
+       "to": "bin"
       },
       {
        "from": "bin",
@@ -530,12 +530,12 @@
      "path": [
       "term",
       "bash",
-      "kbox"
+      "bin"
      ],
      "label": "./bonjour",
      "explain": [
-      "Vous lancez le binaire : le shell demande au noyau de le lancer.",
-      "Le **noyau** charge le binaire en mémoire."
+      "Vous tapez `./bonjour` : le terminal passe la ligne au shell.",
+      "Le shell lance le **binaire**, comme il lance `ls` ou le compilateur."
      ]
     },
     {
@@ -547,7 +547,7 @@
      ],
      "label": "code machine",
      "explain": [
-      "Le binaire est déjà en code machine…",
+      "Le **noyau** le charge en mémoire : il est déjà en code machine…",
       "… le **processeur** exécute ses instructions : aucun programme ne le lit à sa place."
      ],
      "tone": "n"
@@ -622,6 +622,10 @@
      "from": "cc",
      "to": "bin",
      "dashed": true
+    },
+    {
+     "from": "bash",
+     "to": "bin"
     },
     {
      "from": "bin",
@@ -706,12 +710,14 @@
     {
      "do": "send",
      "path": [
+      "bash",
       "bin",
       "kbox",
       "cpu"
      ],
      "explain": [
-      "Vous relancez le binaire : il a été fabriqué **avant** le changement.",
+      "Vous relancez le binaire : le shell le lance.",
+      "Mais il a été fabriqué **avant** le changement.",
       "Le processeur exécute l'ancienne version."
      ],
      "tone": "n"
@@ -784,12 +790,14 @@
     {
      "do": "send",
      "path": [
+      "bash",
       "bin",
       "kbox",
       "cpu"
      ],
      "explain": [
-      "Vous relancez le nouveau binaire.",
+      "Vous relancez le binaire : le shell le lance.",
+      "C'est le nouveau, écrit à la place de l'ancien.",
       "Le processeur exécute la nouvelle version."
      ],
      "tone": "n"
