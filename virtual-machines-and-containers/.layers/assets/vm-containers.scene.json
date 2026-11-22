@@ -816,7 +816,6 @@
     "pk",
     "shw",
     "sk",
-    "snode",
     "peng",
     "box",
     "bapp",
@@ -862,10 +861,6 @@
       {
        "id": "box2",
        "label": "marche"
-      },
-      {
-       "id": "snode",
-       "label": "pas utilisé"
       }
      ],
      "hud": [
@@ -874,7 +869,7 @@
        "value": "l'appli marche"
       }
      ],
-     "say": "Elle y emporte son Node.js : l'appli marche, quel que soit celui du serveur."
+     "say": "Elle y emporte son Node.js : rien à installer sur le serveur, l'appli marche."
     },
     {
      "do": "wait",

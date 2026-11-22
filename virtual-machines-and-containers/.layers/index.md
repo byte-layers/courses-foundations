@@ -98,21 +98,13 @@ Le serveur a lui aussi un moteur de conteneurs, et une copie du même conteneur 
 
 > 📖 [Machine virtuelle (Wikipédia)](https://fr.wikipedia.org/wiki/Machine_virtuelle) · [Qu'est-ce qu'un conteneur ? (Docker, en anglais)](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)
 
-## Récap
-
-- Plusieurs programmes sur une même machine ont parfois besoin de versions différentes : il faut des **environnements séparés**.
-- Une **machine virtuelle** est un ordinateur entier simulé par un **hyperviseur**, avec son propre noyau : isolation forte, poids d'un système entier.
-- Un **conteneur** isole un programme et ses fichiers en partageant le **noyau de l'hôte** : plus léger, démarre comme un programme.
-- Un conteneur emporte ce dont l'appli a besoin : la même boîte tourne sur le poste et sur le serveur. **Docker** est l'outil le plus connu.
-
-C'est la dernière étape de l'introduction. Le [quiz de fin d'introduction](https://byte-layers.com/fr/bits/intro-review) reprend les sept étapes, du matériel aux conteneurs.
-
-Trois questions pour vérifier ce que vous avez retenu.
+## Trois questions pour vérifier ce que vous avez retenu
 
 ```quiz
 title: "Machines virtuelles et conteneurs"
 tracksProgress: false
 showNotice: false
+place: stage
 questions:
   - prompt: "Qu'est-ce qui distingue une machine virtuelle d'un conteneur ?"
     answers:
@@ -136,6 +128,15 @@ questions:
     correct: 3
     explanation: "Le conteneur emporte ce dont l'appli a besoin. Elle ne dépend plus de ce qui est installé sur le serveur."
 ```
+
+## Récap
+
+- Plusieurs programmes sur une même machine ont parfois besoin de versions différentes : il faut des **environnements séparés**.
+- Une **machine virtuelle** est un ordinateur entier simulé par un **hyperviseur**, avec son propre noyau : isolation forte, poids d'un système entier.
+- Un **conteneur** isole un programme et ses fichiers en partageant le **noyau de l'hôte** : plus léger, démarre comme un programme.
+- Un conteneur emporte ce dont l'appli a besoin : la même boîte tourne sur le poste et sur le serveur. **Docker** est l'outil le plus connu.
+
+C'est la dernière étape de l'introduction. Le [quiz de fin d'introduction](https://byte-layers.com/fr/bits/intro-review) reprend les sept étapes, du matériel aux conteneurs.
 
 ```ack
 J'ai compris
