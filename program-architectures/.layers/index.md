@@ -72,11 +72,11 @@ step: client-lourd
 
 Un prêt saisi au poste 1 se lit au poste 3. Le prix : quand une nouvelle version de l'appli sort, il faut **mettre à jour chaque poste**. Avec quarante postes, c'est un chantier, et il suffit d'un poste oublié pour que deux versions de l'appli écrivent dans la même base.
 
-> 💡 **Remarque.** Historiquement, c'étaient les clients lourds qui parlaient directement à la base de données. Aujourd'hui, selon la base utilisée, une application web peut parfois le faire aussi.
+> 💡 **Remarque.** Historiquement, c'étaient les clients lourds qui parlaient directement à la base de données. Aujourd'hui, selon la base utilisée, une application web, dite client léger, peut parfois le faire.
 
 ## Trois tiers, avec un client léger
 
-Le **navigateur** (Firefox, Chrome, Edge, Safari) est déjà installé sur tous les postes. Dans cette forme, il est le seul programme dont les postes ont besoin : il affiche les pages de l'appli Prêts, c'est le client léger.
+On passe en mode **client léger**. Avec le client lourd, un technicien devait installer et mettre à jour l'appli sur chaque poste. Avec le client léger, l'appli Prêts devient une **application web** : elle fonctionne directement dans le **navigateur** (Firefox, Chrome, Edge, Safari). Le navigateur, lui, est un client lourd, physiquement installé sur le poste, et il l'est déjà partout.
 
 On reste en client-serveur, mais avec une machine de plus au milieu : un **serveur web**. C'est lui qui fait tourner l'appli Prêts, applique les règles et fait les traitements ; on l'appelle aussi le **backend**. Le navigateur ne parle pas à la base : il demande au serveur web, qui demande à la base.
 
