@@ -1,1517 +1,2117 @@
 {
-  "format": "bl-scenes/0.2",
-  "id": "program-architectures",
-  "title": "Les architectures d'un programme, du poste seul au n tiers",
-  "lang": "fr",
-  "kit": "feuillete",
-  "legend": [
+ "format": "bl-scenes/0.3",
+ "id": "program-architectures",
+ "title": "Les architectures d'un programme, du poste seul au n tiers",
+ "lang": "fr",
+ "kit": "feuillete",
+ "legend": [
+  {
+   "kind": "req",
+   "label": "demande"
+  },
+  {
+   "kind": "res",
+   "label": "réponse"
+  }
+ ],
+ "steps": [
+  {
+   "id": "poste-seul",
+   "label": "Un poste",
+   "chapter": "un poste",
+   "title": "Un programme sur un poste",
+   "body": [
+    "L'appli Prêts est installée sur le poste du comptoir, dans sa fenêtre. Elle **affiche** les écrans, **décide** (le lecteur a-t-il le droit d'emprunter ?) et **stocke** les prêts sur le disque du poste."
+   ],
+   "hud": [
     {
-      "kind": "req",
-      "label": "demande"
-    },
-    {
-      "kind": "res",
-      "label": "réponse"
+     "label": "machines",
+     "value": 1
     }
-  ],
-  "steps": [
+   ],
+   "show": [
     {
-      "id": "poste-seul",
-      "label": "Un poste",
-      "chapter": "un poste",
-      "title": "Un programme sur un poste",
-      "body": [
-        "L'appli Prêts est installée sur le poste du comptoir. Elle **affiche** les écrans, **décide** (le lecteur a-t-il le droit d'emprunter ?) et **stocke** les prêts sur le disque du poste.",
-        "Au deuxième comptoir, un deuxième poste a sa propre copie de l'appli et ses propres données : il ne voit pas les prêts du premier."
-      ],
-      "callout": {
-        "title": "le problème",
-        "text": "Les données vivent sur chaque poste : impossible de les partager."
-      },
-      "hud": [
-        {
-          "label": "machines",
-          "value": 2
-        },
-        {
-          "label": "données",
-          "value": "2 copies séparées"
-        }
-      ],
-      "show": [
-        {
-          "id": "p1",
-          "kind": "zone",
-          "at": [
-            -3.5,
-            3.5
-          ],
-          "size": [
-            6.4,
-            6.4
-          ],
-          "label": "poste 1"
-        },
-        {
-          "id": "p2",
-          "kind": "zone",
-          "at": [
-            3.5,
-            -3.5
-          ],
-          "size": [
-            6.4,
-            6.4
-          ],
-          "label": "poste 2"
-        },
-        {
-          "id": "app1",
-          "kind": "node",
-          "at": [
-            -5.3,
-            4.1
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "roles": [
-            "afficher",
-            "décider"
-          ],
-          "detail": "L'**appli Prêts** est installée sur ce poste. Elle **affiche** les écrans et **décide** : un lecteur a-t-il le droit d'emprunter, quand le livre doit-il revenir ?"
-        },
-        {
-          "id": "data1",
-          "kind": "store",
-          "at": [
-            -1.7,
-            2.9
-          ],
-          "tone": "n",
-          "title": "Données",
-          "roles": [
-            "stocker"
-          ],
-          "detail": "Les **données** des prêts sont rangées dans un fichier, sur le disque de ce poste. Seule l'appli de ce poste les lit."
-        },
-        {
-          "id": "app2",
-          "kind": "node",
-          "at": [
-            1.7,
-            -2.9
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "roles": [
-            "afficher",
-            "décider"
-          ],
-          "detail": "L'**appli Prêts** est installée sur ce poste. Elle **affiche** les écrans et **décide** : un lecteur a-t-il le droit d'emprunter, quand le livre doit-il revenir ?"
-        },
-        {
-          "id": "data2",
-          "kind": "store",
-          "at": [
-            5.3,
-            -4.1
-          ],
-          "tone": "n",
-          "title": "Données",
-          "roles": [
-            "stocker"
-          ],
-          "note": "ignore le prêt du poste 1",
-          "detail": "Les **données** des prêts sont rangées dans un fichier, sur le disque de ce poste. Seule l'appli de ce poste les lit."
-        },
-        {
-          "id": "biblio",
-          "kind": "actor",
-          "at": [
-            -0.7,
-            8.7
-          ],
-          "tone": "y",
-          "label": "bibliothécaire",
-          "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
-        },
-        {
-          "id": "collegue",
-          "kind": "actor",
-          "at": [
-            6.3,
-            1.7
-          ],
-          "tone": "y",
-          "label": "collègue",
-          "detail": "Un **collègue**, au deuxième comptoir, cherche si un livre est prêté."
-        }
-      ],
-      "links": [
-        {
-          "from": "app1",
-          "to": "data1"
-        },
-        {
-          "from": "app2",
-          "to": "data2"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 800
-        },
-        {
-          "do": "pulse",
-          "at": "biblio:top"
-        },
-        {
-          "do": "send",
-          "path": [
-            "biblio",
-            "app1",
-            "data1"
-          ],
-          "label": "prêt",
-          "reply": "enregistré",
-          "explain": [
-            "Au poste 1, la bibliothécaire saisit un prêt : l'**appli Prêts** affiche le formulaire.",
-            "L'appli vérifie les règles, puis écrit le prêt dans les **données**, sur le disque du poste 1.",
-            "Le prêt est enregistré, mais seulement sur le poste 1."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 900
-        },
-        {
-          "do": "pulse",
-          "at": "collegue:top"
-        },
-        {
-          "do": "send",
-          "path": [
-            "collegue",
-            "app2",
-            "data2"
-          ],
-          "label": "livre prêté ?",
-          "reply": "aucun prêt",
-          "explain": [
-            "Au poste 2, un collègue demande si ce même livre est prêté.",
-            "L'appli du poste 2 cherche dans **ses** données, sur **son** disque.",
-            "Réponse : aucun prêt. Le prêt du poste 1 n'existe pas ici, car les données ne sont pas partagées."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 3000
-        }
-      ]
+     "id": "p1",
+     "kind": "zone",
+     "at": [
+      0.0,
+      0.0
+     ],
+     "size": [
+      6.4,
+      6.4
+     ],
+     "label": "poste"
     },
     {
-      "id": "client-lourd",
-      "label": "Client lourd",
-      "chapter": "client lourd",
-      "title": "Le client lourd : une appli par poste, une base partagée",
-      "body": [
-        "Les données quittent les postes : elles vont dans une **base de données**, sur un serveur que tous les postes partagent. Chaque poste garde son appli installée, qui affiche et décide : c'est le **client lourd**.",
-        "Deux niveaux, deux **tiers** : les postes, puis le serveur de données. Un prêt saisi au poste 1 se voit au poste 3. Mais une nouvelle version de l'appli s'installe poste par poste."
-      ],
-      "callout": {
-        "title": "la limite",
-        "text": "Chaque nouvelle version s'installe sur chaque poste, un par un."
-      },
-      "hud": [
-        {
-          "label": "machines",
-          "value": 4
-        },
-        {
-          "label": "à mettre à jour",
-          "value": "3 postes"
-        }
-      ],
-      "labels": "left",
-      "show": [
-        {
-          "id": "z1",
-          "kind": "zone",
-          "at": [
-            -2.5,
-            7.5
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste 1"
-        },
-        {
-          "id": "thick1",
-          "kind": "node",
-          "at": [
-            -2.5,
-            7.5
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "roles": [
-            "afficher",
-            "décider"
-          ],
-          "detail": "Le **client lourd** : l'appli Prêts installée sur chaque poste. Elle **affiche** et **décide**, puis demande au serveur de lire ou d'écrire les données."
-        },
-        {
-          "id": "z2",
-          "kind": "zone",
-          "at": [
-            2.5,
-            2.5
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste 2"
-        },
-        {
-          "id": "thick2",
-          "kind": "node",
-          "at": [
-            2.5,
-            2.5
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "roles": [
-            "afficher",
-            "décider"
-          ]
-        },
-        {
-          "id": "z3",
-          "kind": "zone",
-          "at": [
-            7.5,
-            -2.5
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste 3"
-        },
-        {
-          "id": "thick3",
-          "kind": "node",
-          "at": [
-            7.5,
-            -2.5
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "roles": [
-            "afficher",
-            "décider"
-          ]
-        },
-        {
-          "id": "zdb",
-          "kind": "zone",
-          "at": [
-            -4.5,
-            -4.5
-          ],
-          "size": [
-            4.2,
-            4.2
-          ],
-          "label": "serveur de données"
-        },
-        {
-          "id": "db",
-          "kind": "store",
-          "at": [
-            -4.5,
-            -4.5
-          ],
-          "tone": "n",
-          "title": "Base de données",
-          "sub": "les prêts",
-          "roles": [
-            "stocker"
-          ],
-          "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
-        },
-        {
-          "id": "biblio",
-          "kind": "actor",
-          "at": [
-            -5.5,
-            10.5
-          ],
-          "tone": "y",
-          "label": "bibliothécaire",
-          "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
-        },
-        {
-          "id": "tech",
-          "kind": "actor",
-          "at": [
-            10.5,
-            -5.5
-          ],
-          "tone": "r",
-          "label": "technicien",
-          "detail": "Le **technicien** installe les nouvelles versions du programme."
-        }
-      ],
-      "links": [
-        {
-          "from": "thick1",
-          "to": "db"
-        },
-        {
-          "from": "thick2",
-          "to": "db"
-        },
-        {
-          "from": "thick3",
-          "to": "db"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 800
-        },
-        {
-          "do": "send",
-          "path": [
-            "biblio",
-            "thick1",
-            "db"
-          ],
-          "label": "prêt",
-          "reply": "enregistré",
-          "explain": [
-            "Au poste 1, la bibliothécaire saisit un prêt dans l'**appli Prêts** installée sur le poste.",
-            "L'appli vérifie les règles, puis envoie le prêt à la **base de données**, sur le serveur.",
-            "La base confirme : le prêt est enregistré, au seul endroit que tous les postes lisent."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 700
-        },
-        {
-          "do": "send",
-          "path": [
-            "thick3",
-            "db"
-          ],
-          "label": "livre prêté ?",
-          "reply": "oui, poste 1",
-          "explain": [
-            "Au poste 3, l'appli demande à la base si ce livre est prêté.",
-            "La base répond oui : tous les postes lisent les mêmes données."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 900
-        },
-        {
-          "do": "pulse",
-          "at": "tech:top"
-        },
-        {
-          "do": "send",
-          "path": [
-            "tech",
-            "thick3"
-          ],
-          "label": "version 2",
-          "explain": [
-            "Une nouvelle version de l'appli sort : le technicien l'installe sur le poste 3…"
-          ]
-        },
-        {
-          "do": "send",
-          "path": [
-            "tech",
-            "thick2"
-          ],
-          "label": "version 2",
-          "explain": [
-            "… puis sur le poste 2…"
-          ]
-        },
-        {
-          "do": "send",
-          "path": [
-            "tech",
-            "thick1"
-          ],
-          "label": "version 2",
-          "explain": [
-            "… puis sur le poste 1. Avec quarante postes, il faudrait recommencer quarante fois."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 3000
-        }
-      ]
+     "id": "app1",
+     "kind": "node",
+     "at": [
+      -1.8,
+      0.6
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "roles": [
+      "afficher",
+      "décider"
+     ],
+     "detail": "L'**appli Prêts** est installée sur ce poste. Elle **affiche** les écrans et **décide** : un lecteur a-t-il le droit d'emprunter, quand le livre doit-il revenir ?"
     },
     {
-      "id": "client-leger",
-      "label": "Client léger",
-      "chapter": "client léger",
-      "title": "Le client léger : un navigateur, un serveur web, une base",
-      "body": [
-        "Sur les postes, un simple **navigateur**, déjà installé : c'est le **client léger**. L'appli Prêts tourne sur un **serveur web**, qui décide et parle à la base de données.",
-        "Trois rôles, trois places : **afficher** dans le navigateur, **décider** sur le serveur web, **stocker** dans la base. C'est l'architecture **trois tiers**."
-      ],
-      "callout": {
-        "title": "rien à installer",
-        "text": "Une nouvelle version s'installe une seule fois, sur le serveur web."
-      },
-      "hud": [
-        {
-          "label": "présentation",
-          "value": "navigateur"
-        },
-        {
-          "label": "métier",
-          "value": "serveur web"
-        },
-        {
-          "label": "données",
-          "value": "serveur BDD"
-        }
-      ],
-      "show": [
-        {
-          "id": "z1",
-          "kind": "zone",
-          "at": [
-            -2,
-            8
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste 1"
-        },
-        {
-          "id": "z2",
-          "kind": "zone",
-          "at": [
-            3,
-            3
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste 2"
-        },
-        {
-          "id": "z3",
-          "kind": "zone",
-          "at": [
-            8,
-            -2
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste 3"
-        },
-        {
-          "id": "nav1",
-          "kind": "node",
-          "at": [
-            -2,
-            8
-          ],
-          "tone": "b",
-          "title": "Navigateur",
-          "roles": [
-            "afficher"
-          ],
-          "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
-        },
-        {
-          "id": "nav2",
-          "kind": "node",
-          "at": [
-            3,
-            3
-          ],
-          "tone": "b",
-          "title": "Navigateur",
-          "roles": [
-            "afficher"
-          ]
-        },
-        {
-          "id": "nav3",
-          "kind": "node",
-          "at": [
-            8,
-            -2
-          ],
-          "tone": "b",
-          "title": "Navigateur",
-          "roles": [
-            "afficher"
-          ]
-        },
-        {
-          "id": "zweb",
-          "kind": "zone",
-          "at": [
-            -6.5,
-            -1.5
-          ],
-          "size": [
-            4.2,
-            4.2
-          ],
-          "label": "serveur web"
-        },
-        {
-          "id": "web",
-          "kind": "node",
-          "at": [
-            -6.5,
-            -1.5
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "sub": "version web",
-          "roles": [
-            "décider"
-          ],
-          "detail": "Le **serveur web** fait tourner l'appli Prêts. Il **décide** : il applique les règles de la bibliothèque, puis lit ou écrit dans la base de données."
-        },
-        {
-          "id": "zdb",
-          "kind": "zone",
-          "at": [
-            0.5,
-            -8.5
-          ],
-          "size": [
-            4.2,
-            4.2
-          ],
-          "label": "serveur BDD"
-        },
-        {
-          "id": "db",
-          "kind": "store",
-          "at": [
-            0.5,
-            -8.5
-          ],
-          "tone": "n",
-          "title": "Base de données",
-          "sub": "les prêts",
-          "roles": [
-            "stocker"
-          ],
-          "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
-        },
-        {
-          "id": "biblio",
-          "kind": "actor",
-          "at": [
-            -5,
-            11
-          ],
-          "tone": "y",
-          "label": "bibliothécaire",
-          "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
-        },
-        {
-          "id": "tech",
-          "kind": "actor",
-          "at": [
-            -11,
-            3
-          ],
-          "tone": "r",
-          "label": "technicien",
-          "detail": "Le **technicien** installe les nouvelles versions du programme."
-        }
-      ],
-      "links": [
-        {
-          "from": "nav1",
-          "to": "web"
-        },
-        {
-          "from": "nav2",
-          "to": "web"
-        },
-        {
-          "from": "nav3",
-          "to": "web"
-        },
-        {
-          "from": "web",
-          "to": "db"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 800
-        },
-        {
-          "do": "send",
-          "path": [
-            "biblio",
-            "nav1",
-            "web",
-            "db"
-          ],
-          "label": "prêt",
-          "reply": "enregistré",
-          "explain": [
-            "La bibliothécaire remplit le formulaire de prêt dans le **navigateur**.",
-            "Le navigateur, qui ne fait qu'afficher, envoie la demande au **serveur web**.",
-            "Le serveur web applique les règles (le lecteur a-t-il déjà cinq livres ?), puis écrit le prêt dans la **base de données**.",
-            "La confirmation revient jusqu'au navigateur, qui l'affiche."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 900
-        },
-        {
-          "do": "pulse",
-          "at": "tech:top"
-        },
-        {
-          "do": "send",
-          "path": [
-            "tech",
-            "web"
-          ],
-          "label": "version 2",
-          "explain": [
-            "Une nouvelle version ? Le technicien l'installe une seule fois, sur le **serveur web** : au prochain affichage, les trois postes l'ont."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 3000
-        }
-      ]
+     "id": "data1",
+     "kind": "store",
+     "at": [
+      1.8,
+      -0.6
+     ],
+     "tone": "n",
+     "title": "Données",
+     "roles": [
+      "stocker"
+     ],
+     "detail": "Les **données** des prêts sont rangées dans un fichier, sur le disque de ce poste. Seule l'appli de ce poste les lit."
     },
     {
-      "id": "n-tiers",
-      "label": "n tiers",
-      "chapter": "plusieurs programmes",
-      "title": "Plusieurs programmes qui collaborent : le n tiers",
-      "body": [
-        "La bibliothèque grandit : rechercher un livre, écrire aux lecteurs en retard, encaisser les amendes. Chaque tâche devient un programme à part, parfois sur sa propre machine.",
-        "L'appli Prêts ne fait plus tout : elle demande aux autres programmes. Comme un restaurant qui passe du cuisinier seul à la brigade, chacun son poste."
-      ],
-      "callout": {
-        "title": "idée clé",
-        "text": "Chaque programme a une seule tâche, et on peut le changer sans toucher aux autres."
-      },
-      "hud": [
-        {
-          "label": "programmes",
-          "value": 4
-        },
-        {
-          "label": "machines",
-          "value": 5
-        }
-      ],
-      "show": [
-        {
-          "id": "zp",
-          "kind": "zone",
-          "at": [
-            -8,
-            8
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste"
-        },
-        {
-          "id": "nav1",
-          "kind": "node",
-          "at": [
-            -8,
-            8
-          ],
-          "tone": "b",
-          "title": "Navigateur",
-          "roles": [
-            "afficher"
-          ],
-          "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
-        },
-        {
-          "id": "zweb",
-          "kind": "zone",
-          "at": [
-            -2.5,
-            2.5
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "serveur web"
-        },
-        {
-          "id": "web",
-          "kind": "node",
-          "at": [
-            -2.5,
-            2.5
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "roles": [
-            "décider"
-          ],
-          "detail": "Le **serveur web** fait tourner l'appli Prêts. Il **décide** : il applique les règles de la bibliothèque, puis lit ou écrit dans la base de données."
-        },
-        {
-          "id": "zsearch",
-          "kind": "zone",
-          "at": [
-            -3,
-            -7
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "serveur recherche"
-        },
-        {
-          "id": "search",
-          "kind": "node",
-          "at": [
-            -3,
-            -7
-          ],
-          "tone": "g",
-          "title": "Recherche",
-          "sub": "le catalogue",
-          "roles": [
-            "décider"
-          ],
-          "detail": "Le programme **Recherche** trouve un livre dans le catalogue, par titre ou par auteur, et dit combien d'exemplaires sont disponibles."
-        },
-        {
-          "id": "zsvc",
-          "kind": "zone",
-          "at": [
-            7.5,
-            3.5
-          ],
-          "size": [
-            6.6,
-            6.6
-          ],
-          "label": "serveur services"
-        },
-        {
-          "id": "pay",
-          "kind": "node",
-          "at": [
-            5.5,
-            5.5
-          ],
-          "tone": "r",
-          "title": "Paiement",
-          "sub": "les amendes",
-          "roles": [
-            "décider"
-          ],
-          "detail": "Le programme **Paiement** encaisse les amendes de retard et note dans la base qu'elles sont réglées."
-        },
-        {
-          "id": "mails",
-          "kind": "node",
-          "at": [
-            9.5,
-            1.5
-          ],
-          "tone": "y",
-          "title": "Mails de retard",
-          "sub": "chaque nuit",
-          "roles": [
-            "décider"
-          ],
-          "detail": "Le programme **Mails de retard** tourne seul, chaque nuit : il cherche les prêts en retard et écrit à chaque lecteur concerné."
-        },
-        {
-          "id": "zdb",
-          "kind": "zone",
-          "at": [
-            7,
-            -7
-          ],
-          "size": [
-            4.2,
-            4.2
-          ],
-          "label": "serveur BDD"
-        },
-        {
-          "id": "db",
-          "kind": "store",
-          "at": [
-            7,
-            -7
-          ],
-          "tone": "n",
-          "title": "Base de données",
-          "roles": [
-            "stocker"
-          ],
-          "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
-        },
-        {
-          "id": "biblio",
-          "kind": "actor",
-          "at": [
-            -12,
-            4
-          ],
-          "tone": "y",
-          "label": "bibliothécaire",
-          "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
-        },
-        {
-          "id": "lecteur",
-          "kind": "actor",
-          "at": [
-            14.5,
-            -0.5
-          ],
-          "tone": "y",
-          "label": "lecteur",
-          "detail": "Un **lecteur** de la bibliothèque. Il reçoit le mail quand son livre est en retard."
-        }
-      ],
-      "links": [
-        {
-          "from": "nav1",
-          "to": "web"
-        },
-        {
-          "from": "web",
-          "to": "search"
-        },
-        {
-          "from": "web",
-          "to": "pay"
-        },
-        {
-          "from": "web",
-          "to": "db"
-        },
-        {
-          "from": "pay",
-          "to": "db"
-        },
-        {
-          "from": "mails",
-          "to": "db"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 800
-        },
-        {
-          "do": "send",
-          "path": [
-            "biblio",
-            "nav1",
-            "web",
-            "search"
-          ],
-          "label": "recherche",
-          "reply": "2 exemplaires",
-          "explain": [
-            "La bibliothécaire cherche un livre dans le **navigateur**.",
-            "Le navigateur envoie la recherche à l'**appli Prêts**.",
-            "L'appli Prêts ne cherche pas elle-même : elle demande au programme **Recherche**.",
-            "Recherche répond « 2 exemplaires disponibles », et la réponse remonte jusqu'à l'écran."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 700
-        },
-        {
-          "do": "send",
-          "path": [
-            "biblio",
-            "nav1",
-            "web",
-            "pay",
-            "db"
-          ],
-          "label": "amende",
-          "reply": "réglée",
-          "explain": [
-            "Un lecteur rapporte un livre en retard et paie son amende au comptoir.",
-            "Le navigateur envoie le paiement à l'**appli Prêts**.",
-            "L'appli Prêts confie l'encaissement au programme **Paiement**.",
-            "Paiement note dans la **base de données** que l'amende est réglée.",
-            "La confirmation remonte jusqu'au navigateur de la bibliothécaire."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 700
-        },
-        {
-          "do": "send",
-          "path": [
-            "mails",
-            "db"
-          ],
-          "label": "retards ?",
-          "reply": "3 retards",
-          "explain": [
-            "La nuit, sans personne devant l'écran, **Mails de retard** demande à la base les prêts en retard.",
-            "La base en trouve trois."
-          ]
-        },
-        {
-          "do": "send",
-          "path": [
-            "mails",
-            "lecteur"
-          ],
-          "label": "mail de retard",
-          "explain": [
-            "Mails de retard écrit à chaque **lecteur** concerné."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 3000
-        }
-      ]
-    },
-    {
-      "id": "externes",
-      "label": "services externes",
-      "chapter": "plusieurs programmes",
-      "title": "Des programmes qui ne sont pas à vous",
-      "body": [
-        "La bibliothèque veut accepter la carte bancaire, et ne plus retaper le titre de chaque nouveau livre. Elle n'écrit aucun de ces deux programmes : ils existent déjà, chez d'autres.",
-        "L'appli Prêts s'en sert à distance, en passant par leur **API** : le guichet qu'un programme ouvre aux autres programmes."
-      ],
-      "callout": {
-        "title": "idée clé",
-        "text": "Un service externe fait une tâche à votre place. En contrepartie, vous dépendez de lui."
-      },
-      "hud": [
-        {
-          "label": "à vous",
-          "value": 2
-        },
-        {
-          "label": "chez d'autres",
-          "value": 2
-        }
-      ],
-      "show": [
-        {
-          "id": "zp",
-          "kind": "zone",
-          "at": [
-            -8,
-            8
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "poste"
-        },
-        {
-          "id": "nav1",
-          "kind": "node",
-          "at": [
-            -8,
-            8
-          ],
-          "tone": "b",
-          "title": "Navigateur",
-          "roles": [
-            "afficher"
-          ],
-          "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
-        },
-        {
-          "id": "zweb",
-          "kind": "zone",
-          "at": [
-            -2.5,
-            2.5
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "label": "serveur web"
-        },
-        {
-          "id": "web",
-          "kind": "node",
-          "at": [
-            -2.5,
-            2.5
-          ],
-          "tone": "v",
-          "title": "Appli Prêts",
-          "roles": [
-            "décider"
-          ],
-          "detail": "Le **serveur web** fait tourner l'appli Prêts. Il **décide** : il applique les règles de la bibliothèque, puis lit ou écrit dans la base de données."
-        },
-        {
-          "id": "zdb",
-          "kind": "zone",
-          "at": [
-            7,
-            -7
-          ],
-          "size": [
-            4.2,
-            4.2
-          ],
-          "label": "serveur BDD"
-        },
-        {
-          "id": "db",
-          "kind": "store",
-          "at": [
-            7,
-            -7
-          ],
-          "tone": "n",
-          "title": "Base de données",
-          "roles": [
-            "stocker"
-          ],
-          "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
-        },
-        {
-          "id": "zbnf",
-          "kind": "zone",
-          "at": [
-            -3,
-            -7
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "tone": "r",
-          "label": "à la BnF"
-        },
-        {
-          "id": "bnf",
-          "kind": "node",
-          "at": [
-            -3,
-            -7
-          ],
-          "tone": "r",
-          "title": "Catalogue BnF",
-          "sub": "les fiches des livres",
-          "detail": "La **Bibliothèque nationale de France** (BnF) tient un catalogue de tous les livres publiés en France. Elle ouvre une **API** : un programme lui donne un numéro ISBN, elle répond avec le titre et l'auteur."
-        },
-        {
-          "id": "zpay",
-          "kind": "zone",
-          "at": [
-            7.5,
-            3.5
-          ],
-          "size": [
-            3.8,
-            3.8
-          ],
-          "tone": "r",
-          "label": "chez un prestataire"
-        },
-        {
-          "id": "payx",
-          "kind": "node",
-          "at": [
-            7.5,
-            3.5
-          ],
-          "tone": "r",
-          "title": "Paiement par carte",
-          "sub": "un prestataire",
-          "detail": "Un **prestataire de paiement** encaisse les cartes bancaires pour le compte de milliers de sites. La bibliothèque ne voit jamais le numéro de carte : elle demande l'encaissement, le prestataire répond « payé » ou « refusé »."
-        },
-        {
-          "id": "biblio",
-          "kind": "actor",
-          "at": [
-            -12,
-            4
-          ],
-          "tone": "y",
-          "label": "bibliothécaire",
-          "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
-        }
-      ],
-      "links": [
-        {
-          "from": "nav1",
-          "to": "web"
-        },
-        {
-          "from": "web",
-          "to": "db"
-        },
-        {
-          "from": "web",
-          "to": "bnf"
-        },
-        {
-          "from": "web",
-          "to": "payx"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 800
-        },
-        {
-          "do": "send",
-          "path": [
-            "biblio",
-            "nav1",
-            "web",
-            "bnf"
-          ],
-          "label": "ISBN",
-          "reply": "titre, auteur",
-          "explain": [
-            "La bibliothécaire ajoute un livre : elle saisit son numéro ISBN dans le **navigateur**.",
-            "Le navigateur l'envoie à l'**appli Prêts**.",
-            "L'appli Prêts ne connaît pas ce livre : elle demande sa fiche au **catalogue de la BnF**.",
-            "La BnF répond avec le titre et l'auteur : personne n'a rien eu à retaper."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 700
-        },
-        {
-          "do": "send",
-          "path": [
-            "biblio",
-            "nav1",
-            "web",
-            "payx"
-          ],
-          "label": "amende par carte",
-          "reply": "payé",
-          "explain": [
-            "Un lecteur règle son amende par carte bancaire, au comptoir.",
-            "Le navigateur envoie le paiement à l'**appli Prêts**.",
-            "Encaisser une carte est un métier : l'appli Prêts le confie au **prestataire de paiement**.",
-            "Le prestataire répond « payé »."
-          ]
-        },
-        {
-          "do": "send",
-          "path": [
-            "web",
-            "db"
-          ],
-          "label": "amende réglée",
-          "explain": [
-            "C'est l'appli Prêts qui note l'amende réglée dans **sa** base : le prestataire n'y a pas accès."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 3000
-        }
-      ]
-    },
-    {
-      "id": "recap",
-      "label": "Récap",
-      "chapter": "récap",
-      "title": "La bibliothèque sous ses quatre formes",
-      "body": [
-        "- **Un poste** : les trois rôles sur la même machine ; les données ne se partagent pas.\n- **Client lourd** (2 tiers) : l'appli sur chaque poste, la base sur un serveur ; mise à jour poste par poste.\n- **Client léger** (3 tiers) : afficher dans le navigateur, décider sur le serveur web, stocker dans la base.\n- **n tiers** : plusieurs programmes qui collaborent, chacun sa tâche ; certains sont des services externes, tenus par d'autres."
-      ],
-      "callout": {
-        "title": "à venir",
-        "text": "Comment ces programmes se parlent-ils à travers le réseau ? Ce sera le module Réseau, à venir."
-      },
-      "hud": [
-        {
-          "label": "formes",
-          "value": 4
-        }
-      ],
-      "show": [
-        {
-          "id": "r1z",
-          "kind": "zone",
-          "at": [
-            -11.5,
-            -0.5
-          ],
-          "size": [
-            5,
-            5
-          ],
-          "label": "1 · un poste"
-        },
-        {
-          "id": "r1a",
-          "kind": "node",
-          "at": [
-            -11.5,
-            -0.5
-          ],
-          "tone": "v",
-          "title": "Appli",
-          "roles": [
-            "afficher",
-            "décider",
-            "stocker"
-          ]
-        },
-        {
-          "id": "r2z",
-          "kind": "zone",
-          "at": [
-            -0.5,
-            -11.5
-          ],
-          "size": [
-            6.4,
-            6.4
-          ],
-          "label": "2 · client lourd"
-        },
-        {
-          "id": "r2a",
-          "kind": "node",
-          "at": [
-            -2,
-            -10
-          ],
-          "tone": "v",
-          "title": "Appli ×3",
-          "roles": [
-            "afficher",
-            "décider"
-          ]
-        },
-        {
-          "id": "r2d",
-          "kind": "store",
-          "at": [
-            1.1,
-            -13.1
-          ],
-          "tone": "n",
-          "title": "BDD",
-          "roles": [
-            "stocker"
-          ]
-        },
-        {
-          "id": "r3z",
-          "kind": "zone",
-          "at": [
-            -1,
-            10
-          ],
-          "size": [
-            7.5,
-            7.5
-          ],
-          "label": "3 · client léger, 3 tiers"
-        },
-        {
-          "id": "r3n",
-          "kind": "node",
-          "at": [
-            -3.5,
-            12.5
-          ],
-          "tone": "b",
-          "title": "Navigateur",
-          "roles": [
-            "afficher"
-          ]
-        },
-        {
-          "id": "r3w",
-          "kind": "node",
-          "at": [
-            -1,
-            10
-          ],
-          "tone": "v",
-          "title": "Serveur web",
-          "roles": [
-            "décider"
-          ]
-        },
-        {
-          "id": "r3d",
-          "kind": "store",
-          "at": [
-            1.5,
-            7.5
-          ],
-          "tone": "n",
-          "title": "BDD",
-          "roles": [
-            "stocker"
-          ]
-        },
-        {
-          "id": "r4z",
-          "kind": "zone",
-          "at": [
-            10,
-            -1
-          ],
-          "size": [
-            7.5,
-            7.5
-          ],
-          "label": "4 · n tiers"
-        },
-        {
-          "id": "r4n",
-          "kind": "node",
-          "at": [
-            7.5,
-            1.5
-          ],
-          "tone": "b",
-          "title": "Navigateur",
-          "roles": [
-            "afficher"
-          ]
-        },
-        {
-          "id": "r4w",
-          "kind": "node",
-          "at": [
-            8.5,
-            -2.5
-          ],
-          "size": [
-            1.6,
-            1.6,
-            0.9
-          ],
-          "tone": "v",
-          "title": "Prêts",
-          "roles": [
-            "décider"
-          ]
-        },
-        {
-          "id": "r4s",
-          "kind": "node",
-          "at": [
-            11.5,
-            0.5
-          ],
-          "size": [
-            1.6,
-            1.6,
-            0.9
-          ],
-          "tone": "g",
-          "title": "Recherche, mails…",
-          "roles": [
-            "décider"
-          ]
-        },
-        {
-          "id": "r4d",
-          "kind": "store",
-          "at": [
-            12.5,
-            -3.5
-          ],
-          "tone": "n",
-          "title": "BDD",
-          "roles": [
-            "stocker"
-          ]
-        }
-      ],
-      "links": [
-        {
-          "from": "r2a",
-          "to": "r2d"
-        },
-        {
-          "path": [
-            "r3n",
-            "r3w",
-            "r3d"
-          ]
-        },
-        {
-          "from": "r4n",
-          "to": "r4w"
-        },
-        {
-          "from": "r4w",
-          "to": "r4s"
-        },
-        {
-          "from": "r4w",
-          "to": "r4d"
-        },
-        {
-          "from": "r4s",
-          "to": "r4d"
-        }
-      ]
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      2.8,
+      5.2
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
     }
-  ]
+   ],
+   "links": [
+    {
+     "from": "app1",
+     "to": "data1"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "pulse",
+     "at": "biblio:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "app1",
+      "data1"
+     ],
+     "label": "prêt",
+     "reply": "enregistré",
+     "explain": [
+      "La bibliothécaire saisit un prêt : l'**appli Prêts** affiche le formulaire.",
+      "L'appli vérifie les règles, puis écrit le prêt dans ses **données**, sur le disque du poste.",
+      "Le prêt est enregistré. Afficher, décider, stocker : tout se passe sur cette machine."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "app1",
+      "data1"
+     ],
+     "label": "livre prêté ?",
+     "reply": "oui, à Léa",
+     "explain": [
+      "Un peu plus tard, elle cherche si un livre est sorti.",
+      "L'appli lit ses données.",
+      "Elle retrouve le prêt : sur un seul poste, tout va bien."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 2600
+    }
+   ]
+  },
+  {
+   "id": "plusieurs-postes",
+   "label": "Plusieurs postes",
+   "chapter": "plusieurs postes",
+   "title": "Plusieurs postes : les données ne se partagent pas",
+   "body": [
+    "Un deuxième comptoir ouvre : on installe l'appli sur un deuxième poste. Il a sa propre copie de l'appli, et ses propres données."
+   ],
+   "callout": {
+    "title": "le problème",
+    "text": "Les données vivent sur chaque poste : impossible de les partager."
+   },
+   "hud": [
+    {
+     "label": "machines",
+     "value": 1
+    },
+    {
+     "label": "données",
+     "value": "1 copie"
+    }
+   ],
+   "show": [
+    {
+     "id": "p1",
+     "kind": "zone",
+     "at": [
+      -3.5,
+      3.5
+     ],
+     "size": [
+      6.4,
+      6.4
+     ],
+     "label": "poste 1"
+    },
+    {
+     "id": "app1",
+     "kind": "node",
+     "at": [
+      -5.3,
+      4.1
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "roles": [
+      "afficher",
+      "décider"
+     ],
+     "detail": "L'**appli Prêts** est installée sur ce poste. Elle **affiche** les écrans et **décide** : un lecteur a-t-il le droit d'emprunter, quand le livre doit-il revenir ?"
+    },
+    {
+     "id": "data1",
+     "kind": "store",
+     "at": [
+      -1.7,
+      2.9
+     ],
+     "tone": "n",
+     "title": "Données",
+     "roles": [
+      "stocker"
+     ],
+     "detail": "Les **données** des prêts sont rangées dans un fichier, sur le disque de ce poste. Seule l'appli de ce poste les lit."
+    },
+    {
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      -0.7,
+      8.7
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    }
+   ],
+   "links": [
+    {
+     "from": "app1",
+     "to": "data1"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "show": [
+      {
+       "id": "p2",
+       "kind": "zone",
+       "at": [
+        3.5,
+        -3.5
+       ],
+       "size": [
+        6.4,
+        6.4
+       ],
+       "label": "poste 2"
+      },
+      {
+       "id": "app2",
+       "kind": "node",
+       "at": [
+        1.7,
+        -2.9
+       ],
+       "tone": "v",
+       "title": "Appli Prêts",
+       "roles": [
+        "afficher",
+        "décider"
+       ],
+       "detail": "L'**appli Prêts** est installée sur ce poste. Elle **affiche** les écrans et **décide** : un lecteur a-t-il le droit d'emprunter, quand le livre doit-il revenir ?"
+      },
+      {
+       "id": "data2",
+       "kind": "store",
+       "at": [
+        5.3,
+        -4.1
+       ],
+       "tone": "n",
+       "title": "Données",
+       "roles": [
+        "stocker"
+       ],
+       "detail": "Les **données** des prêts sont rangées dans un fichier, sur le disque de ce poste. Seule l'appli de ce poste les lit."
+      },
+      {
+       "id": "collegue",
+       "kind": "actor",
+       "at": [
+        6.3,
+        1.7
+       ],
+       "tone": "y",
+       "label": "collègue",
+       "detail": "Un **collègue**, au deuxième comptoir, cherche si un livre est prêté."
+      }
+     ],
+     "link": [
+      {
+       "from": "app2",
+       "to": "data2"
+      }
+     ],
+     "hud": [
+      {
+       "label": "machines",
+       "value": 2
+      },
+      {
+       "label": "données",
+       "value": "2 copies séparées",
+       "tone": "r"
+      }
+     ],
+     "say": "Un deuxième comptoir ouvre : on installe l'appli sur un deuxième poste, avec ses propres données.",
+     "ms": 900
+    },
+    {
+     "do": "pulse",
+     "at": "biblio:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "app1",
+      "data1"
+     ],
+     "label": "prêt",
+     "reply": "enregistré",
+     "explain": [
+      "Au poste 1, la bibliothécaire saisit un prêt : l'**appli Prêts** affiche le formulaire.",
+      "L'appli vérifie les règles, puis écrit le prêt dans les **données**, sur le disque du poste 1.",
+      "Le prêt est enregistré, mais seulement sur le poste 1."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "pulse",
+     "at": "collegue:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "collegue",
+      "app2",
+      "data2"
+     ],
+     "label": "livre prêté ?",
+     "reply": "aucun prêt",
+     "explain": [
+      "Au poste 2, un collègue demande si ce même livre est prêté.",
+      "L'appli du poste 2 cherche dans **ses** données, sur **son** disque.",
+      "Réponse : aucun prêt. Le prêt du poste 1 n'existe pas ici, car les données ne sont pas partagées."
+     ]
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "data2",
+       "note": "ignore le prêt du poste 1"
+      }
+     ],
+     "say": "Chaque poste a sa copie, et les copies ne se parlent pas."
+    },
+    {
+     "do": "wait",
+     "ms": 2800
+    }
+   ]
+  },
+  {
+   "id": "client-lourd",
+   "label": "Deux tiers",
+   "chapter": "deux tiers",
+   "title": "Deux tiers : un client lourd, un serveur de données",
+   "body": [
+    "Les données quittent les postes : elles vont dans une **base de données**, sur un serveur. Chaque poste garde l'appli installée, qui affiche, décide et calcule : c'est le **client lourd**. Il demande les données au serveur : c'est le **client-serveur**.",
+    "Un prêt saisi au poste 1 se voit au poste 3. Mais une nouvelle version de l'appli s'installe poste par poste."
+   ],
+   "callout": {
+    "title": "la limite",
+    "text": "Chaque nouvelle version s'installe sur chaque poste, un par un."
+   },
+   "hud": [
+    {
+     "label": "machines",
+     "value": 4
+    },
+    {
+     "label": "à mettre à jour",
+     "value": "3 postes"
+    }
+   ],
+   "labels": "left",
+   "show": [
+    {
+     "id": "z1",
+     "kind": "zone",
+     "at": [
+      -2.5,
+      7.5
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste 1"
+    },
+    {
+     "id": "thick1",
+     "kind": "node",
+     "at": [
+      -2.5,
+      7.5
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "roles": [
+      "afficher",
+      "décider"
+     ],
+     "detail": "Le **client lourd** : l'appli Prêts installée sur chaque poste. Elle **affiche** et **décide**, puis demande au serveur de lire ou d'écrire les données."
+    },
+    {
+     "id": "z2",
+     "kind": "zone",
+     "at": [
+      2.5,
+      2.5
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste 2"
+    },
+    {
+     "id": "thick2",
+     "kind": "node",
+     "at": [
+      2.5,
+      2.5
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "roles": [
+      "afficher",
+      "décider"
+     ]
+    },
+    {
+     "id": "z3",
+     "kind": "zone",
+     "at": [
+      7.5,
+      -2.5
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste 3"
+    },
+    {
+     "id": "thick3",
+     "kind": "node",
+     "at": [
+      7.5,
+      -2.5
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "roles": [
+      "afficher",
+      "décider"
+     ]
+    },
+    {
+     "id": "zdb",
+     "kind": "zone",
+     "at": [
+      -4.5,
+      -4.5
+     ],
+     "size": [
+      4.2,
+      4.2
+     ],
+     "label": "serveur BDD"
+    },
+    {
+     "id": "db",
+     "kind": "store",
+     "at": [
+      -4.5,
+      -4.5
+     ],
+     "tone": "n",
+     "title": "Base de données",
+     "sub": "les prêts",
+     "roles": [
+      "stocker"
+     ],
+     "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
+    },
+    {
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      -5.5,
+      10.5
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    },
+    {
+     "id": "tech",
+     "kind": "actor",
+     "at": [
+      10.5,
+      -5.5
+     ],
+     "tone": "r",
+     "label": "technicien",
+     "detail": "Le **technicien** installe les nouvelles versions du programme."
+    }
+   ],
+   "links": [
+    {
+     "from": "thick1",
+     "to": "db"
+    },
+    {
+     "from": "thick2",
+     "to": "db"
+    },
+    {
+     "from": "thick3",
+     "to": "db"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "thick1",
+      "db"
+     ],
+     "label": "prêt",
+     "reply": "enregistré",
+     "explain": [
+      "Au poste 1, la bibliothécaire saisit un prêt dans l'**appli Prêts** installée sur le poste.",
+      "L'appli fait elle-même le travail (les règles, la date de retour), puis envoie le prêt à la **base de données**, sur le serveur.",
+      "La base confirme : le prêt est enregistré, au seul endroit que tous les postes lisent."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "send",
+     "path": [
+      "thick3",
+      "db"
+     ],
+     "label": "livre prêté ?",
+     "reply": "oui, poste 1",
+     "explain": [
+      "Au poste 3, l'appli demande à la base si ce livre est prêté.",
+      "La base répond oui : tous les postes lisent les mêmes données."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 900
+    },
+    {
+     "do": "pulse",
+     "at": "tech:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "tech",
+      "thick3"
+     ],
+     "label": "version 2",
+     "explain": [
+      "Une nouvelle version de l'appli sort : le technicien l'installe sur le poste 3…"
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "tech",
+      "thick2"
+     ],
+     "label": "version 2",
+     "explain": [
+      "… puis sur le poste 2…"
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "tech",
+      "thick1"
+     ],
+     "label": "version 2",
+     "explain": [
+      "… puis sur le poste 1. Avec quarante postes, il faudrait recommencer quarante fois."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 3000
+    }
+   ]
+  },
+  {
+   "id": "client-leger",
+   "label": "Trois tiers",
+   "chapter": "trois tiers",
+   "title": "Trois tiers : un client léger, un serveur web, une base",
+   "body": [
+    "Sur les postes, un simple **navigateur**, déjà installé : c'est le **client léger**. Toujours du client-serveur, mais avec un **serveur web** entre les deux : l'appli Prêts y tourne, décide, et parle seule à la base.",
+    "Trois rôles, trois places : **afficher** dans le navigateur, **décider** sur le serveur web, **stocker** dans la base. C'est l'architecture **trois tiers**."
+   ],
+   "callout": {
+    "title": "rien à installer",
+    "text": "Une nouvelle version s'installe une seule fois, sur le serveur web."
+   },
+   "hud": [
+    {
+     "label": "présentation",
+     "value": "navigateur"
+    },
+    {
+     "label": "métier",
+     "value": "serveur web"
+    },
+    {
+     "label": "données",
+     "value": "serveur BDD"
+    }
+   ],
+   "show": [
+    {
+     "id": "z1",
+     "kind": "zone",
+     "at": [
+      -2,
+      8
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste 1"
+    },
+    {
+     "id": "z2",
+     "kind": "zone",
+     "at": [
+      3,
+      3
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste 2"
+    },
+    {
+     "id": "z3",
+     "kind": "zone",
+     "at": [
+      8,
+      -2
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste 3"
+    },
+    {
+     "id": "nav1",
+     "kind": "node",
+     "at": [
+      -2,
+      8
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ],
+     "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
+    },
+    {
+     "id": "nav2",
+     "kind": "node",
+     "at": [
+      3,
+      3
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ]
+    },
+    {
+     "id": "nav3",
+     "kind": "node",
+     "at": [
+      8,
+      -2
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ]
+    },
+    {
+     "id": "zweb",
+     "kind": "zone",
+     "at": [
+      -6.5,
+      -1.5
+     ],
+     "size": [
+      4.2,
+      4.2
+     ],
+     "label": "serveur web (backend)"
+    },
+    {
+     "id": "web",
+     "kind": "node",
+     "at": [
+      -6.5,
+      -1.5
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "sub": "version web",
+     "roles": [
+      "décider"
+     ],
+     "detail": "Le **serveur web** fait tourner l'appli Prêts. Il **décide** : il applique les règles de la bibliothèque, puis lit ou écrit dans la base de données."
+    },
+    {
+     "id": "zdb",
+     "kind": "zone",
+     "at": [
+      0.5,
+      -8.5
+     ],
+     "size": [
+      4.2,
+      4.2
+     ],
+     "label": "serveur BDD"
+    },
+    {
+     "id": "db",
+     "kind": "store",
+     "at": [
+      0.5,
+      -8.5
+     ],
+     "tone": "n",
+     "title": "Base de données",
+     "sub": "les prêts",
+     "roles": [
+      "stocker"
+     ],
+     "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
+    },
+    {
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      -5,
+      11
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    },
+    {
+     "id": "tech",
+     "kind": "actor",
+     "at": [
+      -11,
+      3
+     ],
+     "tone": "r",
+     "label": "technicien",
+     "detail": "Le **technicien** installe les nouvelles versions du programme."
+    }
+   ],
+   "links": [
+    {
+     "from": "nav1",
+     "to": "web"
+    },
+    {
+     "from": "nav2",
+     "to": "web"
+    },
+    {
+     "from": "nav3",
+     "to": "web"
+    },
+    {
+     "from": "web",
+     "to": "db"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "nav1",
+      "web",
+      "db"
+     ],
+     "label": "prêt",
+     "reply": "enregistré",
+     "explain": [
+      "La bibliothécaire remplit le formulaire de prêt dans le **navigateur**.",
+      "Le navigateur, qui ne fait qu'afficher, envoie la demande au **serveur web**.",
+      "Le serveur web applique les règles (le lecteur a-t-il déjà cinq livres ?), puis écrit le prêt dans la **base de données**.",
+      "La confirmation revient jusqu'au navigateur, qui l'affiche."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 900
+    },
+    {
+     "do": "pulse",
+     "at": "tech:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "tech",
+      "web"
+     ],
+     "label": "version 2",
+     "explain": [
+      "Une nouvelle version ? Le technicien l'installe une seule fois, sur le **serveur web** : au prochain affichage, les trois postes l'ont."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 3000
+    }
+   ]
+  },
+  {
+   "id": "n-tiers",
+   "label": "n tiers",
+   "chapter": "n tiers",
+   "title": "Le n tiers : on compte les machines",
+   "body": [
+    "Le « n » de **n tiers** compte les machines, les serveurs, pas les programmes. Ici, cinq : le poste, un serveur web en façade, le serveur d'application, la base de données et un serveur pour les mails.",
+    "Une seule base, et chaque machine a sa tâche."
+   ],
+   "callout": {
+    "title": "idée clé",
+    "text": "n tiers = le nombre de machines de l'architecture."
+   },
+   "hud": [
+    {
+     "label": "tiers",
+     "value": 5
+    }
+   ],
+   "show": [
+    {
+     "id": "zp",
+     "kind": "zone",
+     "at": [
+      -9,
+      9
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste"
+    },
+    {
+     "id": "nav1",
+     "kind": "node",
+     "at": [
+      -9,
+      9
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ],
+     "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
+    },
+    {
+     "id": "zweb",
+     "kind": "zone",
+     "at": [
+      -3,
+      3
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur web"
+    },
+    {
+     "id": "front",
+     "kind": "node",
+     "at": [
+      -3,
+      3
+     ],
+     "tone": "b",
+     "title": "Serveur web",
+     "sub": "en façade",
+     "detail": "Le **serveur web en façade** reçoit toutes les demandes des navigateurs. Il envoie lui-même les fichiers qui ne changent pas (images, styles) et passe le reste au serveur d'application. On l'appelle souvent **reverse proxy**."
+    },
+    {
+     "id": "zapp",
+     "kind": "zone",
+     "at": [
+      3,
+      -3
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur d'application"
+    },
+    {
+     "id": "appsrv",
+     "kind": "node",
+     "at": [
+      3,
+      -3
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "sub": "les règles",
+     "roles": [
+      "décider"
+     ],
+     "detail": "Le **serveur d'application** fait tourner l'appli Prêts : il applique les règles de la bibliothèque. Il ne reçoit que ce que le serveur web lui passe."
+    },
+    {
+     "id": "zdb",
+     "kind": "zone",
+     "at": [
+      9,
+      -9
+     ],
+     "size": [
+      4.2,
+      4.2
+     ],
+     "label": "serveur BDD"
+    },
+    {
+     "id": "db",
+     "kind": "store",
+     "at": [
+      9,
+      -9
+     ],
+     "tone": "n",
+     "title": "Base de données",
+     "roles": [
+      "stocker"
+     ],
+     "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
+    },
+    {
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      -13,
+      5
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    },
+    {
+     "id": "zmail",
+     "kind": "zone",
+     "at": [
+      11,
+      5
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur de mails"
+    },
+    {
+     "id": "mail",
+     "kind": "node",
+     "at": [
+      11,
+      5
+     ],
+     "tone": "y",
+     "title": "Envoi des mails",
+     "detail": "Le **serveur de mails** envoie les messages aux lecteurs. D'autres installations ajoutent, à la place ou en plus, une **file d'attente** de messages ou un **serveur d'intégration**, qui relie l'appli à d'autres logiciels."
+    },
+    {
+     "id": "lecteur",
+     "kind": "actor",
+     "at": [
+      14.5,
+      1.5
+     ],
+     "tone": "y",
+     "label": "lecteur",
+     "detail": "Un **lecteur** de la bibliothèque. Il reçoit le mail quand son livre est en retard."
+    }
+   ],
+   "links": [
+    {
+     "from": "nav1",
+     "to": "front"
+    },
+    {
+     "from": "front",
+     "to": "appsrv"
+    },
+    {
+     "from": "appsrv",
+     "to": "db"
+    },
+    {
+     "from": "appsrv",
+     "to": "mail"
+    },
+    {
+     "from": "mail",
+     "to": "lecteur"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "pulse",
+     "at": "biblio:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "nav1",
+      "front",
+      "appsrv",
+      "db"
+     ],
+     "label": "prêt",
+     "reply": "enregistré",
+     "explain": [
+      "La bibliothécaire saisit un prêt dans le **navigateur**.",
+      "Le navigateur l'envoie au **serveur web**, en façade.",
+      "Le serveur web passe la demande au **serveur d'application**, qui applique les règles.",
+      "Le serveur d'application écrit le prêt dans la **base de données**.",
+      "La confirmation remonte par les mêmes machines."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "send",
+     "path": [
+      "appsrv",
+      "mail",
+      "lecteur"
+     ],
+     "label": "mail de retard",
+     "explain": [
+      "Chaque nuit, l'appli trouve les retards et confie les mails au **serveur de mails**, le cinquième tiers.",
+      "Il écrit à chaque **lecteur** concerné."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "wait",
+     "ms": 2800
+    }
+   ]
+  },
+  {
+   "id": "externes",
+   "label": "services externes",
+   "chapter": "plusieurs programmes",
+   "title": "Des programmes qui ne sont pas à vous",
+   "body": [
+    "La bibliothèque veut accepter la carte bancaire, et ne plus retaper le titre de chaque nouveau livre. Elle n'écrit aucun de ces deux programmes : ils existent déjà, chez d'autres.",
+    "L'appli Prêts s'en sert à distance, en passant par leur **API** : le guichet qu'un programme ouvre aux autres programmes."
+   ],
+   "callout": {
+    "title": "idée clé",
+    "text": "Un service externe fait une tâche à votre place. En contrepartie, vous dépendez de lui."
+   },
+   "hud": [
+    {
+     "label": "chez vous",
+     "value": "5 machines"
+    },
+    {
+     "label": "chez d'autres",
+     "value": "2 services"
+    }
+   ],
+   "show": [
+    {
+     "id": "zp",
+     "kind": "zone",
+     "at": [
+      -9,
+      9
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste"
+    },
+    {
+     "id": "nav1",
+     "kind": "node",
+     "at": [
+      -9,
+      9
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ],
+     "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
+    },
+    {
+     "id": "zweb",
+     "kind": "zone",
+     "at": [
+      -3,
+      3
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur web"
+    },
+    {
+     "id": "front",
+     "kind": "node",
+     "at": [
+      -3,
+      3
+     ],
+     "tone": "b",
+     "title": "Serveur web",
+     "sub": "en façade",
+     "detail": "Le **serveur web en façade** reçoit toutes les demandes des navigateurs. Il envoie lui-même les fichiers qui ne changent pas (images, styles) et passe le reste au serveur d'application. On l'appelle souvent **reverse proxy**."
+    },
+    {
+     "id": "zapp",
+     "kind": "zone",
+     "at": [
+      3,
+      -3
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur d'application"
+    },
+    {
+     "id": "appsrv",
+     "kind": "node",
+     "at": [
+      3,
+      -3
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "sub": "les règles",
+     "roles": [
+      "décider"
+     ],
+     "detail": "Le **serveur d'application** fait tourner l'appli Prêts : il applique les règles de la bibliothèque. Il ne reçoit que ce que le serveur web lui passe."
+    },
+    {
+     "id": "zdb",
+     "kind": "zone",
+     "at": [
+      9,
+      -9
+     ],
+     "size": [
+      4.2,
+      4.2
+     ],
+     "label": "serveur BDD"
+    },
+    {
+     "id": "db",
+     "kind": "store",
+     "at": [
+      9,
+      -9
+     ],
+     "tone": "n",
+     "title": "Base de données",
+     "roles": [
+      "stocker"
+     ],
+     "detail": "La **base de données** (BDD) est un programme qui range les données et répond aux demandes de lecture et d'écriture. Ici, elle tourne sur un serveur que tous les postes partagent."
+    },
+    {
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      -13,
+      5
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    },
+    {
+     "id": "zmail",
+     "kind": "zone",
+     "at": [
+      11,
+      5
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "serveur de mails"
+    },
+    {
+     "id": "mail",
+     "kind": "node",
+     "at": [
+      11,
+      5
+     ],
+     "tone": "y",
+     "title": "Envoi des mails",
+     "detail": "Le **serveur de mails** envoie les messages aux lecteurs. D'autres installations ajoutent, à la place ou en plus, une **file d'attente** de messages ou un **serveur d'intégration**, qui relie l'appli à d'autres logiciels."
+    },
+    {
+     "id": "lecteur",
+     "kind": "actor",
+     "at": [
+      14.5,
+      1.5
+     ],
+     "tone": "y",
+     "label": "lecteur",
+     "detail": "Un **lecteur** de la bibliothèque. Il reçoit le mail quand son livre est en retard."
+    },
+    {
+     "id": "zbnf",
+     "kind": "zone",
+     "at": [
+      -7,
+      -7
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "tone": "r",
+     "label": "à la BnF"
+    },
+    {
+     "id": "bnf",
+     "kind": "node",
+     "at": [
+      -7,
+      -7
+     ],
+     "tone": "r",
+     "title": "Catalogue BnF",
+     "sub": "les fiches des livres",
+     "detail": "La **Bibliothèque nationale de France** (BnF) tient un catalogue de tous les livres publiés en France. Elle ouvre une **API** : un programme lui donne un numéro ISBN, elle répond avec le titre et l'auteur."
+    },
+    {
+     "id": "zpay",
+     "kind": "zone",
+     "at": [
+      -1,
+      -13
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "tone": "r",
+     "label": "chez un prestataire"
+    },
+    {
+     "id": "payx",
+     "kind": "node",
+     "at": [
+      -1,
+      -13
+     ],
+     "tone": "r",
+     "title": "Paiement par carte",
+     "sub": "un prestataire",
+     "detail": "Un **prestataire de paiement** encaisse les cartes bancaires pour le compte de milliers de sites. La bibliothèque ne voit jamais le numéro de carte : elle demande l'encaissement, le prestataire répond « payé » ou « refusé »."
+    }
+   ],
+   "links": [
+    {
+     "from": "nav1",
+     "to": "front"
+    },
+    {
+     "from": "front",
+     "to": "appsrv"
+    },
+    {
+     "from": "appsrv",
+     "to": "db"
+    },
+    {
+     "from": "appsrv",
+     "to": "mail"
+    },
+    {
+     "from": "mail",
+     "to": "lecteur"
+    },
+    {
+     "from": "appsrv",
+     "to": "bnf"
+    },
+    {
+     "from": "appsrv",
+     "to": "payx"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "pulse",
+     "at": "biblio:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "nav1",
+      "front",
+      "appsrv",
+      "bnf"
+     ],
+     "label": "ISBN",
+     "reply": "titre, auteur",
+     "explain": [
+      "La bibliothécaire ajoute un livre : elle saisit son numéro ISBN dans le **navigateur**.",
+      "Le navigateur l'envoie au serveur web…",
+      "… qui le passe à l'**appli Prêts**.",
+      "L'appli Prêts ne connaît pas ce livre : elle demande sa fiche au **catalogue de la BnF**.",
+      "La BnF répond avec le titre et l'auteur : personne n'a rien eu à retaper."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "nav1",
+      "front",
+      "appsrv",
+      "payx"
+     ],
+     "label": "amende par carte",
+     "reply": "payé",
+     "explain": [
+      "Un lecteur règle son amende par carte bancaire, au comptoir.",
+      "Le navigateur envoie le paiement au serveur web…",
+      "… qui le passe à l'**appli Prêts**.",
+      "Encaisser une carte est un métier : l'appli Prêts le confie au **prestataire de paiement**.",
+      "Le prestataire répond « payé »."
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "appsrv",
+      "db"
+     ],
+     "label": "amende réglée",
+     "explain": [
+      "C'est l'appli Prêts qui note l'amende réglée dans **sa** base : le prestataire n'y a pas accès."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 3000
+    }
+   ],
+   "labels": "left"
+  },
+  {
+   "id": "services",
+   "label": "Services",
+   "chapter": "aller plus loin",
+   "title": "Aller plus loin : des services, chacun ses données",
+   "body": [
+    "Une grande application se découpe en **services** : Prêts, Recherche, Paiement, Mails. Chacun a une seule tâche et **ses propres données** ; ils se parlent par leurs API, comme avec un service externe.",
+    "On parle d'architecture **orientée services**, ou de **micro-services** quand ils sont nombreux et petits."
+   ],
+   "callout": {
+    "title": "le prix",
+    "text": "Plus de programmes à déployer et à surveiller : il faut des outils et une organisation pour ça."
+   },
+   "hud": [
+    {
+     "label": "services",
+     "value": 4
+    },
+    {
+     "label": "bases",
+     "value": 3
+    }
+   ],
+   "show": [
+    {
+     "id": "zp",
+     "kind": "zone",
+     "at": [
+      -10,
+      10
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "poste"
+    },
+    {
+     "id": "nav1",
+     "kind": "node",
+     "at": [
+      -10,
+      10
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ],
+     "detail": "Le **navigateur** (Firefox, Chrome, Edge…) est déjà installé sur chaque poste. Il ne fait qu'**afficher** les pages que lui envoie le serveur web."
+    },
+    {
+     "id": "zweb",
+     "kind": "zone",
+     "at": [
+      -3.5,
+      3.5
+     ],
+     "size": [
+      5.6,
+      5.6
+     ],
+     "label": "service Prêts"
+    },
+    {
+     "id": "web",
+     "kind": "node",
+     "at": [
+      -4.7,
+      4.7
+     ],
+     "tone": "v",
+     "title": "Appli Prêts",
+     "roles": [
+      "décider"
+     ],
+     "detail": "Le **serveur web** fait tourner l'appli Prêts. Il **décide** : il applique les règles de la bibliothèque, puis lit ou écrit dans la base de données."
+    },
+    {
+     "id": "dbp",
+     "kind": "store",
+     "at": [
+      -2.3,
+      2.3
+     ],
+     "tone": "n",
+     "title": "Prêts",
+     "roles": [
+      "stocker"
+     ],
+     "detail": "Chaque service garde **ses propres données** : ici, les prêts. Les autres services n'y touchent pas : ils demandent au service Prêts."
+    },
+    {
+     "id": "zsearch",
+     "kind": "zone",
+     "at": [
+      -3.5,
+      -7
+     ],
+     "size": [
+      5.6,
+      5.6
+     ],
+     "label": "service Recherche"
+    },
+    {
+     "id": "search",
+     "kind": "node",
+     "at": [
+      -4.7,
+      -5.8
+     ],
+     "tone": "g",
+     "title": "Recherche",
+     "sub": "le catalogue",
+     "roles": [
+      "décider"
+     ],
+     "detail": "Le programme **Recherche** trouve un livre dans le catalogue, par titre ou par auteur, et dit combien d'exemplaires sont disponibles."
+    },
+    {
+     "id": "idx",
+     "kind": "store",
+     "at": [
+      -2.3,
+      -8.2
+     ],
+     "tone": "n",
+     "title": "Catalogue",
+     "roles": [
+      "stocker"
+     ]
+    },
+    {
+     "id": "zpay",
+     "kind": "zone",
+     "at": [
+      7,
+      3.5
+     ],
+     "size": [
+      5.6,
+      5.6
+     ],
+     "label": "service Paiement"
+    },
+    {
+     "id": "pay",
+     "kind": "node",
+     "at": [
+      5.8,
+      4.7
+     ],
+     "tone": "r",
+     "title": "Paiement",
+     "sub": "les amendes",
+     "roles": [
+      "décider"
+     ],
+     "detail": "Le programme **Paiement** encaisse les amendes de retard et note dans la base qu'elles sont réglées."
+    },
+    {
+     "id": "dpay",
+     "kind": "store",
+     "at": [
+      8.2,
+      2.3
+     ],
+     "tone": "n",
+     "title": "Amendes",
+     "roles": [
+      "stocker"
+     ]
+    },
+    {
+     "id": "zmails",
+     "kind": "zone",
+     "at": [
+      7,
+      -7
+     ],
+     "size": [
+      3.8,
+      3.8
+     ],
+     "label": "service Mails"
+    },
+    {
+     "id": "mails",
+     "kind": "node",
+     "at": [
+      7,
+      -7
+     ],
+     "tone": "y",
+     "title": "Mails de retard",
+     "sub": "chaque nuit",
+     "roles": [
+      "décider"
+     ],
+     "detail": "Le programme **Mails de retard** tourne seul, chaque nuit : il cherche les prêts en retard et écrit à chaque lecteur concerné."
+    },
+    {
+     "id": "biblio",
+     "kind": "actor",
+     "at": [
+      -14,
+      6
+     ],
+     "tone": "y",
+     "label": "bibliothécaire",
+     "detail": "La **bibliothécaire** enregistre les prêts et les retours au comptoir. C'est elle qui se sert du programme."
+    },
+    {
+     "id": "lecteur",
+     "kind": "actor",
+     "at": [
+      12,
+      -10
+     ],
+     "tone": "y",
+     "label": "lecteur",
+     "detail": "Un **lecteur** de la bibliothèque. Il reçoit le mail quand son livre est en retard."
+    }
+   ],
+   "links": [
+    {
+     "from": "nav1",
+     "to": "web"
+    },
+    {
+     "from": "web",
+     "to": "dbp"
+    },
+    {
+     "from": "web",
+     "to": "search"
+    },
+    {
+     "from": "search",
+     "to": "idx"
+    },
+    {
+     "from": "web",
+     "to": "pay"
+    },
+    {
+     "from": "pay",
+     "to": "dpay"
+    },
+    {
+     "from": "mails",
+     "to": "web"
+    },
+    {
+     "from": "mails",
+     "to": "lecteur"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "pulse",
+     "at": "biblio:top"
+    },
+    {
+     "do": "send",
+     "path": [
+      "biblio",
+      "nav1",
+      "web",
+      "search",
+      "idx"
+     ],
+     "label": "recherche",
+     "reply": "2 exemplaires",
+     "explain": [
+      "La bibliothécaire cherche un livre dans le **navigateur**.",
+      "Le navigateur envoie la recherche au service **Prêts**.",
+      "Prêts ne cherche pas lui-même : il demande au service **Recherche**.",
+      "Recherche fouille **son** catalogue.",
+      "Il répond « 2 exemplaires », et la réponse remonte jusqu'à l'écran."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "send",
+     "path": [
+      "web",
+      "pay",
+      "dpay"
+     ],
+     "label": "amende",
+     "reply": "réglée",
+     "explain": [
+      "Un lecteur paie son amende : Prêts confie l'encaissement au service **Paiement**.",
+      "Paiement note l'amende réglée dans **ses** données.",
+      "Il confirme à Prêts."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "send",
+     "path": [
+      "mails",
+      "web",
+      "dbp"
+     ],
+     "label": "retards ?",
+     "reply": "3 retards",
+     "explain": [
+      "La nuit, le service **Mails** a besoin des retards. Il ne lit pas la base des prêts : il demande au service Prêts.",
+      "Prêts lit **ses** données.",
+      "Il répond : trois retards."
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "mails",
+      "lecteur"
+     ],
+     "label": "mail de retard",
+     "explain": [
+      "Mails écrit à chaque **lecteur** concerné."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "wait",
+     "ms": 2800
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "label": "Récap",
+   "chapter": "récap",
+   "title": "La bibliothèque sous ses formes",
+   "body": [
+    "- **Un poste** : les trois rôles sur la même machine ; les données ne se partagent pas.\n- **Deux tiers**, client lourd : l'appli sur chaque poste, la base sur un serveur ; mise à jour poste par poste.\n- **Trois tiers**, client léger : afficher dans le navigateur, décider sur le serveur web, stocker dans la base.\n- **n tiers** : n compte les machines ; la base reste une seule.\n- **Plus loin** : des services, chacun sa tâche et ses données."
+   ],
+   "callout": {
+    "title": "à venir",
+    "text": "Comment ces programmes se parlent-ils à travers le réseau ? Ce sera le module Réseau, à venir."
+   },
+   "hud": [
+    {
+     "label": "formes",
+     "value": "4 + 1"
+    }
+   ],
+   "show": [
+    {
+     "id": "r1z",
+     "kind": "zone",
+     "at": [
+      -11.5,
+      -0.5
+     ],
+     "size": [
+      5,
+      5
+     ],
+     "label": "1 · un poste"
+    },
+    {
+     "id": "r1a",
+     "kind": "node",
+     "at": [
+      -11.5,
+      -0.5
+     ],
+     "tone": "v",
+     "title": "Appli",
+     "roles": [
+      "afficher",
+      "décider",
+      "stocker"
+     ]
+    },
+    {
+     "id": "r2z",
+     "kind": "zone",
+     "at": [
+      -0.5,
+      -11.5
+     ],
+     "size": [
+      6.4,
+      6.4
+     ],
+     "label": "2 · deux tiers, client lourd"
+    },
+    {
+     "id": "r2a",
+     "kind": "node",
+     "at": [
+      -2,
+      -10
+     ],
+     "tone": "v",
+     "title": "Appli ×3",
+     "roles": [
+      "afficher",
+      "décider"
+     ]
+    },
+    {
+     "id": "r2d",
+     "kind": "store",
+     "at": [
+      1.1,
+      -13.1
+     ],
+     "tone": "n",
+     "title": "BDD",
+     "roles": [
+      "stocker"
+     ]
+    },
+    {
+     "id": "r3z",
+     "kind": "zone",
+     "at": [
+      -1,
+      10
+     ],
+     "size": [
+      7.5,
+      7.5
+     ],
+     "label": "3 · trois tiers, client léger"
+    },
+    {
+     "id": "r3n",
+     "kind": "node",
+     "at": [
+      -3.5,
+      12.5
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ]
+    },
+    {
+     "id": "r3w",
+     "kind": "node",
+     "at": [
+      -1,
+      10
+     ],
+     "tone": "v",
+     "title": "Serveur web",
+     "roles": [
+      "décider"
+     ]
+    },
+    {
+     "id": "r3d",
+     "kind": "store",
+     "at": [
+      1.5,
+      7.5
+     ],
+     "tone": "n",
+     "title": "BDD",
+     "roles": [
+      "stocker"
+     ]
+    },
+    {
+     "id": "r4z",
+     "kind": "zone",
+     "at": [
+      10,
+      -1
+     ],
+     "size": [
+      7.5,
+      7.5
+     ],
+     "label": "4 · n tiers, ici 4"
+    },
+    {
+     "id": "r4n",
+     "kind": "node",
+     "at": [
+      7.2,
+      1.8
+     ],
+     "size": [
+      1.6,
+      1.6,
+      0.9
+     ],
+     "tone": "b",
+     "title": "Navigateur",
+     "roles": [
+      "afficher"
+     ]
+    },
+    {
+     "id": "r4f",
+     "kind": "node",
+     "at": [
+      9.1,
+      -0.1
+     ],
+     "size": [
+      1.6,
+      1.6,
+      0.9
+     ],
+     "tone": "b",
+     "title": "Serveur web"
+    },
+    {
+     "id": "r4w",
+     "kind": "node",
+     "at": [
+      11,
+      -2
+     ],
+     "size": [
+      1.6,
+      1.6,
+      0.9
+     ],
+     "tone": "v",
+     "title": "Serveur d'app",
+     "roles": [
+      "décider"
+     ]
+    },
+    {
+     "id": "r4d",
+     "kind": "store",
+     "at": [
+      12.9,
+      -3.9
+     ],
+     "tone": "n",
+     "title": "BDD",
+     "roles": [
+      "stocker"
+     ]
+    },
+    {
+     "id": "r5z",
+     "kind": "zone",
+     "at": [
+      10.5,
+      10.5
+     ],
+     "size": [
+      7.5,
+      7.5
+     ],
+     "label": "plus loin · services"
+    },
+    {
+     "id": "r5a",
+     "kind": "node",
+     "at": [
+      8.5,
+      12.5
+     ],
+     "size": [
+      1.6,
+      1.6,
+      0.9
+     ],
+     "tone": "v",
+     "title": "Prêts"
+    },
+    {
+     "id": "r5b",
+     "kind": "node",
+     "at": [
+      12.5,
+      12.5
+     ],
+     "size": [
+      1.6,
+      1.6,
+      0.9
+     ],
+     "tone": "g",
+     "title": "Recherche"
+    },
+    {
+     "id": "r5c",
+     "kind": "node",
+     "at": [
+      8.5,
+      8.5
+     ],
+     "size": [
+      1.6,
+      1.6,
+      0.9
+     ],
+     "tone": "r",
+     "title": "Paiement"
+    },
+    {
+     "id": "r5d",
+     "kind": "node",
+     "at": [
+      12.5,
+      8.5
+     ],
+     "size": [
+      1.6,
+      1.6,
+      0.9
+     ],
+     "tone": "y",
+     "title": "Mails"
+    }
+   ],
+   "links": [
+    {
+     "from": "r2a",
+     "to": "r2d"
+    },
+    {
+     "path": [
+      "r3n",
+      "r3w",
+      "r3d"
+     ]
+    },
+    {
+     "path": [
+      "r4n",
+      "r4f",
+      "r4w",
+      "r4d"
+     ]
+    },
+    {
+     "from": "r5a",
+     "to": "r5b"
+    },
+    {
+     "from": "r5a",
+     "to": "r5c"
+    },
+    {
+     "from": "r5d",
+     "to": "r5a"
+    }
+   ]
+  }
+ ]
 }
