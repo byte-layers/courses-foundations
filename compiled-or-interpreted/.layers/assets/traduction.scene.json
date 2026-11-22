@@ -1,0 +1,468 @@
+{
+ "format": "bl-scenes/0.3",
+ "id": "compiled-or-interpreted-plan",
+ "title": "Compilé ou interprété (2D)",
+ "lang": "fr",
+ "kit": "plan",
+ "legend": [
+  {
+   "tone": "y",
+   "label": "code source"
+  },
+  {
+   "tone": "g",
+   "label": "traduit avant"
+  },
+  {
+   "tone": "v",
+   "label": "traduit pendant"
+  },
+  {
+   "tone": "b",
+   "label": "fichier traduit"
+  }
+ ],
+ "entities": [
+  {
+   "id": "avant",
+   "kind": "layer",
+   "at": [
+    -8.5,
+    0.2
+   ],
+   "tone": "g",
+   "size": [
+    7.0,
+    19.6,
+    1
+   ],
+   "title": "avant l'exécution"
+  },
+  {
+   "id": "pendant",
+   "kind": "layer",
+   "at": [
+    7.5,
+    0.2
+   ],
+   "tone": "v",
+   "size": [
+    7.0,
+    19.6,
+    1
+   ],
+   "title": "pendant l'exécution"
+  },
+  {
+   "id": "cpu",
+   "kind": "node",
+   "at": [
+    16.5,
+    3.0
+   ],
+   "tone": "n",
+   "size": [
+    5.0,
+    12.4,
+    1
+   ],
+   "title": "processeur",
+   "sub": "0101 1100 0011",
+   "detail": "Le **processeur** n'exécute que du **code machine** : des instructions très simples écrites sous forme de nombres. Tout programme finit par lui parvenir sous cette forme."
+  },
+  {
+   "id": "s-sh",
+   "kind": "file",
+   "at": [
+    -17,
+    -6.3
+   ],
+   "tone": "y",
+   "size": [
+    6.0,
+    2.0,
+    1
+   ],
+   "title": "hello.sh"
+  },
+  {
+   "id": "s-py",
+   "kind": "file",
+   "at": [
+    -17,
+    -2.1
+   ],
+   "tone": "y",
+   "size": [
+    6.0,
+    2.0,
+    1
+   ],
+   "title": "hello.py"
+  },
+  {
+   "id": "s-java",
+   "kind": "file",
+   "at": [
+    -17,
+    2.1
+   ],
+   "tone": "y",
+   "size": [
+    6.0,
+    2.0,
+    1
+   ],
+   "title": "Bonjour.java"
+  },
+  {
+   "id": "s-c",
+   "kind": "file",
+   "at": [
+    -17,
+    6.3
+   ],
+   "tone": "y",
+   "size": [
+    6.0,
+    2.0,
+    1
+   ],
+   "title": "bonjour.c"
+  },
+  {
+   "id": "bash",
+   "kind": "node",
+   "at": [
+    0,
+    -6.5
+   ],
+   "tone": "v",
+   "size": [
+    5.4,
+    2.4,
+    1
+   ],
+   "in": "pendant",
+   "title": "bash",
+   "sub": "déjà installé",
+   "detail": "`bash` est l'**interpréteur** des scripts shell. Il est déjà là sous Linux et macOS."
+  },
+  {
+   "id": "python",
+   "kind": "node",
+   "at": [
+    0,
+    -2.3000000000000003
+   ],
+   "tone": "v",
+   "size": [
+    5.4,
+    2.4,
+    1
+   ],
+   "in": "pendant",
+   "title": "python",
+   "sub": "à installer",
+   "detail": "L'**interpréteur** Python : un programme à installer, comme Node.js pour du JavaScript ou PHP pour du PHP."
+  },
+  {
+   "id": "jvm",
+   "kind": "node",
+   "at": [
+    0,
+    1.9000000000000001
+   ],
+   "tone": "v",
+   "size": [
+    5.4,
+    2.4,
+    1
+   ],
+   "in": "pendant",
+   "title": "JVM",
+   "sub": "à installer",
+   "detail": "La **machine virtuelle Java** lit le bytecode et le fait exécuter par le processeur. Elle s'installe avec le JDK."
+  },
+  {
+   "id": "javac",
+   "kind": "node",
+   "at": [
+    0,
+    1.9000000000000001
+   ],
+   "tone": "g",
+   "size": [
+    5.4,
+    2.4,
+    1
+   ],
+   "in": "avant",
+   "title": "javac",
+   "sub": "compilateur Java",
+   "detail": "`javac` traduit `Bonjour.java` en **bytecode**, une langue intermédiaire, une fois, avant de lancer le programme."
+  },
+  {
+   "id": "cc",
+   "kind": "node",
+   "at": [
+    0,
+    6.1
+   ],
+   "tone": "g",
+   "size": [
+    5.4,
+    2.4,
+    1
+   ],
+   "in": "avant",
+   "title": "compilateur C",
+   "detail": "Le **compilateur** traduit tout `bonjour.c` en code machine, une fois pour toutes, avant de lancer le programme."
+  },
+  {
+   "id": "class",
+   "kind": "file",
+   "at": [
+    -0.5,
+    2.1
+   ],
+   "tone": "b",
+   "size": [
+    6.0,
+    2.0,
+    1
+   ],
+   "title": "Bonjour.class",
+   "detail": "Du **bytecode** : des instructions pour la machine virtuelle Java, pas pour le processeur."
+  },
+  {
+   "id": "bin",
+   "kind": "file",
+   "at": [
+    -0.5,
+    6.3
+   ],
+   "tone": "b",
+   "size": [
+    6.0,
+    2.0,
+    1
+   ],
+   "title": "bonjour (binaire)",
+   "detail": "Le **binaire** : le programme traduit en code machine, pour un type de processeur et un système."
+  }
+ ],
+ "steps": [
+  {
+   "id": "traduction",
+   "label": "Quatre chemins",
+   "title": "Qui traduit, et quand",
+   "body": [
+    "Le processeur ne lit que du code machine. Pour chaque code source, un traducteur : pendant l'exécution, ou avant."
+   ],
+   "show": [
+    "pendant",
+    "cpu",
+    "s-sh",
+    "s-py",
+    "s-java",
+    "s-c"
+   ],
+   "links": [],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 1000
+    },
+    {
+     "do": "scene",
+     "show": [
+      "bash"
+     ],
+     "link": [
+      {
+       "from": "s-sh",
+       "to": "bash"
+      },
+      {
+       "from": "bash",
+       "to": "cpu"
+      }
+     ],
+     "say": "Un script shell : bash, déjà installé, le lit et le traduit pendant l'exécution, ligne à ligne."
+    },
+    {
+     "do": "send",
+     "path": [
+      "s-sh",
+      "bash",
+      "cpu"
+     ],
+     "label": "ligne à ligne"
+    },
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "scene",
+     "show": [
+      "python"
+     ],
+     "link": [
+      {
+       "from": "s-py",
+       "to": "python"
+      },
+      {
+       "from": "python",
+       "to": "cpu"
+      }
+     ],
+     "say": "Un script Python, JavaScript ou PHP : même chose, mais l'interpréteur du langage est à installer."
+    },
+    {
+     "do": "send",
+     "path": [
+      "s-py",
+      "python",
+      "cpu"
+     ],
+     "label": "ligne à ligne"
+    },
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "scene",
+     "show": [
+      "avant"
+     ],
+     "say": "Java ajoute une étape **avant l'exécution** : la compilation."
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "show": [
+      "javac",
+      "class"
+     ],
+     "link": [
+      {
+       "from": "s-java",
+       "to": "javac"
+      },
+      {
+       "from": "javac",
+       "to": "class"
+      }
+     ],
+     "say": "javac traduit d'abord vers une langue intermédiaire, le bytecode…"
+    },
+    {
+     "do": "send",
+     "path": [
+      "s-java",
+      "javac",
+      "class"
+     ],
+     "label": "une fois"
+    },
+    {
+     "do": "scene",
+     "show": [
+      "jvm"
+     ],
+     "link": [
+      {
+       "from": "class",
+       "to": "jvm"
+      },
+      {
+       "from": "jvm",
+       "to": "cpu"
+      }
+     ],
+     "say": "…que la machine virtuelle Java traduit ensuite pendant l'exécution."
+    },
+    {
+     "do": "send",
+     "path": [
+      "class",
+      "jvm",
+      "cpu"
+     ],
+     "label": "à chaque lancement"
+    },
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "scene",
+     "show": [
+      "cc",
+      "bin"
+     ],
+     "link": [
+      {
+       "from": "s-c",
+       "to": "cc"
+      },
+      {
+       "from": "cc",
+       "to": "bin"
+      }
+     ],
+     "say": "Le C : le compilateur traduit tout, une fois pour toutes, en un fichier de code machine."
+    },
+    {
+     "do": "send",
+     "path": [
+      "s-c",
+      "cc",
+      "bin"
+     ],
+     "label": "une fois"
+    },
+    {
+     "do": "scene",
+     "link": [
+      {
+       "from": "bin",
+       "to": "cpu"
+      }
+     ],
+     "say": "Ce binaire va droit au processeur : plus rien ne le lit ni ne le traduit."
+    },
+    {
+     "do": "send",
+     "path": [
+      "bin",
+      "cpu"
+     ],
+     "label": "directement",
+     "tone": "b"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "cpu",
+       "label": "rien que lui"
+      }
+     ],
+     "say": "Interprété ne veut pas dire « pas traduit » : il y a toujours un traducteur, la question est quand."
+    },
+    {
+     "do": "wait",
+     "ms": 2800
+    }
+   ]
+  }
+ ]
+}
