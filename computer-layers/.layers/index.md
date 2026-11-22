@@ -11,7 +11,7 @@ duration: 40
 requires: "0.8.0"
 ---
 
-Un ordinateur est fait de couches posées les unes sur les autres, et chacune ne parle qu'à ses voisines. Vous saurez ce que fait chaque couche, pourquoi un serveur se passe d'interface graphique, ce que sont un terminal et un shell, à quoi ressemblent les premières commandes et ce qu'est un script. Ce contenu est écrit pour quelqu'un qui n'a jamais ouvert de terminal : la plupart des sections ont leur schéma animé, que le bouton ▶ Jouer ouvre en grand, et trois sections vous font taper les commandes dans un terminal simulé, dans la page.
+Un ordinateur est fait de couches posées les unes sur les autres, et chacune ne parle qu'à ses voisines. Vous saurez ce que fait chaque couche, pourquoi un serveur se passe souvent d'interface graphique, ce que sont un terminal et un shell, à quoi ressemblent les premières commandes et ce qu'est un script. Ce contenu est écrit pour quelqu'un qui n'a jamais ouvert de terminal : la plupart des sections ont leur schéma animé, que le bouton ▶ Jouer ouvre en grand, et trois sections vous font taper les commandes dans un terminal simulé, dans la page.
 
 **Prérequis** : aucun.
 
@@ -51,11 +51,11 @@ lesson: assets/os.scene.json
 step: explorateur
 ```
 
-## Un serveur fonctionne sans interface graphique
+## Un serveur peut fonctionner sans interface graphique
 
 Un **serveur** est un ordinateur qui rend un service à d'autres : il héberge un site web, garde une base de données, distribue des fichiers. Il tourne le plus souvent dans un centre de données (*data center*), au milieu de centaines d'autres machines, et personne ne regarde son écran.
 
-On lui retire donc l'interface graphique et les applications de bureau. Il reste le matériel, le noyau, et le shell avec ses services. Ce choix a trois raisons :
+Sur la plupart des serveurs, sous Linux surtout, on retire donc l'interface graphique et les applications de bureau ; Windows Server, lui, s'installe au choix avec ou sans. Il reste le matériel, le noyau, et le shell avec ses services. Ce choix a trois raisons :
 
 - la mémoire et le disque servent au travail du serveur, pas à dessiner des fenêtres ;
 - moins de logiciels installés, c'est moins de logiciels à mettre à jour et à protéger ;
@@ -68,7 +68,7 @@ lesson: assets/os.scene.json
 step: sans-gui
 ```
 
-## Le terminal et le shell remplacent l'explorateur
+## Sans interface graphique : le terminal et le shell
 
 Sans explorateur, on voit le contenu d'un dossier en tapant une commande. Deux programmes se partagent ce travail, et on les confond souvent :
 
@@ -138,7 +138,7 @@ Seule la dernière commande laisse une trace dans le dossier : c'est elle que le
 
 ## Ranger un dossier en commandes : mv, cp et rm
 
-Ranger un dossier, à la souris, c'est créer des dossiers, glisser des fichiers dedans, en copier, jeter ce qui ne sert plus. Dans le terminal, trois commandes de plus suffisent.
+Ranger un dossier, à la souris, c'est créer des dossiers, glisser des fichiers dedans, en copier, jeter ce qui ne sert plus. Dans le terminal, trois commandes de plus suffisent. Cette section les présente : **rien à taper ici**, vous les taperez dans la suivante.
 
 | Commande | Ce qu'elle fait |
 |---|---|
@@ -146,7 +146,20 @@ Ranger un dossier, à la souris, c'est créer des dossiers, glisser des fichiers
 | `cp facture.pdf sauvegarde/` | copie `facture.pdf` dans `sauvegarde` : l'original reste en place (*copy*) |
 | `rm -r tmp` | supprime le dossier `tmp` et tout ce qu'il contient (*remove*, `-r` pour un dossier) |
 
-> ⚠️ **`rm` ne passe pas par la corbeille** : ce qu'il supprime est perdu. Sur le plateau, vous ne risquez rien, et ↺ **Recommencer** remet le dossier comme au départ.
+Le schéma range un dossier en quatre commandes : il crée `photos` et `sauvegarde` avec `mkdir`, y déplace les photos, y copie la facture, puis supprime `tmp`. L'explorateur, à côté du terminal, montre le dossier après chaque commande.
+
+```scene
+lesson: assets/os.scene.json
+step: ranger
+```
+
+Chaque dossier est créé **avant** qu'on y range un fichier : `mv` et `cp` vers un dossier qui n'existe pas ne rangent rien.
+
+> ⚠️ **`rm` ne passe pas par la corbeille** : ce qu'il supprime est perdu.
+
+## À vous : ranger le dossier rangement en commandes
+
+À votre tour, dans le terminal du plateau. Vous n'y risquez rien : ↺ **Recommencer** remet le dossier comme au départ.
 
 Le dossier `rangement`, dans `~/byte-layers/foundations`, est en désordre : deux photos, une facture, des notes et un dossier `tmp` qui ne sert plus. Commencez par `ls` pour voir ce qu'il contient ; l'arbre, à côté du terminal, change à chaque commande. Créez chaque dossier avec `mkdir` **avant** d'y déplacer ou d'y copier un fichier : sur le plateau, `mv` vers un dossier qui n'existe pas renomme le fichier au lieu de le ranger (un vrai terminal refuserait).
 
@@ -257,7 +270,7 @@ Le dernier contrôle fait ce que vous feriez demain : il recrée un dossier en d
 
 - Un ordinateur est une pile de couches : matériel, noyau, shell et services, interface graphique, applications.
 - Seul le noyau touche au matériel ; les programmes lui demandent tout par des appels système.
-- Un serveur se passe d'interface graphique : on s'y connecte avec `ssh` et on travaille dans le shell.
+- Un serveur se passe souvent d'interface graphique : on s'y connecte avec `ssh` et on travaille dans le shell.
 - Le terminal affiche, le shell comprend. L'explorateur et le terminal font le même travail, l'un à la souris, l'autre en texte.
 - Une commande, c'est un nom, des options et des arguments ; un script, ce sont des commandes rangées dans un fichier.
 - `mv` déplace, `cp` copie, `rm` supprime sans passer par la corbeille ; un script rejoue ces commandes autant de fois qu'il faut.
@@ -269,12 +282,15 @@ lesson: assets/os.scene.json
 step: recap
 ```
 
-Trois questions pour vérifier ce que vous avez retenu.
+## Trois questions pour vérifier ce que vous avez retenu
+
+Les questions s'affichent en grand sur le plateau, une par une.
 
 ```quiz
 title: "L'ordinateur en couches"
 tracksProgress: false
 showNotice: false
+place: stage
 questions:
   - prompt: "Un programme veut lire un fichier sur le disque. Comment fait-il ?"
     answers:
