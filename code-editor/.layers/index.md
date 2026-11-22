@@ -27,7 +27,7 @@ lesson: assets/ide.scene.json
 step: traitement
 ```
 
-Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**. Certains s'ouvrent dans le terminal (`nano`, `vi`), d'autres dans une fenêtre (le Bloc-notes sous Windows, TextEdit sous macOS, gedit sous Linux). C'est assez pour un petit script.
+Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**. Certains s'ouvrent dans le terminal (`nano`, `vi`), d'autres dans une fenêtre (le Bloc-notes sous Windows, gedit sous Linux). C'est assez pour un petit script.
 
 Un **traitement de texte** (Word, LibreOffice Writer) fait des **documents** : le texte, sa mise en forme, les commentaires, la mise en page pour l'impression. Un script n'y passe pas bien : les guillemets droits `"` deviennent des guillemets typographiques `« »`, que `bash` ne reconnaît pas.
 
@@ -39,7 +39,7 @@ Un **éditeur de code** enregistre le même texte brut qu'un éditeur de texte, 
 | **Traitement de texte** | Word, Writer | un document mis en forme | ne convient pas |
 | **Éditeur de code** | VS Code, Neovim | du texte brut | convient, et aide à écrire, lancer, déboguer |
 
-> ⚠️ **Si vous utilisez TextEdit**, il se comporte par défaut comme un traitement de texte : texte enrichi, guillemets typographiques, corrections automatiques. Avant d'y écrire un script, passez le document en texte brut (**Format > Convertir au format texte**) et décochez les guillemets et tirets intelligents dans **TextEdit > Réglages**.
+> 💡 **Remarque.** Certains traitements de texte savent aussi enregistrer du texte brut, avec les bons réglages : c'est le cas de TextEdit sous macOS.
 
 ## Avec l'éditeur de texte du système : deux fenêtres, aucune aide
 
