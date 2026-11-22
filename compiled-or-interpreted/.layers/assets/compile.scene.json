@@ -182,6 +182,15 @@
    "detail": "**Node.js** lit et exécute du JavaScript hors du navigateur. Il s'installe à part."
   },
   {
+   "id": "you",
+   "kind": "actor",
+   "at": [
+    13.0,
+    2.0
+   ],
+   "label": "vous"
+  },
+  {
    "id": "js",
    "kind": "file",
    "at": [
@@ -775,11 +784,165 @@
    ]
   },
   {
-   "id": "modifier",
-   "label": "Modifier",
-   "title": "Modifier le code source : ce qu'il faut refaire",
+   "id": "modifier-script",
+   "label": "Modifier un script",
+   "title": "Modifier un script : on relance, c'est tout",
    "body": [
-    "Même changement dans les deux codes sources : le script le prend tout de suite, le binaire seulement une fois recompilé."
+    "Vous changez une ligne de `hello.sh`, puis vous le relancez. `bash` relit le fichier : la modification se voit tout de suite."
+   ],
+   "hud": [
+    {
+     "label": "à refaire",
+     "value": "rien"
+    }
+   ],
+   "labels": "left",
+   "show": [
+    "cpu",
+    "kbox",
+    "term",
+    "bash",
+    {
+     "id": "sh",
+     "note": "dit Bonjour"
+    },
+    {
+     "id": "you",
+     "at": [
+      13.0,
+      2.0
+     ]
+    }
+   ],
+   "links": [
+    {
+     "from": "you",
+     "to": "sh"
+    },
+    {
+     "from": "term",
+     "to": "bash"
+    },
+    {
+     "from": "sh",
+     "to": "bash",
+     "dashed": true
+    },
+    {
+     "from": "bash",
+     "to": "kbox"
+    },
+    {
+     "from": "kbox",
+     "to": "cpu"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "sh"
+     ],
+     "label": "Bonjour → Salut",
+     "explain": [
+      "Vous ouvrez `hello.sh` dans un éditeur et remplacez « Bonjour » par « Salut »."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "sh",
+       "note": "dit Salut"
+      }
+     ],
+     "say": "Vous enregistrez : le fichier dit maintenant « Salut »."
+    },
+    {
+     "do": "type",
+     "text": "./hello.sh"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash"
+     ],
+     "label": "./hello.sh",
+     "explain": [
+      "Vous relancez le script, sans rien faire d'autre."
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "sh",
+      "bash"
+     ],
+     "label": "ligne 2",
+     "kind": "read",
+     "explain": [
+      "`bash` relit le fichier : il trouve la nouvelle ligne."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bash",
+      "kbox",
+      "cpu"
+     ],
+     "label": "écrire",
+     "explain": [
+      "Il demande au noyau d'écrire le texte…",
+      "… et le processeur exécute `bash`, comme avant."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Salut alice !"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "scene",
+     "hud": [
+      {
+       "label": "à refaire",
+       "value": "rien",
+       "tone": "g"
+      }
+     ],
+     "say": "Modifier, relancer : rien d'autre à refaire."
+    },
+    {
+     "do": "wait",
+     "ms": 2400
+    }
+   ]
+  },
+  {
+   "id": "modifier-compile",
+   "label": "Modifier du C",
+   "title": "Modifier un programme compilé : recompiler",
+   "body": [
+    "Même changement dans `bonjour.c`. Le binaire, lui, a été écrit avant : tant qu'on ne recompile pas, il dit encore « Bonjour »."
    ],
    "hud": [
     {
@@ -795,10 +958,6 @@
     "term",
     "bash",
     {
-     "id": "sh",
-     "note": "dit Bonjour"
-    },
-    {
      "id": "csrc",
      "note": "dit Bonjour"
     },
@@ -807,21 +966,23 @@
      "id": "bin",
      "label": null,
      "note": "dit Bonjour"
+    },
+    {
+     "id": "you",
+     "at": [
+      -4.5,
+      10.5
+     ]
     }
    ],
    "links": [
     {
+     "from": "you",
+     "to": "csrc"
+    },
+    {
      "from": "term",
      "to": "bash"
-    },
-    {
-     "from": "sh",
-     "to": "bash",
-     "dashed": true
-    },
-    {
-     "from": "bash",
-     "to": "cc"
     },
     {
      "from": "csrc",
@@ -856,44 +1017,19 @@
    "script": [
     {
      "do": "wait",
-     "ms": 800
-    },
-    {
-     "do": "scene",
-     "set": [
-      {
-       "id": "sh",
-       "note": "dit Salut"
-      }
-     ],
-     "say": "Vous remplacez « Bonjour » par « Salut » dans `hello.sh`."
-    },
-    {
-     "do": "type",
-     "text": "./hello.sh"
+     "ms": 700
     },
     {
      "do": "send",
      "path": [
-      "sh",
-      "bash"
+      "you",
+      "csrc"
      ],
-     "kind": "read",
+     "label": "Bonjour → Salut",
      "explain": [
-      "Vous relancez le script : `bash` relit le fichier et exécute la nouvelle ligne."
+      "Vous faites le même changement dans `bonjour.c`."
      ],
      "tone": "y"
-    },
-    {
-     "do": "output",
-     "text": "Salut alice !"
-    },
-    {
-     "do": "prompt"
-    },
-    {
-     "do": "wait",
-     "ms": 500
     },
     {
      "do": "scene",
@@ -910,7 +1046,7 @@
        "tone": "r"
       }
      ],
-     "say": "Même changement dans `bonjour.c`."
+     "say": "Le code source dit « Salut »… mais le binaire a été écrit **avant** : il est périmé."
     },
     {
      "do": "type",
@@ -919,15 +1055,26 @@
     {
      "do": "send",
      "path": [
+      "term",
       "bash",
+      "bin"
+     ],
+     "label": "./bonjour",
+     "explain": [
+      "Vous relancez le programme : le shell lance le binaire.",
+      "C'est toujours l'ancien."
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
       "bin",
       "kbox",
       "cpu"
      ],
      "explain": [
-      "Vous relancez le binaire : le shell le lance.",
-      "Mais il a été fabriqué **avant** le changement.",
-      "Le processeur exécute l'ancienne version."
+      "Le noyau le charge…",
+      "… et le processeur exécute l'ancienne version."
      ],
      "tone": "n"
     },
@@ -943,6 +1090,16 @@
      "ms": 500
     },
     {
+     "do": "scene",
+     "link": [
+      {
+       "from": "bash",
+       "to": "cc"
+      }
+     ],
+     "say": "Il faut **recompiler** : relancer le compilateur."
+    },
+    {
      "do": "type",
      "text": "cc bonjour.c -o bonjour"
     },
@@ -955,8 +1112,8 @@
      ],
      "label": "recompiler",
      "explain": [
-      "Il faut **recompiler** : le shell relance le compilateur…",
-      "… qui va relire le code source."
+      "Vous relancez la commande du compilateur…",
+      "… que le shell lance, comme la première fois."
      ]
     },
     {
@@ -968,7 +1125,7 @@
      ],
      "kind": "read",
      "explain": [
-      "Le compilateur relit `bonjour.c`…",
+      "Le compilateur relit tout `bonjour.c`…",
       "… et écrit un nouveau binaire à la place de l'ancien."
      ],
      "tone": "y"
@@ -987,7 +1144,8 @@
        "value": "à jour",
        "tone": "g"
       }
-     ]
+     ],
+     "say": "Le binaire est à jour."
     },
     {
      "do": "prompt"
@@ -999,15 +1157,26 @@
     {
      "do": "send",
      "path": [
+      "term",
       "bash",
+      "bin"
+     ],
+     "label": "./bonjour",
+     "explain": [
+      "Vous relancez le programme.",
+      "Le shell lance le nouveau binaire."
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
       "bin",
       "kbox",
       "cpu"
      ],
      "explain": [
-      "Vous relancez le binaire : le shell le lance.",
-      "C'est le nouveau, écrit à la place de l'ancien.",
-      "Le processeur exécute la nouvelle version."
+      "Le noyau le charge…",
+      "… et le processeur exécute la nouvelle version."
      ],
      "tone": "n"
     },

@@ -75,14 +75,23 @@ L'intérêt : le même `Bonjour.class` tourne sur Windows, macOS et Linux, chacu
 
 ## Modifier le code source : ce qu'il faut refaire
 
-La différence se voit le jour où l'on change une ligne. Remplaçons « Bonjour » par « Salut » dans le script et dans le code source C, puis relançons chaque programme.
+La différence se voit le jour où l'on change une ligne. Commençons par le script : on remplace « Bonjour » par « Salut » dans `hello.sh`, puis on le relance.
 
 ```scene
 lesson: assets/compile.scene.json
-step: modifier
+step: modifier-script
 ```
 
-Le script dit « Salut » dès qu'on le relance : `bash` relit le fichier à chaque fois. Le binaire dit encore « Bonjour » : il faut **recompiler**. Même chose en Java : après une modification, on relance `javac` avant `java`. En échange, le compilateur signale certaines fautes avant même que le programme ne démarre.
+Le script dit « Salut » dès qu'on le relance : `bash` relit le fichier à chaque fois. **Modifier, relancer**, rien d'autre.
+
+Même changement dans le programme en C, `bonjour.c`.
+
+```scene
+lesson: assets/compile.scene.json
+step: modifier-compile
+```
+
+Le binaire dit encore « Bonjour » : c'est une traduction faite **avant** le changement. Il faut **recompiler** pour en écrire un nouveau. Même chose en Java : après une modification, on relance `javac` avant `java`. En échange, le compilateur signale certaines fautes avant même que le programme ne démarre.
 
 > 💡 **Remarque.** Les gros programmes en langage interprété ont eux aussi, aujourd'hui, une étape avant l'exécution, qu'on appelle souvent le **build**. En JavaScript, un outil comme webpack rassemble des centaines de fichiers en quelques-uns, prêts pour le navigateur ; Python range une version préparée de chaque fichier (les `.pyc`) pour démarrer plus vite. Le résultat n'est pas du code machine : un interpréteur le lit toujours.
 
