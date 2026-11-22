@@ -1,0 +1,1107 @@
+{
+ "format": "bl-scenes/0.3",
+ "id": "compiled-or-interpreted",
+ "title": "Compilé ou interprété : du code source au programme qui tourne",
+ "lang": "fr",
+ "kit": "feuillete",
+ "legend": [
+  {
+   "tone": "y",
+   "label": "code source"
+  },
+  {
+   "tone": "n",
+   "label": "code machine"
+  },
+  {
+   "tone": "g",
+   "label": "runtime"
+  },
+  {
+   "tone": "b",
+   "label": "bytecode Java"
+  }
+ ],
+ "entities": [
+  {
+   "id": "hw",
+   "kind": "layer",
+   "at": [
+    0.0,
+    -2.5,
+    0
+   ],
+   "size": [
+    5.6,
+    5.6,
+    0.55
+   ],
+   "tone": "n",
+   "title": "Matériel",
+   "sub": "processeur · mémoire · disque",
+   "detail": "Le **processeur** n'exécute qu'une sorte d'instructions : le **code machine**, des nombres propres à sa famille de processeurs."
+  },
+  {
+   "id": "kernel",
+   "kind": "layer",
+   "at": [
+    0.0,
+    -2.5,
+    0.95
+   ],
+   "size": [
+    5.6,
+    5.6,
+    0.55
+   ],
+   "tone": "r",
+   "title": "Noyau",
+   "sub": "les programmes qui tournent",
+   "detail": "Le **noyau** charge les programmes en mémoire et leur partage le processeur. Sur le schéma, les programmes qui tournent sont posés sur lui ; les fichiers restent au sol, sur le disque."
+  },
+  {
+   "id": "bash",
+   "kind": "program",
+   "in": "kernel",
+   "at": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "tone": "g",
+   "title": "bash",
+   "label": "interpréteur",
+   "detail": "`bash` est lui-même un programme, déjà en code machine. Il lit un script et fait ce que dit chaque ligne : c'est un **interpréteur**."
+  },
+  {
+   "id": "sh",
+   "kind": "file",
+   "at": [
+    1.25,
+    6.25
+   ],
+   "tone": "y",
+   "title": "hello.sh",
+   "icon": "sh",
+   "detail": "Un **script** : du texte, écrit par une personne. Il reste un texte du début à la fin ; c'est `bash` qui le lit."
+  },
+  {
+   "id": "csrc",
+   "kind": "file",
+   "at": [
+    1.25,
+    6.25
+   ],
+   "tone": "y",
+   "title": "bonjour.c",
+   "icon": "c",
+   "detail": "Le **code source** du programme, en langage C : un texte, comme un script. Le processeur ne sait pas le lire."
+  },
+  {
+   "id": "cc",
+   "kind": "program",
+   "in": "kernel",
+   "at": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "tone": "n",
+   "title": "compilateur",
+   "label": "traduit tout, une fois",
+   "detail": "Le **compilateur** est un programme qui lit tout le code source et écrit un nouveau fichier, le **binaire**, en code machine. Il travaille avant l'exécution, pas pendant."
+  },
+  {
+   "id": "bin",
+   "kind": "file",
+   "at": [
+    6.25,
+    2.75
+   ],
+   "tone": "n",
+   "title": "bonjour",
+   "icon": "01",
+   "label": "binaire",
+   "detail": "Le **binaire** : les instructions du programme en code machine. Le noyau le charge en mémoire et le processeur l'exécute. Il ne marche que pour une famille de processeurs et un système d'exploitation."
+  },
+  {
+   "id": "jsrc",
+   "kind": "file",
+   "at": [
+    1.25,
+    6.25
+   ],
+   "tone": "y",
+   "title": "Bonjour.java",
+   "icon": "J",
+   "detail": "Le code source en **Java** : encore un texte."
+  },
+  {
+   "id": "javac",
+   "kind": "program",
+   "in": "kernel",
+   "at": [
+    -0.95,
+    0.95,
+    0.55
+   ],
+   "tone": "n",
+   "title": "javac",
+   "label": "compilateur Java",
+   "detail": "Le compilateur Java (`javac`) traduit le code source, mais pas en code machine : en **bytecode**."
+  },
+  {
+   "id": "cls",
+   "kind": "file",
+   "at": [
+    6.25,
+    2.75
+   ],
+   "tone": "b",
+   "title": "Bonjour.class",
+   "icon": "010",
+   "label": "bytecode",
+   "detail": "Le **bytecode** : des instructions pour la machine virtuelle Java, pas pour le processeur. Le même fichier sert sur Windows, macOS et Linux."
+  },
+  {
+   "id": "jvm",
+   "kind": "program",
+   "in": "kernel",
+   "at": [
+    0.95,
+    -0.95,
+    0.55
+   ],
+   "tone": "g",
+   "title": "JVM",
+   "label": "machine virtuelle Java",
+   "detail": "La **machine virtuelle Java** (JVM) est un programme en code machine qui lit le bytecode et le fait exécuter. Il en existe une pour chaque système."
+  },
+  {
+   "id": "node",
+   "kind": "program",
+   "in": "kernel",
+   "at": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "tone": "g",
+   "title": "Node.js",
+   "detail": "**Node.js** lit et exécute du JavaScript hors du navigateur."
+  },
+  {
+   "id": "js",
+   "kind": "file",
+   "at": [
+    1.25,
+    6.25
+   ],
+   "tone": "y",
+   "title": "bonjour.js",
+   "icon": "js",
+   "detail": "Un programme en **JavaScript** : un texte, lu par Node.js."
+  }
+ ],
+ "steps": [
+  {
+   "id": "interprete",
+   "label": "Interprété",
+   "title": "Un script est lu ligne à ligne",
+   "body": [
+    "`bash` est un programme : il lit `hello.sh` une ligne après l'autre et fait ce qu'elle demande. Le fichier reste un texte."
+   ],
+   "hud": [
+    {
+     "label": "trajet",
+     "value": "interprété"
+    }
+   ],
+   "labels": "left",
+   "show": [
+    "hw",
+    "kernel",
+    "bash",
+    "sh"
+   ],
+   "links": [
+    {
+     "from": "sh",
+     "to": "bash:top",
+     "dashed": true
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "editor",
+     "title": "hello.sh",
+     "lang": "bash",
+     "lines": [
+      "#!/bin/bash",
+      "echo \"Bonjour $USER !\"",
+      "date"
+     ]
+    },
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "type",
+     "text": "./hello.sh"
+    },
+    {
+     "do": "line",
+     "n": 1
+    },
+    {
+     "do": "send",
+     "path": [
+      "sh",
+      "bash"
+     ],
+     "label": "ligne 1",
+     "kind": "read",
+     "explain": [
+      "La ligne 1, `#!/bin/bash`, dit au système de passer le fichier à `bash`."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "line",
+     "n": 2
+    },
+    {
+     "do": "send",
+     "path": [
+      "sh",
+      "bash"
+     ],
+     "label": "ligne 2",
+     "kind": "read",
+     "explain": [
+      "`bash` lit la ligne 2 et la comprend : afficher un texte."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bash",
+      "kernel:side",
+      "hw:side"
+     ],
+     "label": "écrire",
+     "explain": [
+      "Il demande au **noyau** d'écrire ce texte à l'écran.",
+      "Le processeur exécute `bash`, pas le fichier : le fichier n'est qu'un texte."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Bonjour alice !"
+    },
+    {
+     "do": "wait",
+     "ms": 300
+    },
+    {
+     "do": "line",
+     "n": 3
+    },
+    {
+     "do": "send",
+     "path": [
+      "sh",
+      "bash"
+     ],
+     "label": "ligne 3",
+     "kind": "read",
+     "explain": [
+      "Puis `bash` lit la ligne 3, après avoir exécuté la 2."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bash",
+      "kernel:side",
+      "hw:side"
+     ],
+     "label": "date",
+     "explain": [
+      "Il demande l'heure au noyau.",
+      "Du début à la fin, un **interpréteur** a lu le texte pour le processeur."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "dim. 22 nov. 2026 10:14:03"
+    },
+    {
+     "do": "line",
+     "n": 0
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 2200
+    }
+   ]
+  },
+  {
+   "id": "compile",
+   "label": "Compilé",
+   "title": "Un compilateur traduit tout, une fois",
+   "body": [
+    "Le compilateur lit tout `bonjour.c` et écrit un nouveau fichier, le binaire, en code machine. Le noyau le charge et le processeur l'exécute, sans programme pour le lire."
+   ],
+   "hud": [
+    {
+     "label": "trajet",
+     "value": "compilé"
+    }
+   ],
+   "labels": "left",
+   "show": [
+    "hw",
+    "kernel",
+    "csrc",
+    "cc",
+    {
+     "id": "bin",
+     "dim": true,
+     "label": "pas encore écrit"
+    }
+   ],
+   "links": [
+    {
+     "from": "csrc",
+     "to": "cc:top"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "send",
+     "path": [
+      "csrc",
+      "cc"
+     ],
+     "label": "tout le fichier",
+     "kind": "read",
+     "explain": [
+      "Le **compilateur** lit tout `bonjour.c`, d'un bout à l'autre, avant que rien ne s'exécute."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "bin",
+       "dim": false,
+       "label": "binaire"
+      }
+     ],
+     "link": [
+      {
+       "from": "cc:top",
+       "to": "bin"
+      }
+     ],
+     "say": "Il écrit un nouveau fichier, le **binaire** : les mêmes instructions, en code machine.",
+     "ms": 900
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "csrc",
+       "dim": true
+      },
+      {
+       "id": "cc",
+       "dim": true
+      }
+     ],
+     "unlink": [
+      {
+       "from": "cc:top",
+       "to": "bin"
+      }
+     ],
+     "link": [
+      {
+       "from": "bin",
+       "to": "kernel:side"
+      }
+     ],
+     "say": "Pour lancer le programme, plus besoin du code source ni du compilateur."
+    },
+    {
+     "do": "type",
+     "text": "./bonjour"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bin",
+      "kernel:side",
+      "hw:side"
+     ],
+     "label": "./bonjour",
+     "explain": [
+      "Vous lancez le binaire : le noyau le charge en mémoire.",
+      "Le **processeur** exécute ses instructions : aucun programme ne le lit à sa place."
+     ],
+     "tone": "n"
+    },
+    {
+     "do": "output",
+     "text": "Bonjour !"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 2400
+    }
+   ]
+  },
+  {
+   "id": "modifier",
+   "label": "Modifier",
+   "title": "Modifier le code source : ce qu'il faut refaire",
+   "body": [
+    "Même changement dans les deux codes sources : le script le prend tout de suite, le binaire seulement une fois recompilé."
+   ],
+   "hud": [
+    {
+     "label": "binaire",
+     "value": "à jour",
+     "tone": "g"
+    }
+   ],
+   "show": [
+    {
+     "id": "hw",
+     "size": [
+      7,
+      7,
+      0.55
+     ]
+    },
+    {
+     "id": "kernel",
+     "size": [
+      7,
+      7,
+      0.55
+     ]
+    },
+    {
+     "id": "bash",
+     "at": [
+      -0.95,
+      0.95,
+      0.55
+     ],
+     "label": null
+    },
+    {
+     "id": "sh",
+     "at": [
+      0.75,
+      7.25
+     ],
+     "note": "dit Bonjour"
+    },
+    {
+     "id": "cc",
+     "at": [
+      0.95,
+      -0.95,
+      0.55
+     ],
+     "label": null
+    },
+    {
+     "id": "csrc",
+     "at": [
+      5.5,
+      5.0
+     ],
+     "note": "dit Bonjour"
+    },
+    {
+     "id": "bin",
+     "at": [
+      8.5,
+      1.0
+     ],
+     "label": null,
+     "note": "dit Bonjour"
+    }
+   ],
+   "links": [
+    {
+     "from": "sh",
+     "to": "bash:top",
+     "dashed": true
+    },
+    {
+     "from": "csrc",
+     "to": "cc:top"
+    },
+    {
+     "from": "cc:top",
+     "to": "bin",
+     "dashed": true
+    },
+    {
+     "from": "bin",
+     "to": "kernel:side"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "sh",
+       "note": "dit Salut"
+      }
+     ],
+     "say": "Vous remplacez « Bonjour » par « Salut » dans `hello.sh`."
+    },
+    {
+     "do": "type",
+     "text": "./hello.sh"
+    },
+    {
+     "do": "send",
+     "path": [
+      "sh",
+      "bash",
+      "kernel:side"
+     ],
+     "kind": "read",
+     "explain": [
+      "Vous relancez le script : `bash` relit le fichier.",
+      "Il exécute la nouvelle ligne."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "output",
+     "text": "Salut alice !"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "csrc",
+       "note": "dit Salut"
+      }
+     ],
+     "hud": [
+      {
+       "label": "binaire",
+       "value": "périmé",
+       "tone": "r"
+      }
+     ],
+     "say": "Même changement dans `bonjour.c`."
+    },
+    {
+     "do": "type",
+     "text": "./bonjour"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bin",
+      "kernel:side"
+     ],
+     "explain": [
+      "Vous relancez le binaire : il a été fabriqué **avant** le changement."
+     ],
+     "tone": "n"
+    },
+    {
+     "do": "output",
+     "text": "Bonjour !"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "send",
+     "path": [
+      "csrc",
+      "cc",
+      "bin"
+     ],
+     "label": "recompiler",
+     "kind": "read",
+     "explain": [
+      "Il faut **recompiler** : le compilateur relit le code source…",
+      "… et écrit un nouveau binaire à la place de l'ancien."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "bin",
+       "note": "dit Salut"
+      }
+     ],
+     "hud": [
+      {
+       "label": "binaire",
+       "value": "à jour",
+       "tone": "g"
+      }
+     ]
+    },
+    {
+     "do": "type",
+     "text": "./bonjour"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bin",
+      "kernel:side"
+     ],
+     "explain": [
+      "Vous relancez le nouveau binaire."
+     ],
+     "tone": "n"
+    },
+    {
+     "do": "output",
+     "text": "Salut !"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 2400
+    }
+   ]
+  },
+  {
+   "id": "bytecode",
+   "label": "Java",
+   "title": "Java : compilé, puis lu par une machine virtuelle",
+   "body": [
+    "Le compilateur Java écrit du bytecode ; la machine virtuelle Java le lit et le fait exécuter."
+   ],
+   "hud": [
+    {
+     "label": "trajet",
+     "value": "bytecode"
+    }
+   ],
+   "show": [
+    {
+     "id": "hw",
+     "size": [
+      7,
+      7,
+      0.55
+     ]
+    },
+    {
+     "id": "kernel",
+     "size": [
+      7,
+      7,
+      0.55
+     ]
+    },
+    "jsrc",
+    "javac",
+    "jvm",
+    {
+     "id": "cls",
+     "dim": true,
+     "label": "pas encore écrit"
+    }
+   ],
+   "links": [
+    {
+     "from": "jsrc",
+     "to": "javac:top"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "type",
+     "text": "javac Bonjour.java"
+    },
+    {
+     "do": "send",
+     "path": [
+      "jsrc",
+      "javac"
+     ],
+     "label": "tout le fichier",
+     "kind": "read",
+     "explain": [
+      "Le compilateur Java, `javac`, lit tout `Bonjour.java`."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "cls",
+       "dim": false,
+       "label": "bytecode"
+      }
+     ],
+     "link": [
+      {
+       "from": "javac:top",
+       "to": "cls"
+      },
+      {
+       "from": "cls",
+       "to": "jvm:top",
+       "dashed": true
+      }
+     ],
+     "say": "Il écrit `Bonjour.class` : du **bytecode**, pas du code machine.",
+     "ms": 900
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 400
+    },
+    {
+     "do": "type",
+     "text": "java Bonjour"
+    },
+    {
+     "do": "send",
+     "path": [
+      "cls",
+      "jvm"
+     ],
+     "label": "bytecode",
+     "kind": "read",
+     "explain": [
+      "`java Bonjour` lance la **machine virtuelle Java**, qui lit le bytecode."
+     ],
+     "tone": "b"
+    },
+    {
+     "do": "send",
+     "path": [
+      "jvm",
+      "kernel:side",
+      "hw:side"
+     ],
+     "label": "exécuter",
+     "explain": [
+      "Elle passe par le noyau, comme tout programme.",
+      "Le processeur exécute la JVM, qui fait ce que dit le bytecode."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Bonjour !"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 2400
+    }
+   ]
+  },
+  {
+   "id": "runtime",
+   "label": "Runtime",
+   "title": "Le runtime : ce qu'il faut avoir installé",
+   "body": [
+    "Un script a besoin de son interpréteur, le bytecode de sa machine virtuelle, le JavaScript de Node.js : c'est leur runtime. Le binaire n'a besoin que du système."
+   ],
+   "hud": [
+    {
+     "label": "runtime",
+     "value": "—"
+    }
+   ],
+   "show": [
+    {
+     "id": "kernel",
+     "size": [
+      8,
+      8,
+      0.55
+     ]
+    },
+    {
+     "id": "hw",
+     "size": [
+      8,
+      8,
+      0.55
+     ]
+    },
+    {
+     "id": "bash",
+     "at": [
+      -1.7,
+      1.7,
+      0.55
+     ],
+     "label": null
+    },
+    {
+     "id": "jvm",
+     "at": [
+      0.0,
+      0.0,
+      0.55
+     ],
+     "label": null
+    },
+    {
+     "id": "node",
+     "at": [
+      1.7,
+      -1.7,
+      0.55
+     ],
+     "label": null
+    },
+    {
+     "id": "sh",
+     "at": [
+      0.5,
+      8.5
+     ],
+     "label": null
+    },
+    {
+     "id": "cls",
+     "at": [
+      4.0,
+      7.0
+     ],
+     "label": null
+    },
+    {
+     "id": "js",
+     "at": [
+      6.5,
+      4.5
+     ]
+    },
+    {
+     "id": "bin",
+     "at": [
+      8.0,
+      1.0
+     ],
+     "label": null
+    }
+   ],
+   "links": [
+    {
+     "from": "sh",
+     "to": "bash:top",
+     "dashed": true
+    },
+    {
+     "from": "cls",
+     "to": "jvm:top",
+     "dashed": true
+    },
+    {
+     "from": "js",
+     "to": "node:top",
+     "dashed": true
+    },
+    {
+     "from": "bin",
+     "to": "kernel:side"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "hud": [
+      {
+       "label": "runtime",
+       "value": "bash"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "sh",
+      "bash",
+      "kernel:side"
+     ],
+     "kind": "read",
+     "explain": [
+      "Un script a besoin de son interpréteur, `bash` : c'est son **runtime**.",
+      "`bash` fait travailler le noyau."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "hud": [
+      {
+       "label": "runtime",
+       "value": "JVM"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "cls",
+      "jvm",
+      "kernel:side"
+     ],
+     "kind": "read",
+     "explain": [
+      "Le bytecode a besoin de la JVM.",
+      "La JVM fait travailler le noyau."
+     ],
+     "tone": "b"
+    },
+    {
+     "do": "scene",
+     "hud": [
+      {
+       "label": "runtime",
+       "value": "Node.js"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "js",
+      "node",
+      "kernel:side"
+     ],
+     "kind": "read",
+     "explain": [
+      "Un programme JavaScript a besoin de **Node.js**.",
+      "Node.js fait travailler le noyau."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "hud": [
+      {
+       "label": "runtime",
+       "value": "aucun"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "bin",
+      "kernel:side"
+     ],
+     "explain": [
+      "Le binaire n'a besoin d'aucun runtime : le noyau le charge, le processeur l'exécute."
+     ],
+     "tone": "n"
+    },
+    {
+     "do": "wait",
+     "ms": 2200
+    }
+   ]
+  }
+ ]
+}
