@@ -7,7 +7,16 @@ Un script est un fichier de texte qui contient des commandes. Pour l'écrire, il
 
 ## 03.1 - Ouvrir l'éditeur de texte et le régler
 
-Le tableau dit quel éditeur ouvrir, et le réglage à faire avant de taper.
+On peut tout éditer **depuis le terminal**, sans le quitter : l'éditeur occupe alors la fenêtre du terminal et se pilote au clavier. On parle d'interface en mode texte, ou **TUI** (*text user interface*). On peut aussi éditer **en mode graphique**, ou **GUI** (*graphical user interface*) : l'éditeur ouvre sa propre fenêtre, et la souris sert aussi. Dans les deux cas, il existe de simples éditeurs de texte et des **IDE** (*environnement de développement intégré*), des éditeurs qui ajoutent de quoi écrire, lancer et vérifier du code.
+
+| | Éditeur de texte | IDE |
+|---|---|---|
+| **Dans le terminal (TUI)** | `nano` | `vim` ou Neovim, enrichis d'extensions |
+| **En mode graphique (GUI)** | TextEdit, Bloc-notes, Éditeur de texte | VS Code, IntelliJ IDEA |
+
+Pour ce premier script, on prend l'**éditeur de texte graphique** de votre système : il est déjà installé et s'utilise comme n'importe quelle application. Les IDE viendront plus tard, avec le contenu [L'éditeur de code](https://byte-layers.com/fr/bits/code-editor).
+
+Le tableau suivant dit quel éditeur ouvrir, et le réglage à faire avant de taper.
 
 | Système | L'éditeur | Le réglage |
 |---|---|---|
