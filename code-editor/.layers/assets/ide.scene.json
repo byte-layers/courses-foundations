@@ -1,0 +1,683 @@
+{
+ "format": "bl-scenes/0.3",
+ "id": "code-editor-plan",
+ "title": "De l'éditeur de texte à l'éditeur de code (2D)",
+ "lang": "fr",
+ "kit": "plan",
+ "legend": [
+  {
+   "tone": "y",
+   "label": "texte brut"
+  },
+  {
+   "tone": "r",
+   "label": "mise en forme"
+  }
+ ],
+ "entities": [
+  {
+   "id": "you",
+   "kind": "actor",
+   "at": [
+    -15,
+    0
+   ],
+   "label": "vous"
+  },
+  {
+   "id": "wp",
+   "kind": "node",
+   "at": [
+    -8,
+    -4.5
+   ],
+   "tone": "v",
+   "size": [
+    5.4,
+    2.0,
+    1
+   ],
+   "title": "traitement de texte",
+   "sub": "Word, Writer",
+   "detail": "Un **traitement de texte** met en forme un document : gras, polices, marges. Il enregistre tout cela avec vos mots."
+  },
+  {
+   "id": "te",
+   "kind": "node",
+   "at": [
+    -8,
+    4.5
+   ],
+   "tone": "v",
+   "size": [
+    5.4,
+    2.0,
+    1
+   ],
+   "title": "éditeur de texte",
+   "sub": "Bloc-notes, TextEdit",
+   "detail": "Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**."
+  },
+  {
+   "id": "docx",
+   "kind": "layer",
+   "at": [
+    2.5,
+    -4.5
+   ],
+   "tone": "r",
+   "size": [
+    9.0,
+    5.2,
+    1
+   ],
+   "title": "bonjour.docx"
+  },
+  {
+   "id": "docx-txt",
+   "kind": "file",
+   "at": [
+    0,
+    -0.2
+   ],
+   "tone": "r",
+   "size": [
+    6.6,
+    1.2,
+    1
+   ],
+   "in": "docx",
+   "title": "echo « Bonjour »",
+   "detail": "Les guillemets droits sont devenus des guillemets **typographiques** : `bash` ne les prend pas pour des guillemets."
+  },
+  {
+   "id": "docx-fmt",
+   "kind": "program",
+   "at": [
+    0,
+    1.6
+   ],
+   "tone": "r",
+   "size": [
+    6.6,
+    1.1,
+    1
+   ],
+   "in": "docx",
+   "title": "police, gras, marges…"
+  },
+  {
+   "id": "sh",
+   "kind": "layer",
+   "at": [
+    2.5,
+    4.5
+   ],
+   "tone": "y",
+   "size": [
+    9.0,
+    4.0,
+    1
+   ],
+   "title": "bonjour.sh"
+  },
+  {
+   "id": "sh-txt",
+   "kind": "file",
+   "at": [
+    0,
+    0.5
+   ],
+   "tone": "y",
+   "size": [
+    6.6,
+    1.2,
+    1
+   ],
+   "in": "sh",
+   "title": "echo \"Bonjour\""
+  },
+  {
+   "id": "bash",
+   "kind": "node",
+   "at": [
+    13.5,
+    0
+   ],
+   "tone": "b",
+   "size": [
+    4.2,
+    2.0,
+    1
+   ],
+   "title": "bash",
+   "sub": "lit le script"
+  },
+  {
+   "id": "win",
+   "kind": "layer",
+   "at": [
+    0,
+    0
+   ],
+   "tone": "n",
+   "size": [
+    21,
+    15,
+    1
+   ],
+   "title": "éditeur de code",
+   "sub": "un dossier ouvert"
+  },
+  {
+   "id": "explorer",
+   "kind": "layer",
+   "at": [
+    -7,
+    1.2
+   ],
+   "tone": "v",
+   "size": [
+    5.4,
+    11.4,
+    1
+   ],
+   "in": "win",
+   "title": "explorateur",
+   "detail": "L'**explorateur** montre les fichiers et sous-dossiers du dossier ouvert ; un clic en ouvre un."
+  },
+  {
+   "id": "f-fiche",
+   "kind": "file",
+   "at": [
+    0,
+    -2.2
+   ],
+   "tone": "y",
+   "size": [
+    4.2,
+    1.1,
+    1
+   ],
+   "in": "explorer",
+   "title": "fiche.sh"
+  },
+  {
+   "id": "f-notes",
+   "kind": "file",
+   "at": [
+    0,
+    -0.6
+   ],
+   "tone": "y",
+   "size": [
+    4.2,
+    1.1,
+    1
+   ],
+   "in": "explorer",
+   "title": "notes.md"
+  },
+  {
+   "id": "edit",
+   "kind": "node",
+   "at": [
+    2.7,
+    -1.6
+   ],
+   "tone": "v",
+   "size": [
+    13.2,
+    5.8,
+    1
+   ],
+   "in": "win",
+   "title": "zone d'édition",
+   "sub": "un onglet par fichier",
+   "detail": "La **zone d'édition** : le fichier ouvert, avec les numéros de ligne. Un onglet par fichier ouvert."
+  },
+  {
+   "id": "term",
+   "kind": "node",
+   "at": [
+    2.7,
+    4.6
+   ],
+   "tone": "b",
+   "size": [
+    13.2,
+    3.0,
+    1
+   ],
+   "in": "win",
+   "title": "terminal intégré",
+   "detail": "Le **terminal intégré** : un vrai terminal, ouvert sur le dossier, dans la même fenêtre."
+  },
+  {
+   "id": "lang",
+   "kind": "layer",
+   "at": [
+    16.5,
+    0
+   ],
+   "tone": "g",
+   "size": [
+    9.0,
+    15,
+    1
+   ],
+   "title": "support du langage",
+   "sub": "une extension par langage",
+   "detail": "Le **support du langage** reconnaît le langage du fichier (bash, Java, Python…). Dans VS Code, il s'ajoute par une **extension**."
+  },
+  {
+   "id": "l-color",
+   "kind": "program",
+   "at": [
+    0,
+    -3.6
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "coloration"
+  },
+  {
+   "id": "l-comp",
+   "kind": "program",
+   "at": [
+    0,
+    -2.0
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "complétion"
+  },
+  {
+   "id": "l-lint",
+   "kind": "program",
+   "at": [
+    0,
+    -0.4
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "erreurs soulignées",
+   "detail": "On parle aussi de **linting** : l'outil relit le code et souligne les fautes avant qu'on lance le programme."
+  },
+  {
+   "id": "l-run",
+   "kind": "program",
+   "at": [
+    0,
+    1.2
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "lancer, compiler"
+  },
+  {
+   "id": "l-dbg",
+   "kind": "program",
+   "at": [
+    0,
+    2.8
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "déboguer"
+  },
+  {
+   "id": "l-tpl",
+   "kind": "program",
+   "at": [
+    0,
+    4.4
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "modèles de code"
+  }
+ ],
+ "steps": [
+  {
+   "id": "traitement",
+   "label": "Traitement de texte",
+   "title": "Le même texte, deux fichiers",
+   "body": [
+    "La même ligne tapée dans un traitement de texte, puis dans un éditeur de texte. `bash` lit chaque fichier."
+   ],
+   "show": [
+    "you",
+    "wp",
+    "te",
+    "bash"
+   ],
+   "links": [
+    {
+     "from": "you",
+     "to": "wp",
+     "dashed": true
+    },
+    {
+     "from": "you",
+     "to": "te",
+     "dashed": true
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 900
+    },
+    {
+     "do": "scene",
+     "show": [
+      "docx"
+     ],
+     "link": [
+      {
+       "from": "wp",
+       "to": "docx"
+      }
+     ],
+     "say": "Vous tapez la même ligne dans un traitement de texte : echo \"Bonjour\"."
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "wp",
+      "docx"
+     ],
+     "label": "echo \"Bonjour\""
+    },
+    {
+     "do": "scene",
+     "show": [
+      "docx-txt",
+      "docx-fmt"
+     ],
+     "say": "Il enregistre vos mots et leur mise en forme, et change les guillemets droits en « »."
+    },
+    {
+     "do": "wait",
+     "ms": 1600
+    },
+    {
+     "do": "scene",
+     "link": [
+      {
+       "from": "docx",
+       "to": "bash"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "docx",
+      "bash"
+     ],
+     "label": "illisible",
+     "tone": "r"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "bash",
+       "label": "ne comprend pas"
+      }
+     ],
+     "say": "bash ne sait pas lire ce fichier : ce n'est plus du texte brut."
+    },
+    {
+     "do": "wait",
+     "ms": 1800
+    },
+    {
+     "do": "scene",
+     "show": [
+      "sh"
+     ],
+     "link": [
+      {
+       "from": "te",
+       "to": "sh"
+      }
+     ],
+     "set": [
+      {
+       "id": "bash",
+       "label": null
+      }
+     ],
+     "say": "Dans un éditeur de texte, la même ligne."
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "te",
+      "sh"
+     ],
+     "label": "echo \"Bonjour\""
+    },
+    {
+     "do": "scene",
+     "show": [
+      "sh-txt"
+     ],
+     "say": "Il enregistre les caractères tapés, rien de plus : du texte brut."
+    },
+    {
+     "do": "wait",
+     "ms": 1400
+    },
+    {
+     "do": "scene",
+     "link": [
+      {
+       "from": "sh",
+       "to": "bash"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "sh",
+      "bash"
+     ],
+     "label": "Bonjour",
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "bash",
+       "label": "affiche Bonjour"
+      }
+     ],
+     "say": "bash lit le fichier et affiche Bonjour."
+    },
+    {
+     "do": "wait",
+     "ms": 2600
+    }
+   ]
+  },
+  {
+   "id": "outils",
+   "label": "Outils d'un IDE",
+   "title": "Les outils essentiels d'un IDE",
+   "body": [
+    "L'explorateur montre les fichiers du dossier ouvert. La même fenêtre réunit aussi la zone d'édition et le terminal ; le support du langage les aide."
+   ],
+   "show": [
+    "win",
+    "explorer",
+    "f-fiche",
+    "f-notes"
+   ],
+   "links": [],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 1400
+    },
+    {
+     "do": "scene",
+     "show": [
+      "edit"
+     ],
+     "link": [
+      {
+       "from": "f-fiche",
+       "to": "edit"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "f-fiche",
+      "edit"
+     ],
+     "label": "ouvrir"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "edit",
+       "label": "fiche.sh"
+      }
+     ],
+     "say": "Un clic ouvre le fichier dans la zone d'édition, un onglet par fichier."
+    },
+    {
+     "do": "wait",
+     "ms": 1400
+    },
+    {
+     "do": "scene",
+     "show": [
+      {
+       "id": "term",
+       "label": "bash fiche.sh"
+      }
+     ],
+     "say": "Le terminal intégré lance les commandes dans le même dossier, sans changer de fenêtre."
+    },
+    {
+     "do": "wait",
+     "ms": 1700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "lang",
+      "l-color",
+      "l-comp",
+      "l-lint",
+      "l-run",
+      "l-dbg",
+      "l-tpl"
+     ],
+     "link": [
+      {
+       "from": "lang",
+       "to": "edit"
+      },
+      {
+       "from": "lang",
+       "to": "term"
+      }
+     ],
+     "say": "Le support du langage reconnaît le langage du fichier, ici celui de bash."
+    },
+    {
+     "do": "wait",
+     "ms": 1600
+    },
+    {
+     "do": "send",
+     "path": [
+      "lang",
+      "edit"
+     ],
+     "label": "ligne 4",
+     "tone": "r"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "edit",
+       "label": "guillemet oublié, ligne 4"
+      }
+     ],
+     "say": "Il colore, complète, et souligne une faute avant même qu'on lance le script."
+    },
+    {
+     "do": "wait",
+     "ms": 1700
+    },
+    {
+     "do": "send",
+     "path": [
+      "lang",
+      "term"
+     ],
+     "label": "lancer"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "term",
+       "label": "lancer, déboguer"
+      }
+     ],
+     "say": "Il sait aussi lancer, compiler ou déboguer le programme."
+    },
+    {
+     "do": "wait",
+     "ms": 2600
+    }
+   ]
+  }
+ ]
+}

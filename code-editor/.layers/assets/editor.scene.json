@@ -94,7 +94,7 @@
    "label": "Bloc-notes",
    "title": "Deux fenêtres, aucune aide",
    "body": [
-    "Vous écrivez `fiche.sh` dans l'éditeur de texte du système, vous l'enregistrez, puis vous passez dans le terminal pour le lancer."
+    "Imaginons un script, `fiche.sh`, écrit dans l'éditeur de texte du système : pour le lancer, on passe dans le terminal."
    ],
    "labels": "left",
    "show": [
@@ -192,7 +192,7 @@
      "kind": "read",
      "explain": [
       "Vous tapez `bash fiche.sh` dans le terminal.",
-      "`bash` exécute la ligne 3, puis s'arrête : un guillemet n'est pas fermé."
+      "`bash` exécute le script, puis s'arrête en plein milieu : un guillemet n'est pas fermé."
      ]
     },
     {
