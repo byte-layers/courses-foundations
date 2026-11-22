@@ -7,11 +7,11 @@ tags:
   - os
   - terminal
 difficulty: beginner
-duration: 15
+duration: 30
 requires: "0.8.0"
 ---
 
-Un ordinateur est fait de couches posées les unes sur les autres, et chacune ne parle qu'à ses voisines. Vous saurez ce que fait chaque couche, pourquoi un serveur se passe d'interface graphique, ce que sont un terminal et un shell, à quoi ressemblent les premières commandes et ce qu'est un script. Ce contenu est écrit pour quelqu'un qui n'a jamais ouvert de terminal : chaque section a son schéma animé, que le bouton ▶ Jouer ouvre en grand.
+Un ordinateur est fait de couches posées les unes sur les autres, et chacune ne parle qu'à ses voisines. Vous saurez ce que fait chaque couche, pourquoi un serveur se passe d'interface graphique, ce que sont un terminal et un shell, à quoi ressemblent les premières commandes et ce qu'est un script. Ce contenu est écrit pour quelqu'un qui n'a jamais ouvert de terminal : chaque section a son schéma animé, que le bouton ▶ Jouer ouvre en grand, et trois sections vous font taper les commandes dans un terminal simulé, dans la page.
 
 **Prérequis** : aucun.
 
@@ -213,7 +213,46 @@ lesson: assets/os.scene.json
 step: script
 ```
 
-Ces six lignes sont déjà un programme. Écrire et lancer votre propre script sera l'objet d'un contenu pratique, à venir.
+Ces six lignes sont déjà un programme.
+
+## Ranger un dossier avec un script, et le rejouer
+
+Le rangement de tout à l'heure, il faudrait le retaper chaque fois que le dossier se remet en désordre. Rangé dans un script, il se rejoue d'une seule commande. Sur le plateau, `ranger.sh` est ouvert dans un éditeur, au-dessus du terminal : écrivez-y, une par ligne, les commandes qui rangent le dossier, puis lancez-le dans le terminal avec `bash ranger.sh`.
+
+Utilisez `mkdir -p` plutôt que `mkdir` : le script doit pouvoir être relancé alors que les dossiers existent déjà, et `-p` ne dit rien dans ce cas.
+
+```playground
+runtime: shell
+title: Un script qui range
+cwd: ~/byte-layers/foundations/rangement
+show: [files, terminal]
+open: ranger.sh
+files:
+  ranger.sh: |
+    #!/bin/bash
+    # range le dossier : photos, sauvegarde de la facture, tmp supprimé
+  IMG_001.jpg: ""
+  IMG_002.jpg: ""
+  facture.pdf: ""
+  notes.txt: acheter du pain
+  tmp/cache.bin: x
+verify:
+  - label: "`ranger.sh` contient les commandes du rangement"
+    file: ranger.sh
+    includes: /\bmv\b/
+    hint: "écrivez dans l'éditeur les commandes de la section « Ranger un dossier en commandes », une par ligne"
+  - label: vous avez lancé le script, et le dossier est rangé
+    file: [photos/IMG_001.jpg, photos/IMG_002.jpg, sauvegarde/facture.pdf]
+    hint: "lancez `bash ranger.sh` dans le terminal"
+  - label: rejoué sur un dossier en désordre tout neuf, le script le range aussi
+    run: "mkdir -p /tmp/essai/tmp && cd /tmp/essai && touch IMG_001.jpg IMG_002.jpg facture.pdf tmp/cache.bin && bash ~/byte-layers/foundations/rangement/ranger.sh && test -f photos/IMG_002.jpg && test -f sauvegarde/facture.pdf && test -f facture.pdf && test ! -e tmp"
+    hint: "le script doit tout faire seul : créer `photos` et `sauvegarde` avec `mkdir -p`, déplacer les photos, copier la facture, supprimer `tmp`"
+solution: assets/ranger-script.solution.sh
+```
+
+Le dernier contrôle fait ce que vous feriez demain : il recrée un dossier en désordre, ailleurs, et y rejoue votre script. C'est tout l'intérêt d'un script : les mêmes commandes, dans le même ordre, autant de fois qu'il faut.
+
+Écrire et lancer un script sur votre propre ordinateur, avec son vrai terminal, c'est l'objet du lab [Votre premier script, sur votre machine](https://byte-layers.com/fr/labs/first-script-lab).
 
 > 📖 [Ligne de commande pour débutants (Ubuntu, en anglais)](https://ubuntu.com/tutorials/command-line-for-beginners) · [Guide d'utilisation de Terminal sur Mac](https://support.apple.com/fr-fr/guide/terminal/welcome/mac) · [Manuel de Bash (en anglais)](https://www.gnu.org/software/bash/manual/bash.html)
 
