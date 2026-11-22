@@ -1,0 +1,881 @@
+{
+ "format": "bl-scenes/0.3",
+ "id": "virtual-machines-and-containers",
+ "title": "Machines virtuelles et conteneurs",
+ "lang": "fr",
+ "kit": "feuillete",
+ "legend": [
+  {
+   "tone": "n",
+   "label": "matériel"
+  },
+  {
+   "tone": "r",
+   "label": "noyau"
+  },
+  {
+   "tone": "v",
+   "label": "appli"
+  },
+  {
+   "tone": "g",
+   "label": "programme ou outil"
+  },
+  {
+   "tone": "b",
+   "label": "conteneur"
+  }
+ ],
+ "entities": [
+  {
+   "id": "phw",
+   "kind": "layer",
+   "at": [
+    -3.25,
+    2.25,
+    0
+   ],
+   "size": [
+    4.2,
+    4.2,
+    0.55
+   ],
+   "tone": "n",
+   "title": "poste",
+   "detail": "Le **matériel** de la machine : processeur, mémoire, disque."
+  },
+  {
+   "id": "pk",
+   "kind": "layer",
+   "at": [
+    -3.25,
+    2.25,
+    0.95
+   ],
+   "size": [
+    4.2,
+    4.2,
+    0.55
+   ],
+   "tone": "r",
+   "detail": "Le **noyau** de la machine : il partage le matériel entre les programmes qui tournent."
+  },
+  {
+   "id": "shw",
+   "kind": "layer",
+   "at": [
+    2.25,
+    -3.25,
+    0
+   ],
+   "size": [
+    4.2,
+    4.2,
+    0.55
+   ],
+   "tone": "n",
+   "title": "serveur",
+   "detail": "Le **matériel** de la machine : processeur, mémoire, disque."
+  },
+  {
+   "id": "sk",
+   "kind": "layer",
+   "at": [
+    2.25,
+    -3.25,
+    0.95
+   ],
+   "size": [
+    4.2,
+    4.2,
+    0.55
+   ],
+   "tone": "r",
+   "detail": "Le **noyau** de la machine : il partage le matériel entre les programmes qui tournent."
+  },
+  {
+   "id": "papp",
+   "kind": "program",
+   "in": "pk",
+   "at": [
+    -0.45,
+    0.45,
+    0.55
+   ],
+   "tone": "v",
+   "title": "appli Prêts",
+   "detail": "L'**appli Prêts** de la bibliothèque, écrite en JavaScript : elle a besoin de Node.js pour tourner."
+  },
+  {
+   "id": "pnode",
+   "kind": "program",
+   "in": "pk",
+   "at": [
+    0.45,
+    -0.45,
+    0.55
+   ],
+   "tone": "g",
+   "title": "Node.js 22",
+   "detail": "Le **runtime** installé sur le poste : Node.js en version 22."
+  },
+  {
+   "id": "sapp",
+   "kind": "program",
+   "in": "sk",
+   "at": [
+    -0.45,
+    0.45,
+    0.55
+   ],
+   "tone": "v",
+   "detail": "La même appli, installée sur le serveur."
+  },
+  {
+   "id": "snode",
+   "kind": "program",
+   "in": "sk",
+   "at": [
+    -0.1,
+    1.5,
+    0.55
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.6
+   ],
+   "tone": "g",
+   "title": "Node.js 18",
+   "detail": "Le serveur a un autre Node.js, en version 18 : l'appli n'y trouve pas ce qu'elle attend."
+  },
+  {
+   "id": "hhw",
+   "kind": "layer",
+   "at": [
+    -0.5,
+    -0.5,
+    0
+   ],
+   "size": [
+    5.6,
+    5.6,
+    0.55
+   ],
+   "tone": "n",
+   "title": "Matériel",
+   "detail": "Le **matériel** du serveur, le seul vrai : processeur, mémoire, disque."
+  },
+  {
+   "id": "hk",
+   "kind": "layer",
+   "at": [
+    -0.5,
+    -0.5,
+    0.95
+   ],
+   "size": [
+    5.6,
+    5.6,
+    0.55
+   ],
+   "tone": "r",
+   "title": "Noyau de l'hôte",
+   "detail": "Le **noyau** du serveur, qu'on appelle l'**hôte** : la machine réelle qui accueille les autres."
+  },
+  {
+   "id": "hyp",
+   "kind": "layer",
+   "in": "hk",
+   "at": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "size": [
+    5.0,
+    5.0,
+    0.4
+   ],
+   "tone": "g",
+   "title": "hyperviseur",
+   "sub": "intégré ou installé",
+   "detail": "L'**hyperviseur** simule des ordinateurs complets et leur partage le vrai matériel. Il est soit **intégré au système** de la machine (*type 1* : KVM dans Linux, Hyper-V, VMware ESXi), soit un **logiciel installé** sur un système existant (*type 2* : VirtualBox, VMware Workstation)."
+  },
+  {
+   "id": "eng",
+   "kind": "layer",
+   "in": "hk",
+   "at": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "size": [
+    4.8,
+    4.8,
+    0.3
+   ],
+   "tone": "g",
+   "title": "moteur de conteneurs",
+   "sub": "Docker, Podman",
+   "detail": "Le **moteur de conteneurs** (Docker, Podman) est un programme installé sur la machine : il crée, démarre et isole les conteneurs. Les programmes dans les conteneurs, eux, s'adressent **directement au noyau de l'hôte** : le moteur ne simule rien."
+  },
+  {
+   "id": "vm0hw",
+   "kind": "layer",
+   "in": "hyp",
+   "at": [
+    -0.9,
+    1.5,
+    0.4
+   ],
+   "size": [
+    1.9,
+    1.9,
+    0.4
+   ],
+   "tone": "n",
+   "detail": "Une **machine virtuelle** commence par un matériel simulé : processeur, mémoire et disque, imités par l'hyperviseur."
+  },
+  {
+   "id": "vm0k",
+   "kind": "layer",
+   "in": "vm0hw",
+   "at": [
+    0.0,
+    0.0,
+    0.4
+   ],
+   "size": [
+    1.9,
+    1.9,
+    0.4
+   ],
+   "tone": "r",
+   "detail": "Chaque machine virtuelle a **son propre noyau**, et souvent son propre système d'exploitation : c'est un ordinateur complet, en logiciel."
+  },
+  {
+   "id": "vm0app",
+   "kind": "program",
+   "in": "vm0k",
+   "at": [
+    0.0,
+    0.0,
+    0.4
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.7
+   ],
+   "tone": "g",
+   "title": "Node.js 18",
+   "detail": "Dans chaque machine virtuelle, sa version de Node.js : l'une a la 18, l'autre la 22, sans se gêner."
+  },
+  {
+   "id": "vm1hw",
+   "kind": "layer",
+   "in": "hyp",
+   "at": [
+    1.5,
+    -0.9,
+    0.4
+   ],
+   "size": [
+    1.9,
+    1.9,
+    0.4
+   ],
+   "tone": "n",
+   "title": "matériel simulé",
+   "detail": "Une **machine virtuelle** commence par un matériel simulé : processeur, mémoire et disque, imités par l'hyperviseur."
+  },
+  {
+   "id": "vm1k",
+   "kind": "layer",
+   "in": "vm1hw",
+   "at": [
+    0.0,
+    0.0,
+    0.4
+   ],
+   "size": [
+    1.9,
+    1.9,
+    0.4
+   ],
+   "tone": "r",
+   "title": "noyau de la VM",
+   "detail": "Chaque machine virtuelle a **son propre noyau**, et souvent son propre système d'exploitation : c'est un ordinateur complet, en logiciel."
+  },
+  {
+   "id": "vm1app",
+   "kind": "program",
+   "in": "vm1k",
+   "at": [
+    0.0,
+    0.0,
+    0.4
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.7
+   ],
+   "tone": "g",
+   "title": "Node.js 22",
+   "detail": "Dans chaque machine virtuelle, sa version de Node.js : l'une a la 18, l'autre la 22, sans se gêner."
+  },
+  {
+   "id": "c0",
+   "kind": "layer",
+   "in": "eng",
+   "at": [
+    -1.05,
+    1.85,
+    0.3
+   ],
+   "size": [
+    1.2,
+    1.2,
+    0.35
+   ],
+   "tone": "b",
+   "detail": "Un **conteneur** isole un programme et ses fichiers du reste de la machine, mais **sans noyau à lui** : il utilise celui de l'hôte."
+  },
+  {
+   "id": "c0app",
+   "kind": "program",
+   "in": "c0",
+   "at": [
+    0.0,
+    0.0,
+    0.35
+   ],
+   "size": [
+    0.8,
+    0.8,
+    0.6
+   ],
+   "tone": "g",
+   "title": "Node.js 18",
+   "detail": "Le programme qui tourne dans le conteneur, avec sa version de Node.js."
+  },
+  {
+   "id": "c1",
+   "kind": "layer",
+   "in": "eng",
+   "at": [
+    0.4,
+    0.4,
+    0.3
+   ],
+   "size": [
+    1.2,
+    1.2,
+    0.35
+   ],
+   "tone": "b",
+   "detail": "Un **conteneur** isole un programme et ses fichiers du reste de la machine, mais **sans noyau à lui** : il utilise celui de l'hôte."
+  },
+  {
+   "id": "c1app",
+   "kind": "program",
+   "in": "c1",
+   "at": [
+    0.0,
+    0.0,
+    0.35
+   ],
+   "size": [
+    0.8,
+    0.8,
+    0.6
+   ],
+   "tone": "g",
+   "title": "Node.js 22",
+   "detail": "Le programme qui tourne dans le conteneur, avec sa version de Node.js."
+  },
+  {
+   "id": "c2",
+   "kind": "layer",
+   "in": "eng",
+   "at": [
+    1.85,
+    -1.05,
+    0.3
+   ],
+   "size": [
+    1.2,
+    1.2,
+    0.35
+   ],
+   "tone": "b",
+   "title": "conteneur",
+   "detail": "Un **conteneur** isole un programme et ses fichiers du reste de la machine, mais **sans noyau à lui** : il utilise celui de l'hôte."
+  },
+  {
+   "id": "c2app",
+   "kind": "program",
+   "in": "c2",
+   "at": [
+    0.0,
+    0.0,
+    0.35
+   ],
+   "size": [
+    0.8,
+    0.8,
+    0.6
+   ],
+   "tone": "g",
+   "detail": "Le programme qui tourne dans le conteneur, avec sa version de Node.js."
+  },
+  {
+   "id": "peng",
+   "kind": "layer",
+   "in": "pk",
+   "at": [
+    0.2,
+    0.2,
+    0.55
+   ],
+   "size": [
+    3.6,
+    2.4,
+    0.3
+   ],
+   "tone": "g",
+   "detail": "Le moteur de conteneurs, installé sur le poste."
+  },
+  {
+   "id": "seng",
+   "kind": "layer",
+   "in": "sk",
+   "at": [
+    -0.05,
+    -0.95,
+    0.55
+   ],
+   "size": [
+    3.4,
+    2.4,
+    0.3
+   ],
+   "tone": "g",
+   "detail": "Le moteur de conteneurs, installé sur le serveur."
+  },
+  {
+   "id": "box",
+   "kind": "layer",
+   "in": "peng",
+   "at": [
+    0.0,
+    0.0,
+    0.3
+   ],
+   "size": [
+    3.0,
+    1.8,
+    0.35
+   ],
+   "tone": "b",
+   "title": "conteneur",
+   "detail": "Le **conteneur** emporte l'appli **et son runtime**, Node.js 22 : ce dont elle a besoin voyage avec elle."
+  },
+  {
+   "id": "bapp",
+   "kind": "program",
+   "in": "box",
+   "at": [
+    -0.375,
+    0.375,
+    0.35
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.6
+   ],
+   "tone": "v",
+   "title": "appli Prêts",
+   "detail": "L'appli Prêts, dans son conteneur."
+  },
+  {
+   "id": "bnode",
+   "kind": "program",
+   "in": "box",
+   "at": [
+    0.375,
+    -0.375,
+    0.35
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.6
+   ],
+   "tone": "g",
+   "title": "Node.js 22",
+   "detail": "Son Node.js 22, dans le même conteneur."
+  },
+  {
+   "id": "box2",
+   "kind": "layer",
+   "in": "seng",
+   "at": [
+    0.0,
+    0.0,
+    0.3
+   ],
+   "size": [
+    3.0,
+    1.8,
+    0.35
+   ],
+   "tone": "b",
+   "detail": "Une **copie** du même conteneur, sur le serveur : la même appli, avec le même Node.js 22."
+  },
+  {
+   "id": "b2app",
+   "kind": "program",
+   "in": "box2",
+   "at": [
+    -0.375,
+    0.375,
+    0.35
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.6
+   ],
+   "tone": "v",
+   "detail": "L'appli Prêts, dans la copie du conteneur."
+  },
+  {
+   "id": "b2node",
+   "kind": "program",
+   "in": "box2",
+   "at": [
+    0.375,
+    -0.375,
+    0.35
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.6
+   ],
+   "tone": "g",
+   "detail": "Le Node.js 22 emporté dans le conteneur."
+  }
+ ],
+ "steps": [
+  {
+   "id": "probleme",
+   "label": "Le problème",
+   "title": "Sur le poste, ça marche ; sur le serveur, non",
+   "body": [
+    "L'appli Prêts tourne sur le poste du développeur. Installée sur le serveur, elle n'y trouve pas la bonne version de Node.js."
+   ],
+   "labels": "left",
+   "hud": [
+    {
+     "label": "poste",
+     "value": "l'appli marche"
+    }
+   ],
+   "show": [
+    "phw",
+    "pk",
+    "papp",
+    "pnode",
+    "shw",
+    "sk",
+    "snode"
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "papp",
+       "label": "marche"
+      }
+     ],
+     "say": "Sur le poste, l'appli Prêts tourne avec Node.js 22."
+    },
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "scene",
+     "show": [
+      "sapp"
+     ],
+     "say": "On l'installe sur le serveur, qui a Node.js 18.",
+     "ms": 900
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "sapp",
+       "label": "en panne"
+      }
+     ],
+     "hud": [
+      {
+       "label": "serveur",
+       "value": "en panne"
+      }
+     ],
+     "say": "Elle attend une autre version : sur le serveur, elle est en panne."
+    },
+    {
+     "do": "wait",
+     "ms": 2200
+    }
+   ]
+  },
+  {
+   "id": "machines-virtuelles",
+   "label": "Machines virtuelles",
+   "title": "Des ordinateurs entiers, simulés",
+   "body": [
+    "Sur un seul serveur, un hyperviseur simule plusieurs ordinateurs. Chacun a son matériel simulé et son propre noyau."
+   ],
+   "labels": "left",
+   "hud": [
+    {
+     "label": "noyaux",
+     "value": "1"
+    }
+   ],
+   "show": [
+    "hhw",
+    "hk"
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "hyp"
+     ],
+     "say": "Un programme, l'hyperviseur, simule des ordinateurs.",
+     "ms": 900
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "show": [
+      "vm0hw",
+      "vm0k",
+      "vm0app"
+     ],
+     "hud": [
+      {
+       "label": "noyaux",
+       "value": "2"
+      }
+     ],
+     "say": "Chaque machine virtuelle a son matériel simulé et son propre noyau.",
+     "ms": 1000
+    },
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "scene",
+     "show": [
+      "vm1hw",
+      "vm1k",
+      "vm1app"
+     ],
+     "hud": [
+      {
+       "label": "noyaux",
+       "value": "3"
+      }
+     ],
+     "say": "Une seconde machine, isolée de la première : trois noyaux tournent.",
+     "ms": 1000
+    },
+    {
+     "do": "wait",
+     "ms": 2200
+    }
+   ]
+  },
+  {
+   "id": "conteneurs",
+   "label": "Conteneurs",
+   "title": "Isolés, sur le noyau de l'hôte",
+   "body": [
+    "Un conteneur isole un programme sans simuler d'ordinateur : il se pose directement sur le noyau de la machine."
+   ],
+   "labels": "left",
+   "hud": [
+    {
+     "label": "noyaux",
+     "value": "1"
+    }
+   ],
+   "show": [
+    "hhw",
+    "hk"
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "eng"
+     ],
+     "say": "Un programme, le moteur de conteneurs, est installé sur la machine.",
+     "ms": 900
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "show": [
+      "c0",
+      "c0app"
+     ],
+     "say": "Il crée un conteneur : pas de matériel simulé, pas de noyau à lui.",
+     "ms": 900
+    },
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "scene",
+     "show": [
+      "c1",
+      "c1app",
+      "c2",
+      "c2app"
+     ],
+     "hud": [
+      {
+       "label": "noyaux",
+       "value": "1, partagé"
+      }
+     ],
+     "say": "Trois conteneurs, isolés les uns des autres : leurs programmes utilisent tous le noyau de l'hôte.",
+     "ms": 1000
+    },
+    {
+     "do": "wait",
+     "ms": 2200
+    }
+   ]
+  },
+  {
+   "id": "dev-prod",
+   "label": "Du poste au serveur",
+   "title": "La même boîte, partout",
+   "body": [
+    "L'appli tourne dans un conteneur qui contient aussi son Node.js. Une copie du même conteneur part sur le serveur."
+   ],
+   "labels": "left",
+   "hud": [
+    {
+     "label": "poste",
+     "value": "l'appli marche"
+    }
+   ],
+   "show": [
+    "phw",
+    "pk",
+    "shw",
+    "sk",
+    "peng",
+    "box",
+    "bapp",
+    "bnode"
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 800
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "bapp",
+       "label": "marche"
+      }
+     ],
+     "say": "Sur le poste, l'appli tourne dans un conteneur, avec son Node.js 22."
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "seng",
+      "box2",
+      "b2app",
+      "b2node"
+     ],
+     "say": "Le serveur a lui aussi un moteur de conteneurs : une copie de la même boîte y part.",
+     "ms": 1200
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "box2",
+       "label": "marche"
+      }
+     ],
+     "hud": [
+      {
+       "label": "serveur",
+       "value": "l'appli marche"
+      }
+     ],
+     "say": "Elle y emporte son Node.js : rien à installer sur le serveur, l'appli marche."
+    },
+    {
+     "do": "wait",
+     "ms": 2400
+    }
+   ]
+  }
+ ]
+}
