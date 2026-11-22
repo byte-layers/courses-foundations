@@ -8,7 +8,7 @@ tags:
   - review
 difficulty: beginner
 duration: 10
-requires: "0.5.0"
+requires: "0.8.0"
 ---
 
 Ce quiz reprend les sept étapes de l'introduction, du matériel aux conteneurs. Chaque section porte sur une étape et renvoie au contenu qui l'explique : une question qui résiste, relisez ce contenu et revenez. Les questions comptent pour votre progression : une section est validée quand toutes ses réponses sont justes.
@@ -25,6 +25,7 @@ Deux questions sur la pile de couches et sur les deux programmes qu'on ouvre pou
 title: "Les couches, le terminal et le shell"
 tracksProgress: true
 showNotice: false
+place: stage
 questions:
   - prompt: "Quelle couche de l'ordinateur est la seule à parler au matériel ?"
     answers:
@@ -50,6 +51,7 @@ Deux questions sur les commandes qui manipulent des dossiers et des fichiers, ce
 title: "Les commandes de fichiers"
 tracksProgress: true
 showNotice: false
+place: stage
 questions:
   - prompt: "Le shell travaille dans `/home/alice/projets`. Le fichier `notes.txt` est rangé dans `/home/alice`. Quelle commande l'affiche ?"
     answers:
@@ -75,6 +77,7 @@ Trois questions sur le script, des commandes rangées dans un fichier, et sur la
 title: "Le script"
 tracksProgress: true
 showNotice: false
+place: stage
 questions:
   - prompt: "Qu'est-ce qu'un script ?"
     answers:
@@ -107,6 +110,7 @@ Deux questions sur l'outil avec lequel on écrit un programme. Contenu : [De l'�
 title: "L'éditeur de code"
 tracksProgress: true
 showNotice: false
+place: stage
 questions:
   - prompt: "Votre script, écrit dans Word, affiche des erreurs, et ses guillemets sont devenus `« »`. Pourquoi ?"
     answers:
@@ -132,6 +136,7 @@ Deux questions sur le trajet du code source jusqu'au processeur. Contenu : [Comp
 title: "Compilé ou interprété"
 tracksProgress: true
 showNotice: false
+place: stage
 questions:
   - prompt: "Vous modifiez le code source d'un programme en C, déjà compilé. Que faut-il faire avant de le relancer ?"
     answers:
@@ -157,6 +162,7 @@ Deux questions sur les architectures d'un programme et l'appli Prêts de la bibl
 title: "Les architectures d'un programme"
 tracksProgress: true
 showNotice: false
+place: stage
 questions:
   - prompt: "Dans l'architecture client léger, ou trois tiers, que faut-il installer sur chaque poste pour se servir de l'appli Prêts ?"
     answers:
@@ -182,6 +188,7 @@ Deux questions sur les façons de faire tourner plusieurs « machines » sur une
 title: "Machines virtuelles et conteneurs"
 tracksProgress: true
 showNotice: false
+place: stage
 questions:
   - prompt: "Sur un serveur tournent deux machines virtuelles et trois conteneurs. Combien de noyaux tournent sur cette machine ?"
     answers:
