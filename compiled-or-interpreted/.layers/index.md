@@ -60,17 +60,6 @@ step: compile
 
 On lance ensuite le binaire comme n'importe quel programme, ici avec `./bonjour` : le noyau le charge en mémoire et le processeur exécute ses instructions, **sans programme pour le lire**. Le code source et le compilateur ne servent plus pour le faire tourner : on peut donner le binaire à quelqu'un d'autre, à condition qu'il ait le même type de processeur et le même système. Un binaire compilé pour Windows ne se lance pas sur un Mac.
 
-## Modifier le code source : ce qu'il faut refaire
-
-La différence se voit le jour où l'on change une ligne. Remplaçons « Bonjour » par « Salut » dans les deux codes sources, puis relançons chaque programme.
-
-```scene
-lesson: assets/compile.scene.json
-step: modifier
-```
-
-Le script dit « Salut » dès qu'on le relance, puisque `bash` relit le fichier à chaque fois. Le binaire, lui, dit encore « Bonjour » : c'est une traduction faite **avant** le changement. Il faut **recompiler** pour fabriquer un nouveau binaire. En échange de cette étape, le compilateur relit tout le code source et signale certaines fautes avant même que le programme ne démarre.
-
 ## Java : compilé, puis lu par une machine virtuelle
 
 Java prend un chemin entre les deux. Le compilateur Java, `javac`, lit `Bonjour.java`, mais n'écrit pas du code machine : il écrit `Bonjour.class`, du **bytecode**, des instructions pour une machine qui n'existe pas en vrai. La commande `java Bonjour` lance alors la **machine virtuelle Java** (*Java Virtual Machine*, JVM), un programme qui lit ce bytecode et le fait exécuter par le processeur.
@@ -83,6 +72,19 @@ step: bytecode
 L'intérêt : le même `Bonjour.class` tourne sur Windows, macOS et Linux, chacun avec sa propre JVM. On compile une fois, et le résultat voyage. Pour écrire du Java, on installe le **JDK** (*Java Development Kit*), qui contient `javac` et la JVM.
 
 > 💡 **Remarque.** L'expression « machine virtuelle » sert aussi pour autre chose : un ordinateur complet simulé par un programme, que vous rencontrerez plus loin dans ce parcours. Ici, c'est seulement le programme qui lit le bytecode Java.
+
+## Modifier le code source : ce qu'il faut refaire
+
+La différence se voit le jour où l'on change une ligne. Remplaçons « Bonjour » par « Salut » dans le script et dans le code source C, puis relançons chaque programme.
+
+```scene
+lesson: assets/compile.scene.json
+step: modifier
+```
+
+Le script dit « Salut » dès qu'on le relance : `bash` relit le fichier à chaque fois. Le binaire dit encore « Bonjour » : il faut **recompiler**. Même chose en Java : après une modification, on relance `javac` avant `java`. En échange, le compilateur signale certaines fautes avant même que le programme ne démarre.
+
+> 💡 **Remarque.** Les gros programmes en langage interprété ont eux aussi, aujourd'hui, une étape avant l'exécution, qu'on appelle souvent le **build**. En JavaScript, un outil comme webpack rassemble des centaines de fichiers en quelques-uns, prêts pour le navigateur ; Python range une version préparée de chaque fichier (les `.pyc`) pour démarrer plus vite. Le résultat n'est pas du code machine : un interpréteur le lit toujours.
 
 ## Le runtime : ce qu'il faut avoir installé
 
@@ -106,7 +108,7 @@ Le **JavaScript** est le langage des pages web : votre navigateur contient son p
 
 Le lab qui suit ce contenu vous fait installer un runtime et lancer votre premier programme : Node.js pour tout le monde, ou le JDK si votre parcours passe par Java.
 
-> 📖 [Qu'est-ce que JavaScript ? (MDN)](https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/What_is_JavaScript) · [Introduction à Node.js (en anglais)](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs) · [Compiler et lancer un premier programme Java (Oracle, en anglais)](https://dev.java/learn/getting-started/)
+> 📖 [Qu'est-ce que JavaScript ? (MDN)](https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/What_is_JavaScript) · [Introduction à Node.js (en anglais)](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs) · [Compiler et lancer un premier programme Java (Oracle, en anglais)](https://dev.java/learn/getting-started/) · [Les concepts de webpack (en anglais)](https://webpack.js.org/concepts/)
 
 ## Récap
 

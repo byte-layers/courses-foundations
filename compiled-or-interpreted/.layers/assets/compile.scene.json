@@ -566,6 +566,215 @@
    ]
   },
   {
+   "id": "bytecode",
+   "label": "Java",
+   "title": "Java : compilé, puis lu par une machine virtuelle",
+   "body": [
+    "Le compilateur Java écrit du bytecode ; la machine virtuelle Java le lit et le fait exécuter."
+   ],
+   "hud": [
+    {
+     "label": "trajet",
+     "value": "bytecode"
+    }
+   ],
+   "labels": "left",
+   "show": [
+    "cpu",
+    "kbox",
+    "term",
+    "bash",
+    "jsrc",
+    "javac",
+    "jvm",
+    {
+     "id": "cls",
+     "dim": true,
+     "label": "pas encore écrit"
+    }
+   ],
+   "links": [
+    {
+     "from": "term",
+     "to": "bash"
+    },
+    {
+     "from": "bash",
+     "to": "javac"
+    },
+    {
+     "from": "jsrc",
+     "to": "javac"
+    },
+    {
+     "from": "kbox",
+     "to": "cpu"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "type",
+     "text": "javac Bonjour.java"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "javac"
+     ],
+     "label": "javac",
+     "explain": [
+      "Vous tapez `javac Bonjour.java` : le terminal passe la ligne au shell.",
+      "Le shell lance le compilateur Java, `javac`."
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "jsrc",
+      "javac"
+     ],
+     "label": "tout le fichier",
+     "kind": "read",
+     "explain": [
+      "`javac` lit tout `Bonjour.java`."
+     ],
+     "tone": "y"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "cls",
+       "dim": false,
+       "label": "bytecode"
+      }
+     ],
+     "link": [
+      {
+       "from": "javac",
+       "to": "cls"
+      }
+     ],
+     "say": "Il écrit `Bonjour.class` : du **bytecode**, pas du code machine.",
+     "ms": 900
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 400
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "jsrc",
+       "dim": true
+      },
+      {
+       "id": "javac",
+       "dim": true
+      }
+     ],
+     "unlink": [
+      {
+       "from": "bash",
+       "to": "javac"
+      },
+      {
+       "from": "javac",
+       "to": "cls"
+      }
+     ],
+     "link": [
+      {
+       "from": "bash",
+       "to": "jvm"
+      },
+      {
+       "from": "cls",
+       "to": "jvm",
+       "dashed": true
+      },
+      {
+       "from": "jvm",
+       "to": "kbox"
+      }
+     ],
+     "say": "Pour lancer le programme, on passe par la **machine virtuelle Java**."
+    },
+    {
+     "do": "type",
+     "text": "java Bonjour"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "jvm"
+     ],
+     "label": "java Bonjour",
+     "explain": [
+      "`java Bonjour` : le shell lance la JVM.",
+      "La JVM démarre : c'est elle qui va lire le bytecode."
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "cls",
+      "jvm"
+     ],
+     "label": "bytecode",
+     "kind": "read",
+     "explain": [
+      "Elle lit `Bonjour.class`."
+     ],
+     "tone": "b"
+    },
+    {
+     "do": "send",
+     "path": [
+      "jvm",
+      "kbox",
+      "cpu"
+     ],
+     "label": "exécuter",
+     "explain": [
+      "Elle passe par le noyau, comme tout programme.",
+      "Le processeur exécute la JVM, qui fait ce que dit le bytecode."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Bonjour !"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 2400
+    }
+   ]
+  },
+  {
    "id": "modifier",
    "label": "Modifier",
    "title": "Modifier le code source : ce qu'il faut refaire",
@@ -805,215 +1014,6 @@
     {
      "do": "output",
      "text": "Salut !"
-    },
-    {
-     "do": "prompt"
-    },
-    {
-     "do": "wait",
-     "ms": 2400
-    }
-   ]
-  },
-  {
-   "id": "bytecode",
-   "label": "Java",
-   "title": "Java : compilé, puis lu par une machine virtuelle",
-   "body": [
-    "Le compilateur Java écrit du bytecode ; la machine virtuelle Java le lit et le fait exécuter."
-   ],
-   "hud": [
-    {
-     "label": "trajet",
-     "value": "bytecode"
-    }
-   ],
-   "labels": "left",
-   "show": [
-    "cpu",
-    "kbox",
-    "term",
-    "bash",
-    "jsrc",
-    "javac",
-    "jvm",
-    {
-     "id": "cls",
-     "dim": true,
-     "label": "pas encore écrit"
-    }
-   ],
-   "links": [
-    {
-     "from": "term",
-     "to": "bash"
-    },
-    {
-     "from": "bash",
-     "to": "javac"
-    },
-    {
-     "from": "jsrc",
-     "to": "javac"
-    },
-    {
-     "from": "kbox",
-     "to": "cpu"
-    }
-   ],
-   "widgets": [
-    {
-     "kind": "terminal",
-     "title": "alice@pc — bash",
-     "prompt": "alice@pc",
-     "cwd": "~"
-    }
-   ],
-   "script": [
-    {
-     "do": "wait",
-     "ms": 600
-    },
-    {
-     "do": "type",
-     "text": "javac Bonjour.java"
-    },
-    {
-     "do": "send",
-     "path": [
-      "term",
-      "bash",
-      "javac"
-     ],
-     "label": "javac",
-     "explain": [
-      "Vous tapez `javac Bonjour.java` : le terminal passe la ligne au shell.",
-      "Le shell lance le compilateur Java, `javac`."
-     ]
-    },
-    {
-     "do": "send",
-     "path": [
-      "jsrc",
-      "javac"
-     ],
-     "label": "tout le fichier",
-     "kind": "read",
-     "explain": [
-      "`javac` lit tout `Bonjour.java`."
-     ],
-     "tone": "y"
-    },
-    {
-     "do": "scene",
-     "set": [
-      {
-       "id": "cls",
-       "dim": false,
-       "label": "bytecode"
-      }
-     ],
-     "link": [
-      {
-       "from": "javac",
-       "to": "cls"
-      }
-     ],
-     "say": "Il écrit `Bonjour.class` : du **bytecode**, pas du code machine.",
-     "ms": 900
-    },
-    {
-     "do": "prompt"
-    },
-    {
-     "do": "wait",
-     "ms": 400
-    },
-    {
-     "do": "scene",
-     "set": [
-      {
-       "id": "jsrc",
-       "dim": true
-      },
-      {
-       "id": "javac",
-       "dim": true
-      }
-     ],
-     "unlink": [
-      {
-       "from": "bash",
-       "to": "javac"
-      },
-      {
-       "from": "javac",
-       "to": "cls"
-      }
-     ],
-     "link": [
-      {
-       "from": "bash",
-       "to": "jvm"
-      },
-      {
-       "from": "cls",
-       "to": "jvm",
-       "dashed": true
-      },
-      {
-       "from": "jvm",
-       "to": "kbox"
-      }
-     ],
-     "say": "Pour lancer le programme, on passe par la **machine virtuelle Java**."
-    },
-    {
-     "do": "type",
-     "text": "java Bonjour"
-    },
-    {
-     "do": "send",
-     "path": [
-      "term",
-      "bash",
-      "jvm"
-     ],
-     "label": "java Bonjour",
-     "explain": [
-      "`java Bonjour` : le shell lance la JVM.",
-      "La JVM démarre : c'est elle qui va lire le bytecode."
-     ]
-    },
-    {
-     "do": "send",
-     "path": [
-      "cls",
-      "jvm"
-     ],
-     "label": "bytecode",
-     "kind": "read",
-     "explain": [
-      "Elle lit `Bonjour.class`."
-     ],
-     "tone": "b"
-    },
-    {
-     "do": "send",
-     "path": [
-      "jvm",
-      "kbox",
-      "cpu"
-     ],
-     "label": "exécuter",
-     "explain": [
-      "Elle passe par le noyau, comme tout programme.",
-      "Le processeur exécute la JVM, qui fait ce que dit le bytecode."
-     ]
-    },
-    {
-     "do": "output",
-     "text": "Bonjour !"
     },
     {
      "do": "prompt"
