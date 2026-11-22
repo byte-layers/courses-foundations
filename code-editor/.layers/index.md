@@ -89,15 +89,6 @@ Il existe beaucoup d'éditeurs de code. Ce parcours utilise **Visual Studio Code
 
 > 📖 [Visual Studio Code, documentation (en anglais)](https://code.visualstudio.com/docs) · [L'interface de VS Code (en anglais)](https://code.visualstudio.com/docs/getstarted/userinterface) · [Guide d'utilisation de TextEdit (Apple)](https://support.apple.com/fr-fr/guide/textedit/welcome/mac)
 
-## Récap
-
-- Un programme s'écrit en **texte brut** : un traitement de texte ajoute une mise en forme qui le rend illisible pour la machine.
-- Un **éditeur de texte** enregistre ce que vous tapez, sans mise en forme ; un **éditeur de code** fait de même et vous aide à écrire et à lancer le programme.
-- Les outils essentiels d'un **IDE** : l'explorateur du dossier ouvert, la zone d'édition, le terminal intégré et le support du langage (coloration, complétion, erreurs soulignées, lancement, débogage).
-- **VS Code** est l'éditeur de code de ce parcours.
-
-Reste une question : ce texte, bien écrit et sans faute, la machine ne le comprend pas tel quel. Qui le lui traduit ? C'est l'objet du contenu [Compilé ou interprété](https://byte-layers.com/fr/bits/compiled-or-interpreted).
-
 ## Trois questions pour vérifier ce que vous avez retenu
 
 ```quiz
@@ -128,6 +119,15 @@ questions:
     correct: 3
     explanation: "L'explorateur montre les fichiers et sous-dossiers du dossier ouvert. Les commandes se lancent dans le terminal intégré."
 ```
+
+## Récap
+
+- Un programme s'écrit en **texte brut** : un traitement de texte ajoute une mise en forme qui le rend illisible pour la machine.
+- Un **éditeur de texte** enregistre ce que vous tapez, sans mise en forme ; un **éditeur de code** fait de même et vous aide à écrire et à lancer le programme.
+- Les outils essentiels d'un **IDE** : l'explorateur du dossier ouvert, la zone d'édition, le terminal intégré et le support du langage (coloration, complétion, erreurs soulignées, lancement, débogage).
+- **VS Code** est l'éditeur de code de ce parcours.
+
+Reste une question : ce texte, bien écrit et sans faute, la machine ne le comprend pas tel quel. Qui le lui traduit ? C'est l'objet du contenu [Compilé ou interprété](https://byte-layers.com/fr/bits/compiled-or-interpreted).
 
 ```ack
 J'ai compris
