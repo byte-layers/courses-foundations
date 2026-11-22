@@ -28,7 +28,7 @@ showNotice: false
 questions:
   - prompt: "Quelle couche de l'ordinateur est la seule à parler au matériel ?"
     answers:
-      - "Les applications"
+      - "Le shell"
       - "Le noyau"
       - "L'interface graphique"
     correct: 2
@@ -42,7 +42,7 @@ questions:
     explanation: "Le terminal est la fenêtre : il affiche et transmet ce que vous tapez, sans le comprendre. Le shell lit la ligne et fait ce qu'elle demande, en passant par le noyau."
 ```
 
-## Étape 2 : se déplacer, copier, déplacer, supprimer
+## Étape 2 : changer de dossier, copier, déplacer, supprimer
 
 Deux questions sur les commandes qui manipulent des dossiers et des fichiers, celles que vous avez tapées pour ranger un dossier. Contenu : [L'ordinateur en couches](https://byte-layers.com/fr/bits/computer-layers), sections sur les premières commandes et sur le rangement.
 
@@ -61,7 +61,7 @@ questions:
   - prompt: "Après `cp facture.pdf sauvegarde/`, où se trouve `facture.pdf` ?"
     answers:
       - "Seulement dans `sauvegarde`"
-      - "Dans le dossier courant et dans `sauvegarde` : `cp` copie, l'original reste en place"
+      - "Dans le dossier courant et dans `sauvegarde`"
       - "Nulle part : `cp` l'a supprimé"
     correct: 2
     explanation: "`cp` copie : le fichier est maintenant à deux endroits. C'est `mv` qui déplace, l'original quitte alors le dossier courant."
@@ -78,23 +78,23 @@ showNotice: false
 questions:
   - prompt: "Qu'est-ce qu'un script ?"
     answers:
-      - "Un programme compilé en code machine"
-      - "La fenêtre dans laquelle on tape des commandes"
-      - "Un fichier texte de commandes, que le shell exécute dans l'ordre, de haut en bas"
+      - "Un fichier de code machine que le processeur exécute directement"
+      - "Un fichier texte que le terminal affiche sans l'exécuter"
+      - "Un fichier texte de commandes, que le shell exécute dans l'ordre"
     correct: 3
     explanation: "Un script range dans un fichier les commandes qu'on taperait, une par ligne. Le shell les exécute comme si vous les tapiez."
-  - prompt: "Dans un script, à quoi sert la première ligne `#!/bin/bash` ?"
+  - prompt: "On lance un script avec `./hello.sh`. À quoi sert sa première ligne, `#!/bin/bash` ?"
     answers:
       - "Elle indique quel programme doit lire le fichier : ici `bash`"
-      - "C'est un commentaire sans aucun effet"
+      - "Elle affiche le nom du shell au lancement"
       - "Elle rend le fichier exécutable"
     correct: 1
-    explanation: "La première ligne nomme le programme qui lit le script. Les autres lignes qui commencent par `#` sont des commentaires ; c'est `chmod +x` qui rend le fichier exécutable."
-  - prompt: "Le script `ranger.sh` doit pouvoir se relancer quand les dossiers qu'il crée existent déjà. Quelle ligne écrire ?"
+    explanation: "Lancé avec `./`, le script est lu par le programme que nomme sa première ligne. Les autres lignes qui commencent par `#` sont des commentaires ; c'est `chmod +x` qui rend le fichier exécutable."
+  - prompt: "Le script `ranger.sh` doit pouvoir se relancer sans message d'erreur quand les dossiers qu'il crée existent déjà. Quelle ligne écrire ?"
     answers:
       - "`mkdir photos`"
       - "`mkdir -p photos`"
-      - "`cd photos`"
+      - "`mkdir -r photos`"
     correct: 2
     explanation: "Avec l'option `-p`, `mkdir` ne dit rien si le dossier existe déjà. Sans elle, la deuxième fois, il affiche une erreur."
 ```
@@ -108,20 +108,20 @@ title: "L'éditeur de code"
 tracksProgress: true
 showNotice: false
 questions:
-  - prompt: "Pourquoi ne pas écrire un script dans un traitement de texte comme Word ?"
+  - prompt: "Votre script, écrit dans Word, affiche des erreurs, et ses guillemets sont devenus `« »`. Pourquoi ?"
     answers:
-      - "Parce que Word est trop lent pour un programme"
-      - "Parce qu'il enregistre une mise en forme et remplace les guillemets droits : `bash` ne sait plus lire le fichier"
-      - "Parce qu'un script doit être écrit dans le terminal"
+      - "Parce qu'un script doit être écrit en anglais"
+      - "Parce que Word enregistre par défaut une mise en forme et des guillemets typographiques"
+      - "Parce que Word n'enregistre pas les fichiers en `.sh`"
     correct: 2
-    explanation: "Un programme s'écrit en texte brut. Un traitement de texte enregistre aussi la mise en forme, et ses guillemets typographiques ne sont pas des guillemets pour `bash`."
-  - prompt: "Qu'ajoute un éditeur de code à un éditeur de texte ?"
+    explanation: "Un programme s'écrit en texte brut. Un traitement de texte enregistre par défaut la mise en forme, et ses guillemets typographiques ne sont pas des guillemets pour `bash`."
+  - prompt: "Le même `fiche.sh` est ouvert dans le Bloc-notes et dans VS Code. Que voit-on de plus dans VS Code ?"
     answers:
-      - "De l'aide pour écrire : couleurs, numéros de ligne, complétion, terminal intégré"
+      - "Des couleurs, des numéros de ligne et un terminal dans la même fenêtre"
       - "Une mise en forme : gras, polices, marges"
       - "Il traduit le programme en code machine"
     correct: 1
-    explanation: "Les deux enregistrent du texte brut ; l'éditeur de code vous aide en plus à écrire et à trouver vos fautes. Il ne traduit rien : c'est le travail d'un compilateur ou d'un interpréteur."
+    explanation: "Les deux enregistrent du texte brut ; l'éditeur de code vous aide en plus à écrire et à trouver vos fautes. Il ne traduit rien en code machine : c'est le travail d'un compilateur."
 ```
 
 ## Étape 5 : compilé ou interprété
@@ -136,17 +136,17 @@ questions:
   - prompt: "Vous modifiez le code source d'un programme en C, déjà compilé. Que faut-il faire avant de le relancer ?"
     answers:
       - "Rien : la modification se voit au lancement suivant"
-      - "Réinstaller le système d'exploitation"
+      - "Installer le runtime du C"
       - "Le recompiler, pour produire un nouveau binaire"
     correct: 3
     explanation: "Le binaire a été traduit avant la modification. Il faut recompiler. Un script interprété, lui, est relu à chaque lancement."
-  - prompt: "Qu'est-ce qu'un runtime ?"
+  - prompt: "On vous donne `bonjour.js` à lancer sur votre machine. De quoi avez-vous besoin, et comment l'appelle-t-on ?"
     answers:
-      - "Le programme qu'il faut avoir installé pour en exécuter un autre, comme `bash`, la JVM ou Node.js"
-      - "Le temps que met un programme à démarrer"
-      - "Le fichier binaire produit par le compilateur"
+      - "De Node.js, le runtime : le programme qui lit et exécute `bonjour.js`"
+      - "D'un compilateur, qui en fait un binaire"
+      - "De rien : le processeur lit le JavaScript"
     correct: 1
-    explanation: "Un script en JavaScript ne tourne pas sans Node.js, un programme Java pas sans la JVM : ce sont leurs runtimes."
+    explanation: "Hors du navigateur, un script JavaScript ne tourne pas sans Node.js, un programme Java pas sans la JVM, un script shell pas sans `bash` : ce sont leurs runtimes."
 ```
 
 ## Étape 6 : où vivent les programmes
@@ -167,8 +167,8 @@ questions:
     explanation: "Le navigateur affiche les pages ; l'appli tourne sur le serveur web et les données restent dans la base. Une mise à jour se fait une fois, sur le serveur."
   - prompt: "Le paiement par carte de l'appli Prêts est assuré par un prestataire. Comment l'appli s'en sert-elle ?"
     answers:
-      - "Elle passe par l'API du prestataire, le guichet qu'il ouvre aux autres programmes"
-      - "Elle copie le programme du prestataire sur son serveur"
+      - "Elle lui envoie des demandes par son API"
+      - "Elle intègre le code du prestataire dans l'appli Prêts"
       - "Elle demande au noyau de son serveur"
     correct: 1
     explanation: "Un service externe se sert à distance, par son API. Rien à écrire ni à héberger, mais on dépend de lui : prestataire en panne, plus de paiement par carte."
@@ -183,20 +183,20 @@ title: "Machines virtuelles et conteneurs"
 tracksProgress: true
 showNotice: false
 questions:
-  - prompt: "Qu'est-ce qui distingue une machine virtuelle d'un conteneur ?"
+  - prompt: "Sur un serveur tournent deux machines virtuelles et trois conteneurs. Combien de noyaux tournent sur cette machine ?"
     answers:
-      - "Le conteneur simule un ordinateur entier ; la machine virtuelle n'isole qu'un programme"
-      - "Aucune différence, ce sont deux noms de la même chose"
-      - "La machine virtuelle a son propre noyau ; le conteneur partage celui de l'hôte"
+      - "Six : un par machine virtuelle, un par conteneur, et celui de l'hôte"
+      - "Un seul, partagé par tous"
+      - "Trois : celui de l'hôte, et un par machine virtuelle"
     correct: 3
-    explanation: "Une machine virtuelle est un ordinateur simulé, noyau compris. Un conteneur isole un programme et ses fichiers sur le noyau de la machine qui l'accueille : il est plus léger."
+    explanation: "Une machine virtuelle est un ordinateur simulé, noyau compris. Un conteneur n'a pas de noyau à lui : il isole un programme et ses fichiers sur le noyau de la machine qui l'accueille. Ici : le noyau de l'hôte, et un par machine virtuelle."
   - prompt: "L'appli Prêts tourne sur le poste du développeur dans un conteneur, avec son Node.js 22. Pourquoi le même conteneur marchera-t-il sur le serveur ?"
     answers:
-      - "Parce qu'il emporte ce dont l'appli a besoin : elle ne dépend plus du Node.js installé sur le serveur"
-      - "Parce que le serveur se met à jour tout seul"
+      - "Parce qu'il emporte son propre Node.js 22"
+      - "Parce que le conteneur installe Node.js 22 sur le serveur"
       - "Parce qu'un conteneur n'a besoin d'aucun noyau"
     correct: 1
-    explanation: "Le conteneur emporte l'appli et son runtime. Il a besoin du noyau de l'hôte, mais pas des programmes installés sur l'hôte."
+    explanation: "Le conteneur emporte l'appli et son runtime. Il a besoin du noyau de l'hôte, mais pas du Node.js installé sur l'hôte."
 ```
 
 ## Récap
@@ -207,15 +207,15 @@ Les sept étapes, en une ligne chacune :
 2. Des **commandes** se déplacent dans les dossiers et manipulent les fichiers : `cd`, `ls`, `mkdir`, `cp`, `mv`, `rm`.
 3. Un **script** range ces commandes dans un fichier que le shell rejoue.
 4. Un programme s'écrit en **texte brut**, de préférence dans un **éditeur de code**.
-5. Le code source est **compilé** en binaire ou **interprété** par un runtime.
-6. Un programme se répartit entre le poste et des **serveurs**, et se sert de services externes par leur **API**.
+5. Le code source est **compilé** en binaire, **interprété**, ou compilé en bytecode pour la JVM ; le **runtime** est ce qu'il faut installer pour le lancer.
+6. Un programme peut se répartir entre le poste et des **serveurs**, et se servir de services externes par leur **API**.
 7. Une **machine virtuelle** simule un ordinateur entier ; un **conteneur** isole un programme sur le noyau de l'hôte.
 
 > 📖 [Système d'exploitation (Wikipédia)](https://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27exploitation) · [Manuel de Bash (en anglais)](https://www.gnu.org/software/bash/manual/bash.html)
 
 ## Et après l'introduction
 
-Vous savez maintenant ce qu'est un ordinateur, comment lui parler, comment s'écrit et s'exécute un programme, où il tourne. La suite n'est plus de l'introduction : chaque outil s'installe au moment où il règle un problème, et sert dans le quart d'heure. Le premier est **Git**, pour revenir en arrière quand un script est cassé ; **Docker** vient avec le contenu [Pourquoi les conteneurs](https://byte-layers.com/fr/bits/containers-why).
+Vous savez maintenant ce qu'est un ordinateur, comment lui parler, comment s'écrit et s'exécute un programme, où il tourne. La suite n'est plus de l'introduction : chaque outil s'installe au moment où il règle un problème, et sert aussitôt. Le premier est **Git**, qui garde chaque version de vos fichiers et permet de revenir à une version qui marchait : [Pourquoi versionner son travail](https://byte-layers.com/fr/bits/why-version-control) (sous Windows, il est déjà installé avec Git Bash) ; **Docker** vient avec le contenu [Pourquoi les conteneurs](https://byte-layers.com/fr/bits/containers-why).
 
 ```ack
 J'ai terminé l'introduction
