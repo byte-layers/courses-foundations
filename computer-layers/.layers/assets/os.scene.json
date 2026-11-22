@@ -1,1367 +1,1849 @@
 {
-  "format": "bl-scenes/0.2",
-  "id": "computer-layers",
-  "title": "L'ordinateur en couches, du matériel au premier script",
-  "lang": "fr",
-  "kit": "feuillete",
-  "counters": [
+ "format": "bl-scenes/0.3",
+ "id": "computer-layers",
+ "title": "L'ordinateur en couches, du matériel au premier script",
+ "lang": "fr",
+ "kit": "feuillete",
+ "counters": [
+  {
+   "id": "cmds",
+   "label": "commandes"
+  },
+  {
+   "id": "sys",
+   "label": "appels système",
+   "hits": [
+    "kernel",
+    "kbox",
+    "hw"
+   ]
+  }
+ ],
+ "legend": [
+  {
+   "kind": "req",
+   "label": "requête"
+  },
+  {
+   "kind": "res",
+   "label": "réponse"
+  },
+  {
+   "kind": "read",
+   "label": "lecture"
+  }
+ ],
+ "entities": [
+  {
+   "id": "hw",
+   "at": [
+    -1.2,
+    1.2,
+    0
+   ],
+   "kind": "layer",
+   "tone": "n",
+   "title": "Matériel",
+   "sub": "CPU · RAM · disque · réseau",
+   "icon": "▤",
+   "detail": "Le **matériel**, ce que vous pouvez toucher : processeur (CPU), mémoire vive (RAM), disque, carte réseau. Il ne sait rien faire seul : il exécute ce que le noyau lui demande."
+  },
+  {
+   "id": "kernel",
+   "at": [
+    -1.2,
+    1.2,
+    0.95
+   ],
+   "kind": "layer",
+   "tone": "r",
+   "title": "Noyau (kernel)",
+   "sub": "processus · mémoire · fichiers",
+   "icon": "✱",
+   "detail": "Le **noyau** (*kernel*) est le chef d'orchestre. Il partage le processeur et la mémoire entre les programmes et il est le **seul** à parler au matériel. Les programmes lui demandent tout par des *appels système*."
+  },
+  {
+   "id": "shell",
+   "at": [
+    -1.2,
+    1.2,
+    1.9
+   ],
+   "kind": "layer",
+   "tone": "g",
+   "title": "Shell & services",
+   "sub": "bash · sshd · systemd",
+   "icon": ">_",
+   "detail": "Le **shell** est un programme qui lit des commandes et les fait exécuter. `bash` est le plus courant sous Linux. Les **services** (`sshd`, `systemd`…) tournent en fond, sans fenêtre."
+  },
+  {
+   "id": "gui",
+   "at": [
+    -1.2,
+    1.2,
+    2.85
+   ],
+   "kind": "layer",
+   "tone": "v",
+   "title": "Interface graphique",
+   "sub": "fenêtres · souris · bureau",
+   "icon": "▭",
+   "detail": "L'**interface graphique** dessine les fenêtres, suit la souris et gère le bureau. Pratique, mais facultative : un serveur s'en passe très bien."
+  },
+  {
+   "id": "apps",
+   "at": [
+    -1.2,
+    1.2,
+    3.8
+   ],
+   "kind": "layer",
+   "tone": "b",
+   "title": "Applications",
+   "sub": "navigateur · éditeur · jeux",
+   "icon": "▦",
+   "detail": "Les **applications** que vous utilisez tous les jours : navigateur, éditeur de texte, jeux. Elles reposent sur toutes les couches du dessous."
+  },
+  {
+   "id": "you",
+   "kind": "actor",
+   "at": [
+    -5.2,
+    5.2
+   ],
+   "label": "clic souris"
+  },
+  {
+   "id": "explorer",
+   "kind": "node",
+   "at": [
+    0,
+    3.6
+   ],
+   "tone": "v",
+   "title": "Explorateur",
+   "sub": "de fichiers",
+   "icon": "▤",
+   "detail": "L'**explorateur de fichiers** montre vos dossiers sous forme d'icônes. Derrière chaque double-clic, il demande au noyau de lire le disque."
+  },
+  {
+   "id": "kbox",
+   "kind": "node",
+   "at": [
+    0,
+    -0.4
+   ],
+   "tone": "r",
+   "title": "Noyau",
+   "sub": "appels système",
+   "icon": "✱",
+   "detail": "Le **noyau** reçoit les *appels système* : « lis ce dossier », « crée ce fichier », « quelle heure est-il ? ». C'est lui qui touche au disque."
+  },
+  {
+   "id": "disk",
+   "kind": "store",
+   "at": [
+    0,
+    -4.2
+   ],
+   "tone": "n",
+   "title": "Disque",
+   "detail": "Le **disque** garde vos fichiers, même ordinateur éteint. Aucun programme n'y écrit directement : tout passe par le noyau."
+  },
+  {
+   "id": "admin",
+   "kind": "actor",
+   "at": [
+    -5.2,
+    5.2
+   ],
+   "tone": "y",
+   "label": "ssh admin@serveur"
+  },
+  {
+   "id": "term",
+   "kind": "node",
+   "at": [
+    0,
+    5
+   ],
+   "tone": "i",
+   "title": "Terminal",
+   "sub": "affiche le texte",
+   "icon": ">_",
+   "detail": "Le **terminal** est une simple fenêtre de texte : il affiche ce qu'on lui envoie et transmet ce que vous tapez. Il ne comprend pas les commandes : c'est le rôle du shell."
+  },
+  {
+   "id": "bash",
+   "kind": "node",
+   "at": [
+    0,
+    1.6
+   ],
+   "tone": "g",
+   "title": "Shell",
+   "sub": "bash",
+   "icon": "$",
+   "detail": "**`bash`** lit votre ligne, la découpe (commande, options, arguments) et lance le bon programme. Certaines commandes, comme `cd` ou `pwd`, sont faites par le shell lui-même."
+  },
+  {
+   "id": "ls",
+   "kind": "program",
+   "at": [
+    -3.4,
+    -1.4
+   ],
+   "title": "ls",
+   "detail": "**`ls`** (*list*) liste le contenu d'un dossier. C'est un vrai programme, rangé dans `/usr/bin/ls`."
+  },
+  {
+   "id": "mkdir",
+   "kind": "program",
+   "at": [
+    -1.2,
+    -1.4
+   ],
+   "title": "mkdir",
+   "detail": "**`mkdir`** (*make directory*) crée un dossier. Il n'affiche rien quand tout va bien."
+  },
+  {
+   "id": "cat",
+   "kind": "program",
+   "at": [
+    1,
+    -1.4
+   ],
+   "title": "cat",
+   "detail": "**`cat`** (*concatenate*) affiche le contenu d'un fichier texte dans le terminal."
+  },
+  {
+   "id": "file",
+   "kind": "file",
+   "at": [
+    2.4,
+    3.4
+   ],
+   "tone": "y",
+   "title": "hello.sh",
+   "detail": "**`hello.sh`** est un script : un simple fichier texte qui contient des commandes, une par ligne. Le shell les exécute comme si vous les tapiez."
+  },
+  {
+   "id": "date",
+   "kind": "program",
+   "at": [
+    -3.4,
+    -1.4
+   ],
+   "title": "date",
+   "detail": "**`date`** affiche la date et l'heure, qu'il demande au noyau."
+  },
+  {
+   "id": "dev",
+   "kind": "actor",
+   "at": [
+    -7.6,
+    2.8
+   ],
+   "tone": "y",
+   "label": "terminal · script"
+  },
+  {
+   "id": "mv",
+   "kind": "program",
+   "at": [
+    0,
+    0
+   ],
+   "title": "mv",
+   "detail": "Le programme **`mv`** (*move*) déplace un fichier : il demande au noyau de le changer de dossier."
+  },
+  {
+   "id": "cp",
+   "kind": "program",
+   "at": [
+    0,
+    0
+   ],
+   "title": "cp",
+   "detail": "Le programme **`cp`** (*copy*) copie un fichier : l'original reste en place."
+  },
+  {
+   "id": "rm",
+   "kind": "program",
+   "at": [
+    0,
+    0
+   ],
+   "title": "rm",
+   "detail": "Le programme **`rm`** (*remove*) supprime ; avec `-r`, un dossier et tout ce qu'il contient. Pas de corbeille."
+  }
+ ],
+ "steps": [
+  {
+   "id": "couches",
+   "label": "Couches",
+   "chapter": "le poste de travail",
+   "title": "Votre ordinateur, un empilement de couches",
+   "body": [
+    "Ce que vous voyez, ce sont des **applications** dans des fenêtres. Sous elles, il y a des couches que vous ne voyez jamais.",
+    "L'**interface graphique** dessine les fenêtres et gère la souris et le clavier. Le **shell** et les services tournent en arrière-plan. Tout en bas, le **noyau** (kernel) est le seul à parler au **matériel**.",
+    "Un clic de souris descend toute la pile jusqu'au matériel, puis la réponse remonte. Chaque demande faite au noyau est un **appel système**."
+   ],
+   "callout": {
+    "title": "idée clé",
+    "text": "Le noyau partage le processeur, la mémoire et le disque entre tous les programmes, sans qu'ils se marchent dessus."
+   },
+   "hud": [
     {
-      "id": "cmds",
-      "label": "commandes"
+     "label": "mode",
+     "value": "Bureau · GUI"
     },
     {
-      "id": "sys",
-      "label": "appels système",
-      "hits": [
-        "kernel",
-        "kbox",
-        "hw"
-      ]
+     "label": "couches",
+     "value": 5
     }
-  ],
-  "legend": [
+   ],
+   "links": [
     {
-      "kind": "req",
-      "label": "requête"
+     "path": [
+      "apps",
+      "hw"
+     ]
     },
     {
-      "kind": "res",
-      "label": "réponse"
-    },
-    {
-      "kind": "read",
-      "label": "lecture"
+     "path": [
+      "you",
+      "gui"
+     ]
     }
-  ],
-  "entities": [
+   ],
+   "flows": [
     {
-      "id": "hw",
-      "at": [
-        -1.2,
-        1.2,
-        0
-      ],
-      "kind": "layer",
-      "tone": "n",
-      "title": "Matériel",
-      "sub": "CPU · RAM · disque · réseau",
-      "icon": "▤",
-      "detail": "Le **matériel**, ce que vous pouvez toucher : processeur (CPU), mémoire vive (RAM), disque, carte réseau. Il ne sait rien faire seul : il exécute ce que le noyau lui demande."
+     "path": [
+      "you",
+      "gui",
+      "kernel",
+      "hw"
+     ],
+     "label": "clic",
+     "reply": "ok",
+     "explain": [
+      "Vous cliquez : la souris envoie l'action à l'**interface graphique**.",
+      "L'interface ne touche jamais au matériel : elle demande au **noyau**, par un *appel système*.",
+      "Seul le noyau parle au **matériel** : écran, disque, carte réseau.",
+      "La réponse remonte couche par couche jusqu'à vous : c'est ce que vous voyez à l'écran."
+     ]
+    }
+   ],
+   "show": [
+    "hw",
+    {
+     "id": "kernel",
+     "note": "appel système"
+    },
+    "shell",
+    "gui",
+    "apps",
+    "you"
+   ]
+  },
+  {
+   "id": "explorateur",
+   "label": "Explorateur",
+   "chapter": "le poste de travail",
+   "title": "Ouvrir un dossier à la souris",
+   "body": [
+    "Vous double-cliquez sur **Documents** dans l'explorateur de fichiers.",
+    "L'explorateur demande au noyau le contenu du dossier, le noyau lit le disque, et la réponse remonte jusqu'à l'écran sous forme d'icônes."
+   ],
+   "callout": {
+    "title": "sous le capot",
+    "text": "Un simple double-clic déclenche plusieurs appels système : ouvrir le dossier, lister son contenu, lire la taille et la date de chaque fichier."
+   },
+   "hud": [
+    {
+     "label": "mode",
+     "value": "GUI"
     },
     {
-      "id": "kernel",
-      "at": [
-        -1.2,
-        1.2,
-        0.95
-      ],
-      "kind": "layer",
-      "tone": "r",
-      "title": "Noyau (kernel)",
-      "sub": "processus · mémoire · fichiers",
-      "icon": "✱",
-      "detail": "Le **noyau** (*kernel*) est le chef d'orchestre. Il partage le processeur et la mémoire entre les programmes et il est le **seul** à parler au matériel. Les programmes lui demandent tout par des *appels système*."
+     "label": "couches",
+     "value": "—"
+    }
+   ],
+   "labels": "left",
+   "links": [
+    {
+     "from": "you",
+     "to": "explorer"
     },
     {
-      "id": "shell",
-      "at": [
-        -1.2,
-        1.2,
-        1.9
-      ],
-      "kind": "layer",
-      "tone": "g",
-      "title": "Shell & services",
-      "sub": "bash · sshd · systemd",
-      "icon": ">_",
-      "detail": "Le **shell** est un programme qui lit des commandes et les fait exécuter. `bash` est le plus courant sous Linux. Les **services** (`sshd`, `systemd`…) tournent en fond, sans fenêtre."
+     "from": "explorer",
+     "to": "kbox"
     },
     {
-      "id": "gui",
-      "at": [
-        -1.2,
-        1.2,
-        2.85
-      ],
-      "kind": "layer",
-      "tone": "v",
-      "title": "Interface graphique",
-      "sub": "fenêtres · souris · bureau",
-      "icon": "▭",
-      "detail": "L'**interface graphique** dessine les fenêtres, suit la souris et gère le bureau. Pratique, mais facultative : un serveur s'en passe très bien."
+     "from": "kbox",
+     "to": "disk"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "explorer",
+     "title": "Fichiers",
+     "start": "home",
+     "views": {
+      "home": {
+       "path": [
+        "alice"
+       ],
+       "items": [
+        {
+         "name": "Documents",
+         "type": "dir"
+        },
+        {
+         "name": "Images",
+         "type": "dir"
+        },
+        {
+         "name": "Musique",
+         "type": "dir"
+        },
+        {
+         "name": "notes.txt",
+         "type": "file"
+        }
+       ]
+      },
+      "load": {
+       "path": [
+        "alice",
+        "Documents"
+       ],
+       "loading": "lecture du disque…"
+      },
+      "docs": {
+       "path": [
+        "alice",
+        "Documents"
+       ],
+       "items": [
+        {
+         "name": "cours.pdf",
+         "type": "file"
+        },
+        {
+         "name": "photos",
+         "type": "dir"
+        },
+        {
+         "name": "rapport.odt",
+         "type": "file"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 1100
     },
     {
-      "id": "apps",
-      "at": [
-        -1.2,
-        1.2,
-        3.8
-      ],
-      "kind": "layer",
-      "tone": "b",
-      "title": "Applications",
-      "sub": "navigateur · éditeur · jeux",
-      "icon": "▦",
-      "detail": "Les **applications** que vous utilisez tous les jours : navigateur, éditeur de texte, jeux. Elles reposent sur toutes les couches du dessous."
+     "do": "view",
+     "view": "home",
+     "highlight": "Documents"
     },
     {
-      "id": "you",
-      "kind": "actor",
-      "at": [
+     "do": "pulse",
+     "at": "you:top"
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "view",
+     "view": "load"
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "explorer",
+      "kbox",
+      "disk"
+     ],
+     "label": "double-clic",
+     "reply": "3 entrées",
+     "explain": [
+      "Vous double-cliquez sur un dossier dans l'**explorateur de fichiers**.",
+      "L'explorateur ne lit pas le disque lui-même : il fait un *appel système* au **noyau**.",
+      "Le noyau lit le **disque** et récupère la liste des fichiers du dossier.",
+      "La liste revient à l'explorateur, qui l'affiche en icônes : 3 entrées."
+     ]
+    },
+    {
+     "do": "view",
+     "view": "docs"
+    },
+    {
+     "do": "wait",
+     "ms": 2800
+    }
+   ],
+   "show": [
+    {
+     "id": "you",
+     "at": [
+      0,
+      7.2
+     ],
+     "label": "vous"
+    },
+    {
+     "id": "explorer",
+     "label": "double-clic"
+    },
+    "kbox",
+    "disk"
+   ]
+  },
+  {
+   "id": "sans-gui",
+   "label": "Sans GUI",
+   "chapter": "le serveur",
+   "title": "Un serveur, souvent sans interface graphique",
+   "body": [
+    "Sur un serveur Linux (Debian, Ubuntu Server…), personne ne regarde l'écran : il tourne dans un centre de données, au milieu de centaines d'autres machines. On retire donc l'interface graphique et les applications de bureau : il reste le matériel, le noyau et le **shell**.",
+    "Le shell n'est pas une nouveauté : il était déjà là sur votre PC, caché sous l'interface graphique. Sur un serveur, c'est lui qu'on utilise directement, à distance, avec `ssh`."
+   ],
+   "callout": {
+    "title": "pourquoi ?",
+    "text": "Un serveur fait un travail précis (héberger un site, une base de données…). On n'y installe que les applications dont il a besoin : moins de mémoire et de disque utilisés, moins de logiciels à mettre à jour et à sécuriser, et tout s'automatise avec des scripts."
+   },
+   "hud": [
+    {
+     "label": "mode",
+     "value": "Serveur · CLI"
+    },
+    {
+     "label": "couches",
+     "value": 3
+    }
+   ],
+   "links": [
+    {
+     "path": [
+      "shell",
+      "hw"
+     ]
+    },
+    {
+     "path": [
+      "admin",
+      "shell"
+     ]
+    }
+   ],
+   "flows": [
+    {
+     "path": [
+      "admin",
+      "shell",
+      "kernel",
+      "hw"
+     ],
+     "label": "ssh",
+     "reply": "ok",
+     "explain": [
+      "Depuis votre machine, vous vous connectez avec `ssh` : côté serveur, ni écran ni souris.",
+      "Le **shell** reçoit votre commande et demande au **noyau** ce qu'il lui faut.",
+      "Le noyau travaille sur le **matériel** du serveur, exactement comme sur votre PC.",
+      "Le résultat revient sous forme de texte dans votre fenêtre `ssh`."
+     ]
+    }
+   ],
+   "show": [
+    "hw",
+    "kernel",
+    {
+     "id": "shell",
+     "note": "serveur : pas d'écran"
+    },
+    "admin"
+   ]
+  },
+  {
+   "id": "terminal",
+   "label": "Terminal",
+   "chapter": "le serveur",
+   "title": "Sans interface : le terminal et le shell",
+   "body": [
+    "Plus d'explorateur : pour voir le contenu d'un dossier, on tape une commande dans un **terminal**. Le **shell** (bash, zsh) lit ce que vous tapez, le comprend et le transmet au noyau.",
+    "`ls Documents` fait exactement ce que faisait le double-clic : même chemin jusqu'au noyau et au disque, même réponse, mais en texte."
+   ],
+   "callout": {
+    "title": "bon à savoir",
+    "text": "Le shell existe aussi sur votre PC avec interface graphique : ouvrez « Terminal » (macOS, Linux) ou PowerShell (Windows). Le terminal affiche, le shell comprend."
+   },
+   "hud": [
+    {
+     "label": "mode",
+     "value": "Serveur · CLI"
+    },
+    {
+     "label": "couches",
+     "value": "—"
+    }
+   ],
+   "labels": "left",
+   "links": [
+    {
+     "from": "you",
+     "to": "term"
+    },
+    {
+     "from": "term",
+     "to": "bash"
+    },
+    {
+     "from": "bash",
+     "to": "kbox"
+    },
+    {
+     "from": "kbox",
+     "to": "disk"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "type",
+     "text": "ls Documents"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "term",
+      "bash",
+      "kbox",
+      "disk"
+     ],
+     "label": "ls",
+     "reply": "3 entrées",
+     "explain": [
+      "Vous tapez `ls` dans le **terminal** et vous validez avec [[Entrée]].",
+      "Le terminal ne comprend rien à la commande : il transmet la ligne au **shell** (`bash`).",
+      "Le shell comprend « lister ce dossier » et fait un *appel système* au **noyau**.",
+      "Le noyau lit le **disque**, exactement comme pour l'explorateur.",
+      "La liste revient en texte : le terminal affiche 3 entrées au lieu d'icônes."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "cours.pdf  photos  rapport.odt"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 3000
+    }
+   ],
+   "show": [
+    {
+     "id": "you",
+     "at": [
+      0,
+      8.4
+     ],
+     "label": "vous, via ssh"
+    },
+    "term",
+    {
+     "id": "bash",
+     "note": "aussi sur votre PC"
+    },
+    {
+     "id": "kbox",
+     "at": [
+      0,
+      -1.8
+     ]
+    },
+    {
+     "id": "disk",
+     "at": [
+      0,
+      -5.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "commandes",
+   "label": "Commandes",
+   "chapter": "le terminal",
+   "title": "Vos premières commandes",
+   "body": [
+    "Une commande, c'est un nom, des options et des arguments : `ls -l Documents`.",
+    "- `pwd` où suis-je ?\n- `ls` lister le dossier\n- `cd` changer de dossier\n- `mkdir` créer un dossier\n- `cat` afficher un fichier",
+    "`cd` et `pwd` sont intégrées au shell. `ls`, `mkdir` et `cat` sont de petits programmes rangés dans `/usr/bin` : le shell les lance, et eux parlent au noyau."
+   ],
+   "callout": {
+    "title": "astuce",
+    "text": "`man ls` affiche le manuel de n'importe quelle commande, et [[Tab]] complète les noms à votre place."
+   },
+   "hud": [
+    {
+     "label": "mode",
+     "value": "Terminal"
+    },
+    {
+     "label": "couches",
+     "value": "—"
+    }
+   ],
+   "links": [
+    {
+     "from": "term",
+     "to": "bash"
+    },
+    {
+     "from": "bash",
+     "to": "ls"
+    },
+    {
+     "from": "bash",
+     "to": "mkdir"
+    },
+    {
+     "from": "bash",
+     "to": "cat"
+    },
+    {
+     "from": "ls",
+     "to": "kbox"
+    },
+    {
+     "from": "mkdir",
+     "to": "kbox"
+    },
+    {
+     "from": "cat",
+     "to": "kbox"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 400
+    },
+    {
+     "do": "type",
+     "text": "pwd"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash"
+     ],
+     "label": "pwd",
+     "reply": "ok",
+     "explain": [
+      "Vous tapez `pwd` : le terminal passe la ligne au **shell**.",
+      "Le shell connaît son dossier courant : il répond `/home/alice` sans déranger le noyau."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "/home/alice"
+    },
+    {
+     "do": "wait",
+     "ms": 450
+    },
+    {
+     "do": "type",
+     "text": "ls"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "ls",
+      "kbox"
+     ],
+     "label": "ls",
+     "reply": "ok",
+     "explain": [
+      "Vous tapez `ls` : la ligne part au **shell**.",
+      "Le shell lance le programme **`ls`**.",
+      "`ls` demande au **noyau** le contenu du dossier.",
+      "La liste remonte jusqu'au terminal : `Documents  Images  Musique  notes.txt`."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Documents  Images  Musique  notes.txt"
+    },
+    {
+     "do": "wait",
+     "ms": 450
+    },
+    {
+     "do": "type",
+     "text": "mkdir projets"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "mkdir",
+      "kbox"
+     ],
+     "label": "mkdir",
+     "reply": "ok",
+     "explain": [
+      "Vous tapez `mkdir projets` : la ligne part au **shell**.",
+      "Le shell lance le programme **`mkdir`**.",
+      "`mkdir` demande au **noyau** de créer le dossier `projets` sur le disque.",
+      "C'est fait. `mkdir` n'affiche rien quand tout va bien : pas de nouvelles, bonnes nouvelles."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 450
+    },
+    {
+     "do": "type",
+     "text": "cd projets"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash"
+     ],
+     "label": "cd",
+     "reply": "ok",
+     "explain": [
+      "Vous tapez `cd projets` : la ligne part au **shell**.",
+      "`cd` fait partie du shell : il change son dossier courant, et l'invite affiche `~/projets`."
+     ]
+    },
+    {
+     "do": "cwd",
+     "path": "~/projets"
+    },
+    {
+     "do": "wait",
+     "ms": 450
+    },
+    {
+     "do": "type",
+     "text": "cat ../notes.txt"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "cat",
+      "kbox"
+     ],
+     "label": "cat",
+     "reply": "ok",
+     "explain": [
+      "Vous tapez `cat ../notes.txt` : `..` veut dire « le dossier au-dessus ».",
+      "Le shell lance le programme **`cat`**.",
+      "`cat` demande au **noyau** de lire le fichier `notes.txt`.",
+      "Le contenu du fichier s'affiche dans le terminal."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Penser à réviser bash !"
+    },
+    {
+     "do": "wait",
+     "ms": 450
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 3600
+    }
+   ],
+   "show": [
+    {
+     "id": "term",
+     "at": [
+      -1.2,
+      6.2
+     ]
+    },
+    {
+     "id": "bash",
+     "at": [
+      -1.2,
+      2.6
+     ],
+     "label": "cd · pwd intégrées"
+    },
+    "ls",
+    {
+     "id": "mkdir",
+     "label": "programmes"
+    },
+    "cat",
+    {
+     "id": "kbox",
+     "at": [
+      -1.2,
+      -5.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ranger",
+   "label": "Ranger",
+   "chapter": "le terminal",
+   "title": "Ranger un dossier en commandes",
+   "body": [
+    "Créer les dossiers avec `mkdir`, déplacer avec `mv`, copier avec `cp`, supprimer avec `rm -r`.",
+    "Chaque dossier est créé **avant** qu'on y range un fichier."
+   ],
+   "hud": [
+    {
+     "label": "mode",
+     "value": "Terminal"
+    },
+    {
+     "label": "couches",
+     "value": "—"
+    }
+   ],
+   "links": [
+    {
+     "from": "term",
+     "to": "bash"
+    },
+    {
+     "from": "bash",
+     "to": "mkdir"
+    },
+    {
+     "from": "bash",
+     "to": "mv"
+    },
+    {
+     "from": "bash",
+     "to": "cp"
+    },
+    {
+     "from": "bash",
+     "to": "rm"
+    },
+    {
+     "from": "mkdir",
+     "to": "kbox"
+    },
+    {
+     "from": "mv",
+     "to": "kbox"
+    },
+    {
+     "from": "cp",
+     "to": "kbox"
+    },
+    {
+     "from": "rm",
+     "to": "kbox"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~/rangement"
+    },
+    {
+     "kind": "explorer",
+     "title": "Fichiers",
+     "start": "v0",
+     "views": {
+      "v0": {
+       "path": [
+        "rangement"
+       ],
+       "items": [
+        {
+         "name": "IMG_001.jpg",
+         "type": "file"
+        },
+        {
+         "name": "IMG_002.jpg",
+         "type": "file"
+        },
+        {
+         "name": "facture.pdf",
+         "type": "file"
+        },
+        {
+         "name": "notes.txt",
+         "type": "file"
+        },
+        {
+         "name": "tmp",
+         "type": "dir"
+        }
+       ]
+      },
+      "v1": {
+       "path": [
+        "rangement"
+       ],
+       "items": [
+        {
+         "name": "photos",
+         "type": "dir"
+        },
+        {
+         "name": "sauvegarde",
+         "type": "dir"
+        },
+        {
+         "name": "IMG_001.jpg",
+         "type": "file"
+        },
+        {
+         "name": "IMG_002.jpg",
+         "type": "file"
+        },
+        {
+         "name": "facture.pdf",
+         "type": "file"
+        },
+        {
+         "name": "notes.txt",
+         "type": "file"
+        },
+        {
+         "name": "tmp",
+         "type": "dir"
+        }
+       ]
+      },
+      "v2": {
+       "path": [
+        "rangement"
+       ],
+       "items": [
+        {
+         "name": "photos",
+         "type": "dir"
+        },
+        {
+         "name": "sauvegarde",
+         "type": "dir"
+        },
+        {
+         "name": "facture.pdf",
+         "type": "file"
+        },
+        {
+         "name": "notes.txt",
+         "type": "file"
+        },
+        {
+         "name": "tmp",
+         "type": "dir"
+        }
+       ]
+      },
+      "v3": {
+       "path": [
+        "rangement",
+        "sauvegarde"
+       ],
+       "items": [
+        {
+         "name": "facture.pdf",
+         "type": "file"
+        }
+       ]
+      },
+      "v4": {
+       "path": [
+        "rangement"
+       ],
+       "items": [
+        {
+         "name": "photos",
+         "type": "dir"
+        },
+        {
+         "name": "sauvegarde",
+         "type": "dir"
+        },
+        {
+         "name": "facture.pdf",
+         "type": "file"
+        },
+        {
+         "name": "notes.txt",
+         "type": "file"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "show": [
+    {
+     "id": "term",
+     "at": [
+      -1.2,
+      6.2
+     ]
+    },
+    {
+     "id": "bash",
+     "at": [
+      -1.2,
+      2.6
+     ]
+    },
+    {
+     "id": "mkdir",
+     "at": [
+      -4.5,
+      -1.4
+     ]
+    },
+    {
+     "id": "mv",
+     "at": [
+      -2.3,
+      -1.4
+     ],
+     "label": "programmes"
+    },
+    {
+     "id": "cp",
+     "at": [
+      -0.1,
+      -1.4
+     ]
+    },
+    {
+     "id": "rm",
+     "at": [
+      2.1,
+      -1.4
+     ]
+    },
+    {
+     "id": "kbox",
+     "at": [
+      -1.2,
+      -5.2
+     ]
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "type",
+     "text": "mkdir photos sauvegarde"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "mkdir",
+      "kbox"
+     ],
+     "label": "mkdir",
+     "reply": "ok",
+     "explain": [
+      "D'abord les dossiers : la ligne part au **shell**.",
+      "Le shell lance **`mkdir`**, avec deux noms : deux dossiers.",
+      "`mkdir` demande au **noyau** de les créer sur le disque.",
+      "`photos` et `sauvegarde` apparaissent dans l'explorateur."
+     ]
+    },
+    {
+     "do": "view",
+     "view": "v1"
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "type",
+     "text": "mv IMG_001.jpg IMG_002.jpg photos/"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "mv",
+      "kbox"
+     ],
+     "label": "mv",
+     "reply": "ok",
+     "explain": [
+      "Les deux photos vont dans `photos` : la ligne part au **shell**.",
+      "Le shell lance **`mv`** : le dernier argument est le dossier d'arrivée.",
+      "`mv` demande au **noyau** de changer les photos de dossier.",
+      "Elles ont quitté `rangement` : on ne les voit plus à côté de la facture."
+     ]
+    },
+    {
+     "do": "view",
+     "view": "v2"
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "type",
+     "text": "cp facture.pdf sauvegarde/"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "cp",
+      "kbox"
+     ],
+     "label": "cp",
+     "reply": "ok",
+     "explain": [
+      "Une copie de la facture : la ligne part au **shell**.",
+      "Le shell lance **`cp`**.",
+      "`cp` demande au **noyau** d'écrire une copie dans `sauvegarde`.",
+      "La copie est dans `sauvegarde`, et l'originale reste dans `rangement`."
+     ]
+    },
+    {
+     "do": "view",
+     "view": "v3",
+     "highlight": "facture.pdf"
+    },
+    {
+     "do": "wait",
+     "ms": 900
+    },
+    {
+     "do": "view",
+     "view": "v4",
+     "highlight": "facture.pdf"
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "type",
+     "text": "rm -r tmp"
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash",
+      "rm",
+      "kbox"
+     ],
+     "label": "rm",
+     "reply": "ok",
+     "explain": [
+      "Le dossier `tmp` ne sert plus : la ligne part au **shell**.",
+      "Le shell lance **`rm`** ; `-r` lui permet de supprimer un dossier et son contenu.",
+      "`rm` demande au **noyau** de les effacer du disque, sans passer par la corbeille.",
+      "Le dossier est rangé : photos, sauvegarde, facture, notes."
+     ]
+    },
+    {
+     "do": "view",
+     "view": "v4"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 3200
+    }
+   ]
+  },
+  {
+   "id": "script",
+   "label": "Script",
+   "chapter": "programmer",
+   "title": "Un premier programme : le script",
+   "body": [
+    "Un **script**, c'est une liste de commandes dans un fichier texte. Le shell les exécute une par une, de haut en bas, comme si vous les tapiez.",
+    "La première ligne, `#!/bin/bash`, indique quel programme doit lire le fichier. On le rend exécutable une fois avec `chmod +x hello.sh`, puis on le lance avec `./hello.sh`."
+   ],
+   "callout": {
+    "title": "et voilà",
+    "text": "Ces six lignes sont déjà un programme. Variables, conditions et boucles viendront s'ajouter à ces mêmes lignes."
+   },
+   "hud": [
+    {
+     "label": "mode",
+     "value": "Script"
+    },
+    {
+     "label": "couches",
+     "value": "—"
+    }
+   ],
+   "links": [
+    {
+     "from": "term",
+     "to": "bash"
+    },
+    {
+     "from": "file",
+     "to": "bash",
+     "dashed": true
+    },
+    {
+     "from": "bash",
+     "to": "date"
+    },
+    {
+     "from": "bash",
+     "to": "mkdir"
+    },
+    {
+     "from": "bash",
+     "to": "ls"
+    },
+    {
+     "from": "date",
+     "to": "kbox"
+    },
+    {
+     "from": "mkdir",
+     "to": "kbox"
+    },
+    {
+     "from": "ls",
+     "to": "kbox"
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "editor",
+     "title": "hello.sh — éditeur",
+     "lang": "bash",
+     "lines": [
+      "#!/bin/bash",
+      "# mon premier programme",
+      "echo \"Bonjour $USER !\"",
+      "date",
+      "mkdir -p ~/byte-layers/demo",
+      "ls ~/byte-layers"
+     ]
+    },
+    {
+     "kind": "terminal",
+     "title": "alice@pc — bash",
+     "prompt": "alice@pc",
+     "cwd": "~"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "type",
+     "text": "./hello.sh"
+    },
+    {
+     "do": "send",
+     "path": [
+      "term",
+      "bash"
+     ],
+     "label": "./hello.sh",
+     "explain": [
+      "Vous tapez `./hello.sh` : le shell va lire le fichier et exécuter ses lignes, une par une."
+     ]
+    },
+    {
+     "do": "line",
+     "n": 1
+    },
+    {
+     "do": "send",
+     "path": [
+      "file",
+      "bash"
+     ],
+     "kind": "read",
+     "label": "ligne 1",
+     "explain": [
+      "La ligne 1, `#!/bin/bash`, dit quel programme doit lire le fichier : `bash`."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 350
+    },
+    {
+     "do": "line",
+     "n": 2
+    },
+    {
+     "do": "send",
+     "path": [
+      "file",
+      "bash"
+     ],
+     "kind": "read",
+     "label": "ligne 2",
+     "explain": [
+      "La ligne 2 commence par `#` : c'est un commentaire, le shell l'ignore. Il est là pour vous."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 350
+    },
+    {
+     "do": "line",
+     "n": 3
+    },
+    {
+     "do": "send",
+     "path": [
+      "file",
+      "bash"
+     ],
+     "kind": "read",
+     "label": "ligne 3",
+     "explain": [
+      "La ligne 3 : `echo` affiche un texte ; `$USER` est remplacé par votre nom d'utilisateur."
+     ]
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "wait",
+     "ms": 350
+    },
+    {
+     "do": "output",
+     "text": "Bonjour alice !"
+    },
+    {
+     "do": "wait",
+     "ms": 300
+    },
+    {
+     "do": "line",
+     "n": 4
+    },
+    {
+     "do": "send",
+     "path": [
+      "file",
+      "bash"
+     ],
+     "kind": "read",
+     "label": "ligne 4",
+     "explain": [
+      "La ligne 4 : `date`, la même commande que vous taperiez à la main."
+     ]
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bash",
+      "date",
+      "kbox"
+     ],
+     "label": "date",
+     "reply": "ok",
+     "explain": [
+      "Le shell lance le programme **`date`**.",
+      "`date` demande l'heure au **noyau**, qui la tient de l'horloge du matériel.",
+      "L'heure s'affiche dans le terminal."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "mer. 18 nov. 2026, 10:42:07"
+    },
+    {
+     "do": "wait",
+     "ms": 300
+    },
+    {
+     "do": "line",
+     "n": 5
+    },
+    {
+     "do": "send",
+     "path": [
+      "file",
+      "bash"
+     ],
+     "kind": "read",
+     "label": "ligne 5",
+     "explain": [
+      "La ligne 5 : `mkdir -p ~/byte-layers/demo` crée le dossier `demo`, et `byte-layers` avec lui s'il n'existe pas encore (`-p`)."
+     ]
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bash",
+      "mkdir",
+      "kbox"
+     ],
+     "label": "mkdir",
+     "reply": "ok",
+     "explain": [
+      "Le shell lance **`mkdir`**, comme si vous l'aviez tapé.",
+      "`mkdir` demande au **noyau** de créer `~/byte-layers/demo`.",
+      "C'est fait, en silence."
+     ]
+    },
+    {
+     "do": "wait",
+     "ms": 300
+    },
+    {
+     "do": "line",
+     "n": 6
+    },
+    {
+     "do": "send",
+     "path": [
+      "file",
+      "bash"
+     ],
+     "kind": "read",
+     "label": "ligne 6",
+     "explain": [
+      "La ligne 6 : `ls ~/byte-layers` liste le dossier qu'on vient de créer."
+     ]
+    },
+    {
+     "do": "count",
+     "counter": "cmds"
+    },
+    {
+     "do": "send",
+     "path": [
+      "bash",
+      "ls",
+      "kbox"
+     ],
+     "label": "ls",
+     "reply": "ok",
+     "explain": [
+      "Le shell lance **`ls`**.",
+      "`ls` demande au **noyau** le contenu de `~/byte-layers`.",
+      "La liste s'affiche : `demo` est apparu. Le programme a marché."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "demo"
+    },
+    {
+     "do": "wait",
+     "ms": 300
+    },
+    {
+     "do": "line",
+     "n": 0
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "wait",
+     "ms": 3600
+    }
+   ],
+   "show": [
+    {
+     "id": "term",
+     "at": [
+      -1.2,
+      6.2
+     ],
+     "label": "./hello.sh"
+    },
+    {
+     "id": "bash",
+     "at": [
+      -1.2,
+      2.6
+     ]
+    },
+    {
+     "id": "file",
+     "label": "lu ligne à ligne"
+    },
+    "date",
+    "mkdir",
+    {
+     "id": "ls",
+     "at": [
+      1,
+      -1.4
+     ]
+    },
+    {
+     "id": "kbox",
+     "at": [
+      -1.2,
+      -5.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "label": "Récap",
+   "chapter": "récap",
+   "title": "Récap",
+   "body": [
+    "- Du bas vers le haut : matériel, noyau, shell et services, interface graphique, applications.\n- Seul le noyau touche au matériel : tout passe par des appels système.\n- L'explorateur et le terminal font la même chose, l'un à la souris, l'autre en texte.\n- Une commande, c'est un nom, des options et des arguments.\n- Un script, ce sont des commandes dans un fichier, exécutées dans l'ordre."
+   ],
+   "callout": {
+    "title": "à vous",
+    "text": "Ouvrez un terminal et tapez `pwd`, puis `ls` : vous refaites les deux premières commandes de l'étape 5."
+   },
+   "hud": [
+    {
+     "label": "mode",
+     "value": "—"
+    },
+    {
+     "label": "couches",
+     "value": 5
+    }
+   ],
+   "links": [
+    {
+     "path": [
+      "apps",
+      "hw"
+     ]
+    },
+    {
+     "path": [
+      "you",
+      "gui"
+     ]
+    }
+   ],
+   "show": [
+    "hw",
+    "kernel",
+    "shell",
+    "gui",
+    "apps",
+    {
+     "id": "you",
+     "label": "explorateur",
+     "at": [
+      -7.6,
+      2.8
+     ]
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "scene",
+     "say": "À la souris : le clic passe par l'interface graphique, qui demande au noyau, seul à parler au matériel.",
+     "hud": [
+      {
+       "label": "mode",
+       "value": "Souris"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "gui",
+      "kernel",
+      "hw"
+     ],
+     "label": "clic",
+     "reply": "ok"
+    },
+    {
+     "do": "wait",
+     "ms": 600
+    },
+    {
+     "do": "scene",
+     "say": "Sans souris, le terminal prend le relais : il part du shell, une couche plus bas.",
+     "hide": [
+      "you"
+     ],
+     "show": [
+      {
+       "id": "dev",
+       "at": [
         -5.2,
         5.2
-      ],
-      "label": "clic souris"
+       ],
+       "label": "terminal"
+      }
+     ],
+     "link": [
+      {
+       "from": "dev",
+       "to": "shell"
+      }
+     ],
+     "hud": [
+      {
+       "label": "mode",
+       "value": "Terminal"
+      }
+     ],
+     "ms": 900
     },
     {
-      "id": "explorer",
-      "kind": "node",
-      "at": [
-        0,
-        3.6
-      ],
-      "tone": "v",
-      "title": "Explorateur",
-      "sub": "de fichiers",
-      "icon": "▤",
-      "detail": "L'**explorateur de fichiers** montre vos dossiers sous forme d'icônes. Derrière chaque double-clic, il demande au noyau de lire le disque."
+     "do": "wait",
+     "ms": 500
     },
     {
-      "id": "kbox",
-      "kind": "node",
-      "at": [
-        0,
-        -0.4
-      ],
-      "tone": "r",
-      "title": "Noyau",
-      "sub": "appels système",
-      "icon": "✱",
-      "detail": "Le **noyau** reçoit les *appels système* : « lis ce dossier », « crée ce fichier », « quelle heure est-il ? ». C'est lui qui touche au disque."
+     "do": "scene",
+     "say": "Il lance ./hello.sh : le shell lit le script et passe chaque besoin au noyau, comme pour le clic.",
+     "set": [
+      {
+       "id": "dev",
+       "label": "./hello.sh"
+      }
+     ]
     },
     {
-      "id": "disk",
-      "kind": "store",
-      "at": [
-        0,
-        -4.2
-      ],
-      "tone": "n",
-      "title": "Disque",
-      "detail": "Le **disque** garde vos fichiers, même ordinateur éteint. Aucun programme n'y écrit directement : tout passe par le noyau."
+     "do": "send",
+     "path": [
+      "dev",
+      "shell",
+      "kernel",
+      "hw"
+     ],
+     "label": "./hello.sh",
+     "reply": "ok"
     },
     {
-      "id": "admin",
-      "kind": "actor",
-      "at": [
-        -5.2,
-        5.2
-      ],
-      "tone": "y",
-      "label": "ssh admin@serveur"
-    },
-    {
-      "id": "term",
-      "kind": "node",
-      "at": [
-        0,
-        5
-      ],
-      "tone": "i",
-      "title": "Terminal",
-      "sub": "affiche le texte",
-      "icon": ">_",
-      "detail": "Le **terminal** est une simple fenêtre de texte : il affiche ce qu'on lui envoie et transmet ce que vous tapez. Il ne comprend pas les commandes : c'est le rôle du shell."
-    },
-    {
-      "id": "bash",
-      "kind": "node",
-      "at": [
-        0,
-        1.6
-      ],
-      "tone": "g",
-      "title": "Shell",
-      "sub": "bash",
-      "icon": "$",
-      "detail": "**`bash`** lit votre ligne, la découpe (commande, options, arguments) et lance le bon programme. Certaines commandes, comme `cd` ou `pwd`, sont faites par le shell lui-même."
-    },
-    {
-      "id": "ls",
-      "kind": "program",
-      "at": [
-        -3.4,
-        -1.4
-      ],
-      "title": "ls",
-      "detail": "**`ls`** (*list*) liste le contenu d'un dossier. C'est un vrai programme, rangé dans `/usr/bin/ls`."
-    },
-    {
-      "id": "mkdir",
-      "kind": "program",
-      "at": [
-        -1.2,
-        -1.4
-      ],
-      "title": "mkdir",
-      "detail": "**`mkdir`** (*make directory*) crée un dossier. Il n'affiche rien quand tout va bien."
-    },
-    {
-      "id": "cat",
-      "kind": "program",
-      "at": [
-        1,
-        -1.4
-      ],
-      "title": "cat",
-      "detail": "**`cat`** (*concatenate*) affiche le contenu d'un fichier texte dans le terminal."
-    },
-    {
-      "id": "file",
-      "kind": "file",
-      "at": [
-        2.4,
-        3.4
-      ],
-      "tone": "y",
-      "title": "hello.sh",
-      "detail": "**`hello.sh`** est un script : un simple fichier texte qui contient des commandes, une par ligne. Le shell les exécute comme si vous les tapiez."
-    },
-    {
-      "id": "date",
-      "kind": "program",
-      "at": [
-        -3.4,
-        -1.4
-      ],
-      "title": "date",
-      "detail": "**`date`** affiche la date et l'heure, qu'il demande au noyau."
-    },
-    {
-      "id": "dev",
-      "kind": "actor",
-      "at": [
-        -7.6,
-        2.8
-      ],
-      "tone": "y",
-      "label": "terminal · script"
+     "do": "wait",
+     "ms": 2600
     }
-  ],
-  "steps": [
-    {
-      "id": "couches",
-      "label": "Couches",
-      "chapter": "le poste de travail",
-      "title": "Votre ordinateur, un empilement de couches",
-      "body": [
-        "Ce que vous voyez, ce sont des **applications** dans des fenêtres. Sous elles, il y a des couches que vous ne voyez jamais.",
-        "L'**interface graphique** dessine les fenêtres et gère la souris et le clavier. Le **shell** et les services tournent en arrière-plan. Tout en bas, le **noyau** (kernel) est le seul à parler au **matériel**.",
-        "Un clic de souris descend toute la pile jusqu'au matériel, puis la réponse remonte. Chaque demande faite au noyau est un **appel système**."
-      ],
-      "callout": {
-        "title": "idée clé",
-        "text": "Le noyau partage le processeur, la mémoire et le disque entre tous les programmes, sans qu'ils se marchent dessus."
-      },
-      "hud": [
-        {
-          "label": "mode",
-          "value": "Bureau · GUI"
-        },
-        {
-          "label": "couches",
-          "value": 5
-        }
-      ],
-      "links": [
-        {
-          "path": [
-            "apps",
-            "hw"
-          ]
-        },
-        {
-          "path": [
-            "you",
-            "gui"
-          ]
-        }
-      ],
-      "flows": [
-        {
-          "path": [
-            "you",
-            "gui",
-            "kernel",
-            "hw"
-          ],
-          "label": "clic",
-          "reply": "ok",
-          "explain": [
-            "Vous cliquez : la souris envoie l'action à l'**interface graphique**.",
-            "L'interface ne touche jamais au matériel : elle demande au **noyau**, par un *appel système*.",
-            "Seul le noyau parle au **matériel** : écran, disque, carte réseau.",
-            "La réponse remonte couche par couche jusqu'à vous : c'est ce que vous voyez à l'écran."
-          ]
-        }
-      ],
-      "show": [
-        "hw",
-        {
-          "id": "kernel",
-          "note": "appel système"
-        },
-        "shell",
-        "gui",
-        "apps",
-        "you"
-      ]
-    },
-    {
-      "id": "explorateur",
-      "label": "Explorateur",
-      "chapter": "le poste de travail",
-      "title": "Ouvrir un dossier à la souris",
-      "body": [
-        "Vous double-cliquez sur **Documents** dans l'explorateur de fichiers.",
-        "L'explorateur demande au noyau le contenu du dossier, le noyau lit le disque, et la réponse remonte jusqu'à l'écran sous forme d'icônes."
-      ],
-      "callout": {
-        "title": "sous le capot",
-        "text": "Un simple double-clic déclenche plusieurs appels système : ouvrir le dossier, lister son contenu, lire la taille et la date de chaque fichier."
-      },
-      "hud": [
-        {
-          "label": "mode",
-          "value": "GUI"
-        },
-        {
-          "label": "couches",
-          "value": "—"
-        }
-      ],
-      "labels": "left",
-      "links": [
-        {
-          "from": "you",
-          "to": "explorer"
-        },
-        {
-          "from": "explorer",
-          "to": "kbox"
-        },
-        {
-          "from": "kbox",
-          "to": "disk"
-        }
-      ],
-      "widgets": [
-        {
-          "kind": "explorer",
-          "title": "Fichiers",
-          "start": "home",
-          "views": {
-            "home": {
-              "path": [
-                "alice"
-              ],
-              "items": [
-                {
-                  "name": "Documents",
-                  "type": "dir"
-                },
-                {
-                  "name": "Images",
-                  "type": "dir"
-                },
-                {
-                  "name": "Musique",
-                  "type": "dir"
-                },
-                {
-                  "name": "notes.txt",
-                  "type": "file"
-                }
-              ]
-            },
-            "load": {
-              "path": [
-                "alice",
-                "Documents"
-              ],
-              "loading": "lecture du disque…"
-            },
-            "docs": {
-              "path": [
-                "alice",
-                "Documents"
-              ],
-              "items": [
-                {
-                  "name": "cours.pdf",
-                  "type": "file"
-                },
-                {
-                  "name": "photos",
-                  "type": "dir"
-                },
-                {
-                  "name": "rapport.odt",
-                  "type": "file"
-                }
-              ]
-            }
-          }
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 1100
-        },
-        {
-          "do": "view",
-          "view": "home",
-          "highlight": "Documents"
-        },
-        {
-          "do": "pulse",
-          "at": "you:top"
-        },
-        {
-          "do": "wait",
-          "ms": 700
-        },
-        {
-          "do": "view",
-          "view": "load"
-        },
-        {
-          "do": "send",
-          "path": [
-            "you",
-            "explorer",
-            "kbox",
-            "disk"
-          ],
-          "label": "double-clic",
-          "reply": "3 entrées",
-          "explain": [
-            "Vous double-cliquez sur un dossier dans l'**explorateur de fichiers**.",
-            "L'explorateur ne lit pas le disque lui-même : il fait un *appel système* au **noyau**.",
-            "Le noyau lit le **disque** et récupère la liste des fichiers du dossier.",
-            "La liste revient à l'explorateur, qui l'affiche en icônes : 3 entrées."
-          ]
-        },
-        {
-          "do": "view",
-          "view": "docs"
-        },
-        {
-          "do": "wait",
-          "ms": 2800
-        }
-      ],
-      "show": [
-        {
-          "id": "you",
-          "at": [
-            0,
-            7.2
-          ],
-          "label": "vous"
-        },
-        {
-          "id": "explorer",
-          "label": "double-clic"
-        },
-        "kbox",
-        "disk"
-      ]
-    },
-    {
-      "id": "sans-gui",
-      "label": "Sans GUI",
-      "chapter": "le serveur",
-      "title": "Un serveur, sans interface graphique",
-      "body": [
-        "Sur un serveur Linux (Debian, Ubuntu Server…), personne ne regarde l'écran : il tourne dans un centre de données, au milieu de centaines d'autres machines. On retire donc l'interface graphique et les applications de bureau : il reste le matériel, le noyau et le **shell**.",
-        "Le shell n'est pas une nouveauté : il était déjà là sur votre PC, caché sous l'interface graphique. Sur un serveur, c'est lui qu'on utilise directement, à distance, avec `ssh`."
-      ],
-      "callout": {
-        "title": "pourquoi ?",
-        "text": "Un serveur fait un travail précis (héberger un site, une base de données…). On n'y installe que les applications dont il a besoin : moins de mémoire et de disque utilisés, moins de logiciels à mettre à jour et à sécuriser, et tout s'automatise avec des scripts."
-      },
-      "hud": [
-        {
-          "label": "mode",
-          "value": "Serveur · CLI"
-        },
-        {
-          "label": "couches",
-          "value": 3
-        }
-      ],
-      "links": [
-        {
-          "path": [
-            "shell",
-            "hw"
-          ]
-        },
-        {
-          "path": [
-            "admin",
-            "shell"
-          ]
-        }
-      ],
-      "flows": [
-        {
-          "path": [
-            "admin",
-            "shell",
-            "kernel",
-            "hw"
-          ],
-          "label": "ssh",
-          "reply": "ok",
-          "explain": [
-            "Depuis votre machine, vous vous connectez avec `ssh` : côté serveur, ni écran ni souris.",
-            "Le **shell** reçoit votre commande et demande au **noyau** ce qu'il lui faut.",
-            "Le noyau travaille sur le **matériel** du serveur, exactement comme sur votre PC.",
-            "Le résultat revient sous forme de texte dans votre fenêtre `ssh`."
-          ]
-        }
-      ],
-      "show": [
-        "hw",
-        "kernel",
-        {
-          "id": "shell",
-          "note": "serveur : pas d'écran"
-        },
-        "admin"
-      ]
-    },
-    {
-      "id": "terminal",
-      "label": "Terminal",
-      "chapter": "le serveur",
-      "title": "Le terminal remplace l'explorateur",
-      "body": [
-        "Plus d'explorateur : pour voir le contenu d'un dossier, on tape une commande dans un **terminal**. Le **shell** (bash, zsh) lit ce que vous tapez, le comprend et le transmet au noyau.",
-        "`ls Documents` fait exactement ce que faisait le double-clic : même chemin jusqu'au noyau et au disque, même réponse, mais en texte."
-      ],
-      "callout": {
-        "title": "bon à savoir",
-        "text": "Le shell existe aussi sur votre PC avec interface graphique : ouvrez « Terminal » (macOS, Linux) ou PowerShell (Windows). Le terminal affiche, le shell comprend."
-      },
-      "hud": [
-        {
-          "label": "mode",
-          "value": "Serveur · CLI"
-        },
-        {
-          "label": "couches",
-          "value": "—"
-        }
-      ],
-      "labels": "left",
-      "links": [
-        {
-          "from": "you",
-          "to": "term"
-        },
-        {
-          "from": "term",
-          "to": "bash"
-        },
-        {
-          "from": "bash",
-          "to": "kbox"
-        },
-        {
-          "from": "kbox",
-          "to": "disk"
-        }
-      ],
-      "widgets": [
-        {
-          "kind": "terminal",
-          "title": "alice@pc — bash",
-          "prompt": "alice@pc",
-          "cwd": "~"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 500
-        },
-        {
-          "do": "type",
-          "text": "ls Documents"
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "you",
-            "term",
-            "bash",
-            "kbox",
-            "disk"
-          ],
-          "label": "ls",
-          "reply": "3 entrées",
-          "explain": [
-            "Vous tapez `ls` dans le **terminal** et vous validez avec [[Entrée]].",
-            "Le terminal ne comprend rien à la commande : il transmet la ligne au **shell** (`bash`).",
-            "Le shell comprend « lister ce dossier » et fait un *appel système* au **noyau**.",
-            "Le noyau lit le **disque**, exactement comme pour l'explorateur.",
-            "La liste revient en texte : le terminal affiche 3 entrées au lieu d'icônes."
-          ]
-        },
-        {
-          "do": "output",
-          "text": "cours.pdf  photos  rapport.odt"
-        },
-        {
-          "do": "prompt"
-        },
-        {
-          "do": "wait",
-          "ms": 3000
-        }
-      ],
-      "show": [
-        {
-          "id": "you",
-          "at": [
-            0,
-            8.4
-          ],
-          "label": "vous, via ssh"
-        },
-        "term",
-        {
-          "id": "bash",
-          "note": "aussi sur votre PC"
-        },
-        {
-          "id": "kbox",
-          "at": [
-            0,
-            -1.8
-          ]
-        },
-        {
-          "id": "disk",
-          "at": [
-            0,
-            -5.2
-          ]
-        }
-      ]
-    },
-    {
-      "id": "commandes",
-      "label": "Commandes",
-      "chapter": "le terminal",
-      "title": "Vos premières commandes",
-      "body": [
-        "Une commande, c'est un nom, des options et des arguments : `ls -l Documents`.",
-        "- `pwd` où suis-je ?\n- `ls` lister le dossier\n- `cd` changer de dossier\n- `mkdir` créer un dossier\n- `cat` afficher un fichier",
-        "`cd` et `pwd` sont intégrées au shell. `ls`, `mkdir` et `cat` sont de petits programmes rangés dans `/usr/bin` : le shell les lance, et eux parlent au noyau."
-      ],
-      "callout": {
-        "title": "astuce",
-        "text": "`man ls` affiche le manuel de n'importe quelle commande, et [[Tab]] complète les noms à votre place."
-      },
-      "hud": [
-        {
-          "label": "mode",
-          "value": "Terminal"
-        },
-        {
-          "label": "couches",
-          "value": "—"
-        }
-      ],
-      "links": [
-        {
-          "from": "term",
-          "to": "bash"
-        },
-        {
-          "from": "bash",
-          "to": "ls"
-        },
-        {
-          "from": "bash",
-          "to": "mkdir"
-        },
-        {
-          "from": "bash",
-          "to": "cat"
-        },
-        {
-          "from": "ls",
-          "to": "kbox"
-        },
-        {
-          "from": "mkdir",
-          "to": "kbox"
-        },
-        {
-          "from": "cat",
-          "to": "kbox"
-        }
-      ],
-      "widgets": [
-        {
-          "kind": "terminal",
-          "title": "alice@pc — bash",
-          "prompt": "alice@pc",
-          "cwd": "~"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 400
-        },
-        {
-          "do": "type",
-          "text": "pwd"
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "term",
-            "bash"
-          ],
-          "label": "pwd",
-          "reply": "ok",
-          "explain": [
-            "Vous tapez `pwd` : le terminal passe la ligne au **shell**.",
-            "Le shell connaît son dossier courant : il répond `/home/alice` sans déranger le noyau."
-          ]
-        },
-        {
-          "do": "output",
-          "text": "/home/alice"
-        },
-        {
-          "do": "wait",
-          "ms": 450
-        },
-        {
-          "do": "type",
-          "text": "ls"
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "term",
-            "bash",
-            "ls",
-            "kbox"
-          ],
-          "label": "ls",
-          "reply": "ok",
-          "explain": [
-            "Vous tapez `ls` : la ligne part au **shell**.",
-            "Le shell lance le programme **`ls`**.",
-            "`ls` demande au **noyau** le contenu du dossier.",
-            "La liste remonte jusqu'au terminal : `Documents  Images  Musique  notes.txt`."
-          ]
-        },
-        {
-          "do": "output",
-          "text": "Documents  Images  Musique  notes.txt"
-        },
-        {
-          "do": "wait",
-          "ms": 450
-        },
-        {
-          "do": "type",
-          "text": "mkdir projets"
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "term",
-            "bash",
-            "mkdir",
-            "kbox"
-          ],
-          "label": "mkdir",
-          "reply": "ok",
-          "explain": [
-            "Vous tapez `mkdir projets` : la ligne part au **shell**.",
-            "Le shell lance le programme **`mkdir`**.",
-            "`mkdir` demande au **noyau** de créer le dossier `projets` sur le disque.",
-            "C'est fait. `mkdir` n'affiche rien quand tout va bien : pas de nouvelles, bonnes nouvelles."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 450
-        },
-        {
-          "do": "type",
-          "text": "cd projets"
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "term",
-            "bash"
-          ],
-          "label": "cd",
-          "reply": "ok",
-          "explain": [
-            "Vous tapez `cd projets` : la ligne part au **shell**.",
-            "`cd` fait partie du shell : il change son dossier courant, et l'invite affiche `~/projets`."
-          ]
-        },
-        {
-          "do": "cwd",
-          "path": "~/projets"
-        },
-        {
-          "do": "wait",
-          "ms": 450
-        },
-        {
-          "do": "type",
-          "text": "cat ../notes.txt"
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "term",
-            "bash",
-            "cat",
-            "kbox"
-          ],
-          "label": "cat",
-          "reply": "ok",
-          "explain": [
-            "Vous tapez `cat ../notes.txt` : `..` veut dire « le dossier au-dessus ».",
-            "Le shell lance le programme **`cat`**.",
-            "`cat` demande au **noyau** de lire le fichier `notes.txt`.",
-            "Le contenu du fichier s'affiche dans le terminal."
-          ]
-        },
-        {
-          "do": "output",
-          "text": "Penser à réviser bash !"
-        },
-        {
-          "do": "wait",
-          "ms": 450
-        },
-        {
-          "do": "prompt"
-        },
-        {
-          "do": "wait",
-          "ms": 3600
-        }
-      ],
-      "show": [
-        {
-          "id": "term",
-          "at": [
-            -1.2,
-            6.2
-          ]
-        },
-        {
-          "id": "bash",
-          "at": [
-            -1.2,
-            2.6
-          ],
-          "label": "cd · pwd intégrées"
-        },
-        "ls",
-        {
-          "id": "mkdir",
-          "label": "programmes"
-        },
-        "cat",
-        {
-          "id": "kbox",
-          "at": [
-            -1.2,
-            -5.2
-          ]
-        }
-      ]
-    },
-    {
-      "id": "script",
-      "label": "Script",
-      "chapter": "programmer",
-      "title": "Un premier programme : le script",
-      "body": [
-        "Un **script**, c'est une liste de commandes dans un fichier texte. Le shell les exécute une par une, de haut en bas, comme si vous les tapiez.",
-        "La première ligne, `#!/bin/bash`, indique quel programme doit lire le fichier. On le rend exécutable une fois avec `chmod +x hello.sh`, puis on le lance avec `./hello.sh`."
-      ],
-      "callout": {
-        "title": "et voilà",
-        "text": "Ces six lignes sont déjà un programme. Variables, conditions et boucles viendront s'ajouter à ces mêmes lignes."
-      },
-      "hud": [
-        {
-          "label": "mode",
-          "value": "Script"
-        },
-        {
-          "label": "couches",
-          "value": "—"
-        }
-      ],
-      "links": [
-        {
-          "from": "term",
-          "to": "bash"
-        },
-        {
-          "from": "file",
-          "to": "bash",
-          "dashed": true
-        },
-        {
-          "from": "bash",
-          "to": "date"
-        },
-        {
-          "from": "bash",
-          "to": "mkdir"
-        },
-        {
-          "from": "bash",
-          "to": "ls"
-        },
-        {
-          "from": "date",
-          "to": "kbox"
-        },
-        {
-          "from": "mkdir",
-          "to": "kbox"
-        },
-        {
-          "from": "ls",
-          "to": "kbox"
-        }
-      ],
-      "widgets": [
-        {
-          "kind": "editor",
-          "title": "hello.sh — éditeur",
-          "lang": "bash",
-          "lines": [
-            "#!/bin/bash",
-            "# mon premier programme",
-            "echo \"Bonjour $USER !\"",
-            "date",
-            "mkdir -p ~/byte-layers/demo",
-            "ls ~/byte-layers"
-          ]
-        },
-        {
-          "kind": "terminal",
-          "title": "alice@pc — bash",
-          "prompt": "alice@pc",
-          "cwd": "~"
-        }
-      ],
-      "script": [
-        {
-          "do": "wait",
-          "ms": 500
-        },
-        {
-          "do": "type",
-          "text": "./hello.sh"
-        },
-        {
-          "do": "send",
-          "path": [
-            "term",
-            "bash"
-          ],
-          "label": "./hello.sh",
-          "explain": [
-            "Vous tapez `./hello.sh` : le shell va lire le fichier et exécuter ses lignes, une par une."
-          ]
-        },
-        {
-          "do": "line",
-          "n": 1
-        },
-        {
-          "do": "send",
-          "path": [
-            "file",
-            "bash"
-          ],
-          "kind": "read",
-          "label": "ligne 1",
-          "explain": [
-            "La ligne 1, `#!/bin/bash`, dit quel programme doit lire le fichier : `bash`."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 350
-        },
-        {
-          "do": "line",
-          "n": 2
-        },
-        {
-          "do": "send",
-          "path": [
-            "file",
-            "bash"
-          ],
-          "kind": "read",
-          "label": "ligne 2",
-          "explain": [
-            "La ligne 2 commence par `#` : c'est un commentaire, le shell l'ignore. Il est là pour vous."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 350
-        },
-        {
-          "do": "line",
-          "n": 3
-        },
-        {
-          "do": "send",
-          "path": [
-            "file",
-            "bash"
-          ],
-          "kind": "read",
-          "label": "ligne 3",
-          "explain": [
-            "La ligne 3 : `echo` affiche un texte ; `$USER` est remplacé par votre nom d'utilisateur."
-          ]
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "wait",
-          "ms": 350
-        },
-        {
-          "do": "output",
-          "text": "Bonjour alice !"
-        },
-        {
-          "do": "wait",
-          "ms": 300
-        },
-        {
-          "do": "line",
-          "n": 4
-        },
-        {
-          "do": "send",
-          "path": [
-            "file",
-            "bash"
-          ],
-          "kind": "read",
-          "label": "ligne 4",
-          "explain": [
-            "La ligne 4 : `date`, la même commande que vous taperiez à la main."
-          ]
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "bash",
-            "date",
-            "kbox"
-          ],
-          "label": "date",
-          "reply": "ok",
-          "explain": [
-            "Le shell lance le programme **`date`**.",
-            "`date` demande l'heure au **noyau**, qui la tient de l'horloge du matériel.",
-            "L'heure s'affiche dans le terminal."
-          ]
-        },
-        {
-          "do": "output",
-          "text": "mer. 18 nov. 2026, 10:42:07"
-        },
-        {
-          "do": "wait",
-          "ms": 300
-        },
-        {
-          "do": "line",
-          "n": 5
-        },
-        {
-          "do": "send",
-          "path": [
-            "file",
-            "bash"
-          ],
-          "kind": "read",
-          "label": "ligne 5",
-          "explain": [
-            "La ligne 5 : `mkdir -p ~/byte-layers/demo` crée le dossier `demo`, et `byte-layers` avec lui s'il n'existe pas encore (`-p`)."
-          ]
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "bash",
-            "mkdir",
-            "kbox"
-          ],
-          "label": "mkdir",
-          "reply": "ok",
-          "explain": [
-            "Le shell lance **`mkdir`**, comme si vous l'aviez tapé.",
-            "`mkdir` demande au **noyau** de créer `~/byte-layers/demo`.",
-            "C'est fait, en silence."
-          ]
-        },
-        {
-          "do": "wait",
-          "ms": 300
-        },
-        {
-          "do": "line",
-          "n": 6
-        },
-        {
-          "do": "send",
-          "path": [
-            "file",
-            "bash"
-          ],
-          "kind": "read",
-          "label": "ligne 6",
-          "explain": [
-            "La ligne 6 : `ls ~/byte-layers` liste le dossier qu'on vient de créer."
-          ]
-        },
-        {
-          "do": "count",
-          "counter": "cmds"
-        },
-        {
-          "do": "send",
-          "path": [
-            "bash",
-            "ls",
-            "kbox"
-          ],
-          "label": "ls",
-          "reply": "ok",
-          "explain": [
-            "Le shell lance **`ls`**.",
-            "`ls` demande au **noyau** le contenu de `~/byte-layers`.",
-            "La liste s'affiche : `demo` est apparu. Le programme a marché."
-          ]
-        },
-        {
-          "do": "output",
-          "text": "demo"
-        },
-        {
-          "do": "wait",
-          "ms": 300
-        },
-        {
-          "do": "line",
-          "n": 0
-        },
-        {
-          "do": "prompt"
-        },
-        {
-          "do": "wait",
-          "ms": 3600
-        }
-      ],
-      "show": [
-        {
-          "id": "term",
-          "at": [
-            -1.2,
-            6.2
-          ],
-          "label": "./hello.sh"
-        },
-        {
-          "id": "bash",
-          "at": [
-            -1.2,
-            2.6
-          ]
-        },
-        {
-          "id": "file",
-          "label": "lu ligne à ligne"
-        },
-        "date",
-        "mkdir",
-        {
-          "id": "ls",
-          "at": [
-            1,
-            -1.4
-          ]
-        },
-        {
-          "id": "kbox",
-          "at": [
-            -1.2,
-            -5.2
-          ]
-        }
-      ]
-    },
-    {
-      "id": "recap",
-      "label": "Récap",
-      "chapter": "récap",
-      "title": "Récap",
-      "body": [
-        "- Du bas vers le haut : matériel, noyau, shell et services, interface graphique, applications.\n- Seul le noyau touche au matériel : tout passe par des appels système.\n- L'explorateur et le terminal font la même chose, l'un à la souris, l'autre en texte.\n- Une commande, c'est un nom, des options et des arguments.\n- Un script, ce sont des commandes dans un fichier, exécutées dans l'ordre."
-      ],
-      "callout": {
-        "title": "à vous",
-        "text": "Ouvrez un terminal et tapez `pwd`, puis `ls` : vous refaites les deux premières commandes de l'étape 5."
-      },
-      "hud": [
-        {
-          "label": "mode",
-          "value": "—"
-        },
-        {
-          "label": "couches",
-          "value": 5
-        }
-      ],
-      "links": [
-        {
-          "path": [
-            "apps",
-            "hw"
-          ]
-        },
-        {
-          "path": [
-            "you",
-            "gui"
-          ]
-        },
-        {
-          "path": [
-            "dev",
-            "shell"
-          ]
-        }
-      ],
-      "flows": [
-        {
-          "path": [
-            "you",
-            "gui",
-            "kernel",
-            "hw"
-          ],
-          "label": "clic",
-          "reply": "ok",
-          "explain": [
-            "Vous cliquez : la souris envoie l'action à l'**interface graphique**.",
-            "L'interface ne touche jamais au matériel : elle demande au **noyau**, par un *appel système*.",
-            "Seul le noyau parle au **matériel** : écran, disque, carte réseau.",
-            "La réponse remonte couche par couche jusqu'à vous : c'est ce que vous voyez à l'écran."
-          ]
-        },
-        {
-          "path": [
-            "dev",
-            "shell",
-            "kernel",
-            "hw"
-          ],
-          "label": "./hello.sh",
-          "reply": "ok",
-          "delay": 1900,
-          "explain": [
-            "Vous lancez `./hello.sh` dans le terminal.",
-            "Le **shell** lit le script et transmet chaque besoin au **noyau**.",
-            "Le noyau fait le travail sur le **matériel**, comme pour un clic.",
-            "Le résultat revient dans votre terminal : même chemin, sans souris."
-          ]
-        }
-      ],
-      "show": [
-        "hw",
-        "kernel",
-        "shell",
-        "gui",
-        "apps",
-        {
-          "id": "you",
-          "label": "explorateur"
-        },
-        "dev"
-      ]
-    }
-  ]
+   ]
+  }
+ ]
 }
