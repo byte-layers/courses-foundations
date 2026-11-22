@@ -36,7 +36,7 @@
    ],
    "tone": "n",
    "title": "Processeur",
-   "sub": "code machine",
+   "sub": "0101 1100 0011",
    "icon": "01",
    "detail": "Le **processeur** n'exécute qu'une sorte d'instructions : le **code machine**, des nombres propres à sa famille de processeurs."
   },

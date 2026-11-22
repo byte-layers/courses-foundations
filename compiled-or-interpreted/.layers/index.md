@@ -36,9 +36,7 @@ step: traduction
 
 Imaginez un livre écrit en français, pour un lecteur qui ne lit que le chinois. Soit on traduit tout le livre avant de le lui donner : c'est **compilé**. Soit un traducteur, assis à côté de lui, traduit phrase par phrase, à chaque lecture : c'est **interprété**. Java traduit d'abord dans une langue intermédiaire, qu'un second traducteur relit pour chaque lecteur.
 
-**Interprété ne veut pas dire « pas traduit »** : un script `bash` ou un programme Python ne parle pas directement au processeur. Il y a toujours un traducteur ; la seule question, c'est quand il travaille.
-
-Les sections qui suivent reprennent chaque chemin, avec le dessin du bit précédent : au fond, le **noyau** et le **processeur** ; devant, le **terminal** et le **shell**. Entre les deux, les programmes que le shell lance, comme `ls` ou `date` : ici les compilateurs et les interpréteurs. Les fichiers sont posés à côté de qui les lit.
+> ⚠️ **Interprété ne veut pas dire « pas traduit ».** Un script `bash` ou un programme Python ne parle pas directement au processeur. Il y a toujours un traducteur ; la seule question, c'est quand il travaille.
 
 ## Interprété : un programme lit le script ligne à ligne
 

@@ -67,7 +67,7 @@
     1
    ],
    "title": "processeur",
-   "sub": "code machine",
+   "sub": "0101 1100 0011",
    "detail": "Le **processeur** n'exécute que du **code machine** : des instructions très simples écrites sous forme de nombres. Tout programme finit par lui parvenir sous cette forme."
   },
   {
@@ -258,10 +258,9 @@
    "label": "Quatre chemins",
    "title": "Qui traduit, et quand",
    "body": [
-    "Le processeur ne lit que du code machine. Pour chaque code source, un traducteur : avant l'exécution, ou pendant."
+    "Le processeur ne lit que du code machine. Pour chaque code source, un traducteur : pendant l'exécution, ou avant."
    ],
    "show": [
-    "avant",
     "pendant",
     "cpu",
     "s-sh",
@@ -338,6 +337,17 @@
     {
      "do": "scene",
      "show": [
+      "avant"
+     ],
+     "say": "Java ajoute une étape **avant l'exécution** : la compilation."
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "show": [
       "javac",
       "class"
      ],
@@ -351,7 +361,7 @@
        "to": "class"
       }
      ],
-     "say": "Java : javac traduit d'abord vers une langue intermédiaire, le bytecode…"
+     "say": "javac traduit d'abord vers une langue intermédiaire, le bytecode…"
     },
     {
      "do": "send",
