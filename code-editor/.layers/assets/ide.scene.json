@@ -1,0 +1,747 @@
+{
+ "format": "bl-scenes/0.3",
+ "id": "code-editor-plan",
+ "title": "De l'éditeur de texte à l'éditeur de code (2D)",
+ "lang": "fr",
+ "kit": "plan",
+ "legend": [
+  {
+   "tone": "y",
+   "label": "texte brut"
+  },
+  {
+   "tone": "r",
+   "label": "mise en forme"
+  },
+  {
+   "tone": "g",
+   "label": "outils de l'IDE"
+  }
+ ],
+ "entities": [
+  {
+   "id": "te",
+   "kind": "node",
+   "at": [
+    -11.5,
+    -6.2
+   ],
+   "tone": "v",
+   "size": [
+    8.6,
+    2.2,
+    1
+   ],
+   "title": "éditeur de texte",
+   "sub": "nano, vi · Bloc-notes, gedit",
+   "detail": "Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**. Certains s'ouvrent dans le terminal (`nano`, `vi`), d'autres dans une fenêtre (Bloc-notes, gedit)."
+  },
+  {
+   "id": "wp",
+   "kind": "node",
+   "at": [
+    0,
+    -6.2
+   ],
+   "tone": "v",
+   "size": [
+    8.6,
+    2.2,
+    1
+   ],
+   "title": "traitement de texte",
+   "sub": "Word, Writer",
+   "detail": "Un **traitement de texte** fait partie d'une suite bureautique : il sert à écrire des documents mis en forme."
+  },
+  {
+   "id": "ce",
+   "kind": "node",
+   "at": [
+    11.5,
+    -6.2
+   ],
+   "tone": "v",
+   "size": [
+    8.6,
+    2.2,
+    1
+   ],
+   "title": "éditeur de code, IDE",
+   "sub": "VS Code · Neovim",
+   "detail": "Un **éditeur de code** (ou **IDE**) enregistre le même texte brut qu'un éditeur de texte, et ajoute des outils pour programmer. Il en existe en fenêtre (VS Code) et dans le terminal (Neovim avec des extensions)."
+  },
+  {
+   "id": "f-te",
+   "kind": "layer",
+   "at": [
+    -11.5,
+    2.4
+   ],
+   "tone": "y",
+   "size": [
+    9.4,
+    9.0,
+    1
+   ],
+   "title": "bonjour.sh"
+  },
+  {
+   "id": "f-te-1",
+   "kind": "file",
+   "at": [
+    0,
+    -1.6
+   ],
+   "tone": "y",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-te",
+   "title": "echo \"Bonjour\""
+  },
+  {
+   "id": "f-wp",
+   "kind": "layer",
+   "at": [
+    0,
+    2.4
+   ],
+   "tone": "r",
+   "size": [
+    9.4,
+    9.0,
+    1
+   ],
+   "title": "mon-document.docx"
+  },
+  {
+   "id": "f-wp-1",
+   "kind": "file",
+   "at": [
+    0,
+    -1.6
+   ],
+   "tone": "y",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "le texte"
+  },
+  {
+   "id": "f-wp-2",
+   "kind": "program",
+   "at": [
+    0,
+    0.0
+   ],
+   "tone": "r",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "mise en forme"
+  },
+  {
+   "id": "f-wp-3",
+   "kind": "program",
+   "at": [
+    0,
+    1.6
+   ],
+   "tone": "r",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "commentaires, notes"
+  },
+  {
+   "id": "f-wp-4",
+   "kind": "program",
+   "at": [
+    0,
+    3.2
+   ],
+   "tone": "r",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "mise en page, impression"
+  },
+  {
+   "id": "f-ce",
+   "kind": "layer",
+   "at": [
+    11.5,
+    2.4
+   ],
+   "tone": "y",
+   "size": [
+    9.4,
+    9.0,
+    1
+   ],
+   "title": "bonjour.sh"
+  },
+  {
+   "id": "f-ce-1",
+   "kind": "file",
+   "at": [
+    0,
+    -1.6
+   ],
+   "tone": "y",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "echo \"Bonjour\""
+  },
+  {
+   "id": "f-ce-2",
+   "kind": "program",
+   "at": [
+    0,
+    0.0
+   ],
+   "tone": "g",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "erreurs soulignées",
+   "detail": "On parle de **linting** : l'éditeur relit le script et souligne les fautes avant qu'on le lance."
+  },
+  {
+   "id": "f-ce-3",
+   "kind": "program",
+   "at": [
+    0,
+    1.6
+   ],
+   "tone": "g",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "terminal intégré : lancer",
+   "detail": "Le script se lance dans un **terminal intégré**, ou d'un clic, sans changer de fenêtre."
+  },
+  {
+   "id": "f-ce-4",
+   "kind": "program",
+   "at": [
+    0,
+    3.2
+   ],
+   "tone": "g",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "pas à pas",
+   "detail": "Le **débogueur** exécute le script ligne par ligne, pour suivre ce qu'il fait."
+  },
+  {
+   "id": "win",
+   "kind": "layer",
+   "at": [
+    0,
+    0
+   ],
+   "tone": "n",
+   "size": [
+    21,
+    15,
+    1
+   ],
+   "title": "éditeur de code",
+   "sub": "un dossier ouvert"
+  },
+  {
+   "id": "explorer",
+   "kind": "layer",
+   "at": [
+    -7,
+    1.2
+   ],
+   "tone": "v",
+   "size": [
+    5.4,
+    11.4,
+    1
+   ],
+   "in": "win",
+   "title": "explorateur",
+   "detail": "L'**explorateur** montre les fichiers et sous-dossiers du dossier ouvert ; un clic en ouvre un."
+  },
+  {
+   "id": "f-fiche",
+   "kind": "file",
+   "at": [
+    0,
+    -2.2
+   ],
+   "tone": "y",
+   "size": [
+    4.2,
+    1.1,
+    1
+   ],
+   "in": "explorer",
+   "title": "fiche.sh"
+  },
+  {
+   "id": "f-notes",
+   "kind": "file",
+   "at": [
+    0,
+    -0.6
+   ],
+   "tone": "y",
+   "size": [
+    4.2,
+    1.1,
+    1
+   ],
+   "in": "explorer",
+   "title": "notes.md"
+  },
+  {
+   "id": "edit",
+   "kind": "node",
+   "at": [
+    2.7,
+    -1.6
+   ],
+   "tone": "v",
+   "size": [
+    13.2,
+    5.8,
+    1
+   ],
+   "in": "win",
+   "title": "zone d'édition",
+   "sub": "un onglet par fichier",
+   "detail": "La **zone d'édition** : le fichier ouvert, avec les numéros de ligne. Un onglet par fichier ouvert."
+  },
+  {
+   "id": "term",
+   "kind": "node",
+   "at": [
+    2.7,
+    4.6
+   ],
+   "tone": "b",
+   "size": [
+    13.2,
+    3.0,
+    1
+   ],
+   "in": "win",
+   "title": "terminal intégré",
+   "detail": "Le **terminal intégré** : un vrai terminal, ouvert sur le dossier, dans la même fenêtre."
+  },
+  {
+   "id": "lang",
+   "kind": "layer",
+   "at": [
+    16.5,
+    0
+   ],
+   "tone": "g",
+   "size": [
+    9.0,
+    15,
+    1
+   ],
+   "title": "support du langage",
+   "sub": "une extension par langage",
+   "detail": "Le **support du langage** reconnaît le langage du fichier (bash, Java, Python…). Dans VS Code, il s'ajoute par une **extension**."
+  },
+  {
+   "id": "l-color",
+   "kind": "program",
+   "at": [
+    0,
+    -3.6
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "coloration"
+  },
+  {
+   "id": "l-comp",
+   "kind": "program",
+   "at": [
+    0,
+    -2.0
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "complétion"
+  },
+  {
+   "id": "l-lint",
+   "kind": "program",
+   "at": [
+    0,
+    -0.4
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "erreurs soulignées",
+   "detail": "On parle aussi de **linting** : l'outil relit le code et souligne les fautes avant qu'on lance le programme."
+  },
+  {
+   "id": "l-run",
+   "kind": "program",
+   "at": [
+    0,
+    1.2
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "lancer, compiler"
+  },
+  {
+   "id": "l-dbg",
+   "kind": "program",
+   "at": [
+    0,
+    2.8
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "déboguer"
+  },
+  {
+   "id": "l-tpl",
+   "kind": "program",
+   "at": [
+    0,
+    4.4
+   ],
+   "tone": "g",
+   "size": [
+    7.4,
+    1.1,
+    1
+   ],
+   "in": "lang",
+   "title": "modèles de code"
+  }
+ ],
+ "steps": [
+  {
+   "id": "traitement",
+   "label": "Trois outils",
+   "title": "Trois outils, trois usages",
+   "body": [
+    "Un script et un document ne s'écrivent pas avec le même outil. Chaque colonne montre un outil et le fichier qu'il enregistre."
+   ],
+   "show": [
+    "te",
+    "wp",
+    "ce"
+   ],
+   "links": [],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 900
+    },
+    {
+     "do": "scene",
+     "show": [
+      "f-te",
+      "f-te-1"
+     ],
+     "link": [
+      {
+       "from": "te",
+       "to": "f-te"
+      }
+     ],
+     "say": "Un éditeur de texte, dans le terminal ou dans une fenêtre : il enregistre le script, rien d'autre."
+    },
+    {
+     "do": "wait",
+     "ms": 1200
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "te",
+       "label": "que le texte"
+      }
+     ],
+     "say": "Du texte brut : c'est assez pour un petit script."
+    },
+    {
+     "do": "wait",
+     "ms": 1600
+    },
+    {
+     "do": "scene",
+     "show": [
+      "f-wp",
+      "f-wp-1",
+      "f-wp-2",
+      "f-wp-3",
+      "f-wp-4"
+     ],
+     "link": [
+      {
+       "from": "wp",
+       "to": "f-wp"
+      }
+     ],
+     "say": "Un traitement de texte fait des documents : le texte, sa mise en forme, les commentaires, l'impression."
+    },
+    {
+     "do": "wait",
+     "ms": 1600
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "wp",
+       "label": "pas pour un script"
+      }
+     ],
+     "say": "Un script n'y passe pas bien : il change les guillemets et ajoute sa mise en forme."
+    },
+    {
+     "do": "wait",
+     "ms": 1800
+    },
+    {
+     "do": "scene",
+     "show": [
+      "f-ce",
+      "f-ce-1"
+     ],
+     "link": [
+      {
+       "from": "ce",
+       "to": "f-ce"
+      }
+     ],
+     "say": "Un éditeur de code enregistre le même script, en texte brut…"
+    },
+    {
+     "do": "wait",
+     "ms": 1200
+    },
+    {
+     "do": "scene",
+     "show": [
+      "f-ce-2",
+      "f-ce-3",
+      "f-ce-4"
+     ],
+     "set": [
+      {
+       "id": "ce",
+       "label": "écrire, lancer, déboguer"
+      }
+     ],
+     "say": "…et ajoute des outils : erreurs soulignées, terminal intégré pour le lancer, exécution pas à pas."
+    },
+    {
+     "do": "wait",
+     "ms": 2800
+    }
+   ]
+  },
+  {
+   "id": "outils",
+   "label": "Outils d'un IDE",
+   "title": "Les outils essentiels d'un IDE",
+   "body": [
+    "L'explorateur montre les fichiers du dossier ouvert. La même fenêtre réunit aussi la zone d'édition et le terminal ; le support du langage les aide."
+   ],
+   "show": [
+    "win",
+    "explorer",
+    "f-fiche",
+    "f-notes"
+   ],
+   "links": [],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 1400
+    },
+    {
+     "do": "scene",
+     "show": [
+      "edit"
+     ],
+     "link": [
+      {
+       "from": "f-fiche",
+       "to": "edit"
+      }
+     ]
+    },
+    {
+     "do": "send",
+     "path": [
+      "f-fiche",
+      "edit"
+     ],
+     "label": "ouvrir"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "edit",
+       "label": "fiche.sh"
+      }
+     ],
+     "say": "Un clic ouvre le fichier dans la zone d'édition, un onglet par fichier."
+    },
+    {
+     "do": "wait",
+     "ms": 1400
+    },
+    {
+     "do": "scene",
+     "show": [
+      {
+       "id": "term",
+       "label": "bash fiche.sh"
+      }
+     ],
+     "say": "Le terminal intégré lance les commandes dans le même dossier, sans changer de fenêtre."
+    },
+    {
+     "do": "wait",
+     "ms": 1700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "lang",
+      "l-color",
+      "l-comp",
+      "l-lint",
+      "l-run",
+      "l-dbg",
+      "l-tpl"
+     ],
+     "link": [
+      {
+       "from": "lang",
+       "to": "edit"
+      },
+      {
+       "from": "lang",
+       "to": "term"
+      }
+     ],
+     "say": "Le support du langage reconnaît le langage du fichier, ici celui de bash."
+    },
+    {
+     "do": "wait",
+     "ms": 1600
+    },
+    {
+     "do": "send",
+     "path": [
+      "lang",
+      "edit"
+     ],
+     "label": "ligne 4",
+     "tone": "r"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "edit",
+       "label": "guillemet oublié, ligne 4"
+      }
+     ],
+     "say": "Il colore, complète, et souligne une faute avant même qu'on lance le script."
+    },
+    {
+     "do": "wait",
+     "ms": 1700
+    },
+    {
+     "do": "send",
+     "path": [
+      "lang",
+      "term"
+     ],
+     "label": "lancer"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "term",
+       "label": "lancer, déboguer"
+      }
+     ],
+     "say": "Il sait aussi lancer, compiler ou déboguer le programme."
+    },
+    {
+     "do": "wait",
+     "ms": 2600
+    }
+   ]
+  }
+ ]
+}
