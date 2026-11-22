@@ -1,0 +1,625 @@
+{
+ "format": "bl-scenes/0.3",
+ "id": "vm-containers-plan",
+ "title": "Machine virtuelle ou conteneur (2D)",
+ "lang": "fr",
+ "kit": "plan",
+ "legend": [
+  {
+   "tone": "n",
+   "label": "matériel"
+  },
+  {
+   "tone": "b",
+   "label": "système"
+  },
+  {
+   "tone": "v",
+   "label": "hyperviseur, moteur"
+  },
+  {
+   "tone": "g",
+   "label": "bibliothèques"
+  },
+  {
+   "tone": "y",
+   "label": "appli"
+  }
+ ],
+ "entities": [
+  {
+   "id": "v-srv",
+   "kind": "node",
+   "at": [
+    -9.5,
+    9.0
+   ],
+   "tone": "n",
+   "size": [
+    16.0,
+    1.7,
+    1
+   ],
+   "title": "serveur",
+   "detail": "Le **matériel** : processeur, mémoire, disque."
+  },
+  {
+   "id": "v-os",
+   "kind": "node",
+   "at": [
+    -9.5,
+    7.0
+   ],
+   "tone": "b",
+   "size": [
+    16.0,
+    1.7,
+    1
+   ],
+   "title": "système hôte",
+   "sub": "et son noyau",
+   "detail": "Le **système d'exploitation** installé sur la machine, avec son **noyau**."
+  },
+  {
+   "id": "hyp",
+   "kind": "node",
+   "at": [
+    -9.5,
+    5.0
+   ],
+   "tone": "v",
+   "size": [
+    16.0,
+    1.7,
+    1
+   ],
+   "title": "hyperviseur",
+   "detail": "L'**hyperviseur** simule des ordinateurs entiers. Ici installé sur le système (type 2, comme VirtualBox) ; sur un serveur, il est souvent intégré au système (type 1)."
+  },
+  {
+   "id": "c-srv",
+   "kind": "node",
+   "at": [
+    9.5,
+    9.0
+   ],
+   "tone": "n",
+   "size": [
+    16.0,
+    1.7,
+    1
+   ],
+   "title": "serveur"
+  },
+  {
+   "id": "c-os",
+   "kind": "node",
+   "at": [
+    9.5,
+    7.0
+   ],
+   "tone": "b",
+   "size": [
+    16.0,
+    1.7,
+    1
+   ],
+   "title": "système hôte",
+   "sub": "et son noyau"
+  },
+  {
+   "id": "eng",
+   "kind": "node",
+   "at": [
+    9.5,
+    5.0
+   ],
+   "tone": "v",
+   "size": [
+    16.0,
+    1.7,
+    1
+   ],
+   "title": "moteur de conteneurs",
+   "sub": "Docker, Podman",
+   "detail": "Le **moteur de conteneurs** crée et isole les conteneurs. Il ne simule rien : les programmes parlent au noyau de l'hôte."
+  },
+  {
+   "id": "vm0",
+   "kind": "layer",
+   "at": [
+    -14.9,
+    -0.6999999999999997
+   ],
+   "tone": "b",
+   "size": [
+    5.0,
+    9.0,
+    1
+   ],
+   "title": "machine virtuelle",
+   "detail": "Sur le schéma, trois **machines virtuelles** : chacune est un ordinateur entier, simulé."
+  },
+  {
+   "id": "vm0-os",
+   "kind": "node",
+   "at": [
+    0,
+    2.6
+   ],
+   "tone": "b",
+   "size": [
+    4.4,
+    2.6,
+    1
+   ],
+   "in": "vm0",
+   "title": "système invité",
+   "sub": "son noyau",
+   "detail": "Chaque machine virtuelle démarre **son propre système**, avec son noyau."
+  },
+  {
+   "id": "vm0-lib",
+   "kind": "node",
+   "at": [
+    0,
+    0.3
+   ],
+   "tone": "g",
+   "size": [
+    4.4,
+    1.7,
+    1
+   ],
+   "in": "vm0",
+   "title": "bibliothèques"
+  },
+  {
+   "id": "vm0-app",
+   "kind": "node",
+   "at": [
+    0,
+    -1.7
+   ],
+   "tone": "y",
+   "size": [
+    4.4,
+    1.7,
+    1
+   ],
+   "in": "vm0",
+   "title": "appli"
+  },
+  {
+   "id": "vm1",
+   "kind": "layer",
+   "at": [
+    -9.5,
+    -0.6999999999999997
+   ],
+   "tone": "b",
+   "size": [
+    5.0,
+    9.0,
+    1
+   ]
+  },
+  {
+   "id": "vm1-os",
+   "kind": "node",
+   "at": [
+    0,
+    2.6
+   ],
+   "tone": "b",
+   "size": [
+    4.4,
+    2.6,
+    1
+   ],
+   "in": "vm1"
+  },
+  {
+   "id": "vm1-lib",
+   "kind": "node",
+   "at": [
+    0,
+    0.3
+   ],
+   "tone": "g",
+   "size": [
+    4.4,
+    1.7,
+    1
+   ],
+   "in": "vm1"
+  },
+  {
+   "id": "vm1-app",
+   "kind": "node",
+   "at": [
+    0,
+    -1.7
+   ],
+   "tone": "y",
+   "size": [
+    4.4,
+    1.7,
+    1
+   ],
+   "in": "vm1"
+  },
+  {
+   "id": "vm2",
+   "kind": "layer",
+   "at": [
+    -4.1,
+    -0.6999999999999997
+   ],
+   "tone": "b",
+   "size": [
+    5.0,
+    9.0,
+    1
+   ]
+  },
+  {
+   "id": "vm2-os",
+   "kind": "node",
+   "at": [
+    0,
+    2.6
+   ],
+   "tone": "b",
+   "size": [
+    4.4,
+    2.6,
+    1
+   ],
+   "in": "vm2"
+  },
+  {
+   "id": "vm2-lib",
+   "kind": "node",
+   "at": [
+    0,
+    0.3
+   ],
+   "tone": "g",
+   "size": [
+    4.4,
+    1.7,
+    1
+   ],
+   "in": "vm2"
+  },
+  {
+   "id": "vm2-app",
+   "kind": "node",
+   "at": [
+    0,
+    -1.7
+   ],
+   "tone": "y",
+   "size": [
+    4.4,
+    1.7,
+    1
+   ],
+   "in": "vm2"
+  },
+  {
+   "id": "ct0",
+   "kind": "layer",
+   "at": [
+    3.5,
+    0.9000000000000004
+   ],
+   "tone": "y",
+   "size": [
+    3.6,
+    5.8,
+    1
+   ],
+   "title": "conteneur",
+   "detail": "Sur le schéma, quatre **conteneurs** : chacun emporte son appli et ses bibliothèques, rien de plus."
+  },
+  {
+   "id": "ct0-lib",
+   "kind": "node",
+   "at": [
+    0,
+    1.5
+   ],
+   "tone": "g",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct0"
+  },
+  {
+   "id": "ct0-app",
+   "kind": "node",
+   "at": [
+    0,
+    -0.5
+   ],
+   "tone": "y",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct0"
+  },
+  {
+   "id": "ct1",
+   "kind": "layer",
+   "at": [
+    7.5,
+    0.9000000000000004
+   ],
+   "tone": "y",
+   "size": [
+    3.6,
+    5.8,
+    1
+   ]
+  },
+  {
+   "id": "ct1-lib",
+   "kind": "node",
+   "at": [
+    0,
+    1.5
+   ],
+   "tone": "g",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct1"
+  },
+  {
+   "id": "ct1-app",
+   "kind": "node",
+   "at": [
+    0,
+    -0.5
+   ],
+   "tone": "y",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct1"
+  },
+  {
+   "id": "ct2",
+   "kind": "layer",
+   "at": [
+    11.5,
+    0.9000000000000004
+   ],
+   "tone": "y",
+   "size": [
+    3.6,
+    5.8,
+    1
+   ]
+  },
+  {
+   "id": "ct2-lib",
+   "kind": "node",
+   "at": [
+    0,
+    1.5
+   ],
+   "tone": "g",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct2"
+  },
+  {
+   "id": "ct2-app",
+   "kind": "node",
+   "at": [
+    0,
+    -0.5
+   ],
+   "tone": "y",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct2"
+  },
+  {
+   "id": "ct3",
+   "kind": "layer",
+   "at": [
+    15.5,
+    0.9000000000000004
+   ],
+   "tone": "y",
+   "size": [
+    3.6,
+    5.8,
+    1
+   ]
+  },
+  {
+   "id": "ct3-lib",
+   "kind": "node",
+   "at": [
+    0,
+    1.5
+   ],
+   "tone": "g",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct3"
+  },
+  {
+   "id": "ct3-app",
+   "kind": "node",
+   "at": [
+    0,
+    -0.5
+   ],
+   "tone": "y",
+   "size": [
+    3.0,
+    1.7,
+    1
+   ],
+   "in": "ct3"
+  }
+ ],
+ "steps": [
+  {
+   "id": "piles",
+   "label": "Les deux piles",
+   "title": "Machine virtuelle ou conteneur",
+   "body": [
+    "Même point de départ : un serveur, son système et son noyau. Deux façons d'y isoler des programmes."
+   ],
+   "show": [
+    "v-srv",
+    "v-os",
+    "c-srv",
+    "c-os"
+   ],
+   "links": [],
+   "hud": [
+    {
+     "label": "VM",
+     "value": "—"
+    },
+    {
+     "label": "conteneurs",
+     "value": "—"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 1000
+    },
+    {
+     "do": "scene",
+     "show": [
+      "hyp"
+     ],
+     "say": "À gauche, un **hyperviseur** se pose sur le système."
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "vm0",
+      "vm0-os",
+      "vm1",
+      "vm1-os",
+      "vm2",
+      "vm2-os"
+     ],
+     "hud": [
+      {
+       "label": "VM",
+       "value": "3 systèmes"
+      }
+     ],
+     "say": "Chaque machine virtuelle démarre **un système entier**, avec son propre noyau…"
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "vm0-lib",
+      "vm0-app",
+      "vm1-lib",
+      "vm1-app",
+      "vm2-lib",
+      "vm2-app"
+     ],
+     "say": "…puis seulement les bibliothèques et l'appli."
+    },
+    {
+     "do": "wait",
+     "ms": 900
+    },
+    {
+     "do": "scene",
+     "show": [
+      "eng"
+     ],
+     "say": "À droite, un **moteur de conteneurs**, qui ne simule rien."
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "show": [
+      "ct0",
+      "ct0-lib",
+      "ct0-app",
+      "ct1",
+      "ct1-lib",
+      "ct1-app",
+      "ct2",
+      "ct2-lib",
+      "ct2-app",
+      "ct3",
+      "ct3-lib",
+      "ct3-app"
+     ],
+     "hud": [
+      {
+       "label": "conteneurs",
+       "value": "0 système"
+      }
+     ],
+     "say": "Chaque conteneur n'emporte que **son appli et ses bibliothèques**."
+    },
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "c-os",
+       "label": "noyau partagé"
+      }
+     ],
+     "say": "Tous s'adressent au **noyau de l'hôte**, partagé : la pile est plus légère, l'isolation moins forte."
+    },
+    {
+     "do": "wait",
+     "ms": 3000
+    }
+   ]
+  }
+ ]
+}

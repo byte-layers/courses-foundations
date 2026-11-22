@@ -8,7 +8,7 @@ tags:
   - computer
 difficulty: beginner
 duration: 12
-requires: "0.6.0"
+requires: "0.8.0"
 ---
 
 Un serveur fait tourner beaucoup de programmes, et le poste du développeur aussi. Vous saurez pourquoi on veut les isoler les uns des autres, ce qu'est une machine virtuelle, ce qu'est un conteneur, ce qui les distingue, et comment un conteneur fait tourner un programme à l'identique sur un poste et sur un serveur. Rien à installer, aucune commande à taper.
@@ -65,7 +65,14 @@ Les conteneurs sont créés, démarrés et isolés par un **moteur de conteneurs
 
 ## Machine virtuelle ou conteneur
 
-Les deux isolent des programmes sur une même machine ; ils ne le font pas au même niveau. Le tableau les compare.
+Les deux isolent des programmes sur une même machine ; ils ne le font pas au même niveau. Posons les deux piles côte à côte, sur le même serveur.
+
+```scene
+lesson: assets/vm-plan.scene.json
+step: piles
+```
+
+Chaque machine virtuelle porte **un système entier** ; un conteneur, seulement **son appli et ses bibliothèques**. Le tableau détaille la différence.
 
 | | Machine virtuelle | Conteneur |
 |---|---|---|
