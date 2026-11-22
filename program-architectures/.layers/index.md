@@ -1,16 +1,16 @@
 ---
 title: "Les architectures d'un programme, du poste seul au n tiers"
-description: "Où vivent les trois rôles d'un programme (afficher, décider, stocker) : un poste seul, le client lourd, le client léger en trois tiers, puis plusieurs programmes qui collaborent."
+description: "Où vivent les trois rôles d'une application (afficher, décider, stocker) : un poste, plusieurs postes, le deux tiers avec un client lourd, le trois tiers avec un client léger, le n tiers, les services externes, et pour aller plus loin les services et micro-services."
 tags:
   - bit
   - architecture
   - computer
 difficulty: beginner
 duration: 12
-requires: "0.5.0"
+requires: "0.8.0"
 ---
 
-Un même programme peut être découpé et réparti de plusieurs façons entre les machines : c'est son **architecture**. Vous saurez reconnaître les quatre formes les plus courantes (un poste seul, le client lourd, le client léger, plusieurs programmes qui collaborent), ce que chacune résout et ce qu'elle coûte. Le fil rouge est un seul programme, la gestion des prêts d'une bibliothèque ; chaque section a son schéma animé, que le bouton ▶ Jouer ouvre en grand.
+Un même programme peut être découpé et réparti de plusieurs façons entre les machines : c'est son **architecture**. Vous saurez reconnaître les formes les plus courantes (un poste, le deux tiers, le trois tiers, le n tiers), ce que chacune résout et ce qu'elle coûte. Le fil rouge est un seul programme, la gestion des prêts d'une bibliothèque ; chaque section a son schéma animé, que le bouton ▶ Jouer ouvre en grand.
 
 **Prérequis** : [L'ordinateur en couches, du matériel au premier script](https://byte-layers.com/fr/bits/computer-layers), pour savoir ce que sont un programme, un disque et un serveur.
 
@@ -28,39 +28,57 @@ Quelle que soit sa forme, l'appli Prêts tient toujours trois **rôles**. Les sc
 
 Chaque architecture qui suit répond à une seule question : sur quelle machine vit chacun de ces trois rôles ?
 
-## Un programme sur un poste : les données ne se partagent pas
+## Un programme sur un poste
 
-Un **poste**, c'est l'ordinateur sur lequel travaille un employé, ici celui du comptoir. La forme la plus simple installe l'appli Prêts sur ce poste, et tout y vit : l'appli affiche et décide, et elle range ses données dans un fichier, sur le disque du poste.
+Un **poste**, c'est l'ordinateur sur lequel travaille un employé, ici celui du comptoir. Le programme dont on parle est une **application** : un programme avec une interface graphique, fait pour un utilisateur final, ici la bibliothécaire. Pas une commande qu'on tape dans un terminal.
 
-Tout va bien tant qu'il n'y a qu'un comptoir. Quand la bibliothèque en ouvre un deuxième, on installe l'appli sur un deuxième poste, et ce poste a ses propres données. Le schéma montre la conséquence : un prêt enregistré au poste 1 n'existe pas pour le poste 2, qui répond « aucun prêt » pour un livre déjà sorti.
+La forme la plus simple installe l'appli Prêts sur ce poste, et tout y vit : l'appli affiche et décide, et elle range ses données dans un fichier, sur le disque du poste.
 
 ```scene
 lesson: assets/architectures.scene.json
 step: poste-seul
 ```
 
-Le problème est le **partage des données** : chaque poste a sa copie, et les copies ne se parlent pas.
+Une application se présente sous deux formes, et les deux noms reviendront dans la suite :
 
-## Le client lourd, ou deux tiers : une base partagée, une mise à jour par poste
+| Forme | Comment on la lance | Nom |
+|---|---|---|
+| un programme installé sur le poste | elle s'ouvre dans sa propre fenêtre | **client lourd** |
+| une application web | elle s'ouvre dans le navigateur | **client léger** |
 
-Pour partager les données, on les sort des postes. Elles vont dans une **base de données** (BDD), un programme spécialisé qui range les données et répond aux demandes de lecture et d'écriture. Elle tourne sur un **serveur**, que tous les postes joignent à travers le réseau de la bibliothèque. Le rôle « stocker » quitte les postes ; « afficher » et « décider » y restent, dans l'appli installée sur chaque poste.
+Le navigateur est lui-même un client lourd, déjà installé sur tous les postes : il sert à ouvrir les clients légers.
 
-Cette appli installée, qui fait l'essentiel du travail et ne demande au serveur que les données, s'appelle un **client lourd**. Le mot **client** désigne le programme qui demande un service à un serveur. L'ensemble forme une architecture **deux tiers** : *tiers* vient de l'anglais *tier*, « niveau », et il y a ici deux niveaux, les postes puis le serveur de données.
+## Un programme sur plusieurs postes : comment gérer les données
 
-Le schéma montre ce que cela change : un prêt saisi au poste 1 se lit au poste 3. Il montre aussi le prix à payer : quand une nouvelle version de l'appli sort, un technicien doit l'installer sur chaque poste, un par un.
+Tout va bien tant qu'il n'y a qu'un comptoir. Quand la bibliothèque en ouvre un deuxième, on installe l'appli sur un deuxième poste, et ce poste a ses propres données.
+
+```scene
+lesson: assets/architectures.scene.json
+step: plusieurs-postes
+```
+
+Un prêt enregistré au poste 1 n'existe pas pour le poste 2, qui répond « aucun prêt » pour un livre déjà sorti. Le problème est le **partage des données** : chaque poste a sa copie, et les copies ne se parlent pas. Les deux sections suivantes montrent les deux façons classiques de le résoudre.
+
+## Deux tiers, avec un client lourd
+
+Pour partager les données, on les sort des postes. Elles vont dans une **base de données** (BDD), un programme spécialisé qui range les données et répond aux demandes de lecture et d'écriture. Elle tourne sur un **serveur**, que tous les postes joignent à travers le réseau de la bibliothèque.
+
+Sur chaque poste reste l'appli installée, le client lourd. Elle fait l'essentiel du travail elle-même : les écrans, les règles, les calculs. Elle ne demande au serveur que les données. Un programme qui demande, un programme qui répond : c'est la communication **client-serveur**. Il y a ici deux niveaux, les postes puis le serveur de données : on parle d'architecture **deux tiers** (*tiers* vient de l'anglais *tier*, « niveau »).
 
 ```scene
 lesson: assets/architectures.scene.json
 step: client-lourd
 ```
 
-Avec trois postes, la mise à jour reste faisable. Avec quarante, répartis dans plusieurs bibliothèques, elle devient un chantier, et il suffit d'un poste oublié pour que deux versions de l'appli écrivent dans la même base.
+Un prêt saisi au poste 1 se lit au poste 3. Le prix : quand une nouvelle version de l'appli sort, il faut **mettre à jour chaque poste**. Avec quarante postes, c'est un chantier, et il suffit d'un poste oublié pour que deux versions de l'appli écrivent dans la même base.
 
-## Le client léger, ou trois tiers : rien à installer sur les postes
+> 💡 **Remarque.** Historiquement, c'étaient les clients lourds qui parlaient directement à la base de données. Aujourd'hui, selon la base utilisée, une application web peut parfois le faire aussi.
 
-Le **navigateur** (Firefox, Chrome, Edge, Safari) est déjà installé sur tous les postes. Dans cette forme, il est le seul programme dont les postes ont besoin : il affiche les pages de l'appli Prêts, et rien d'autre. C'est le **client léger**. L'appli elle-même tourne sur un **serveur web**, une machine qui fabrique les pages et applique les règles ; la base de données reste sur son serveur.
+## Trois tiers, avec un client léger
 
-Chacun des trois rôles a désormais sa place :
+Le **navigateur** (Firefox, Chrome, Edge, Safari) est déjà installé sur tous les postes. Dans cette forme, il est le seul programme dont les postes ont besoin : il affiche les pages de l'appli Prêts, c'est le client léger.
+
+On reste en client-serveur, mais avec une machine de plus au milieu : un **serveur web**. C'est lui qui fait tourner l'appli Prêts, applique les règles et fait les traitements ; on l'appelle aussi le **backend**. Le navigateur ne parle pas à la base : il demande au serveur web, qui demande à la base.
 
 | Rôle | Où il vit | Nom du niveau |
 |---|---|---|
@@ -68,31 +86,32 @@ Chacun des trois rôles a désormais sa place :
 | décider | l'appli Prêts, sur le serveur web | tiers **métier** |
 | stocker | la base de données, sur son serveur | tiers **données** |
 
-Trois niveaux, c'est l'architecture **trois tiers**. Client léger et trois tiers décrivent la même installation, vue de deux côtés : le premier nom regarde le poste, qui n'a presque rien à faire ; le second regarde l'ensemble, rangé en trois niveaux.
-
-Le schéma suit un prêt du navigateur jusqu'à la base, puis montre une mise à jour : le technicien installe la nouvelle version une seule fois, sur le serveur web, et les trois postes l'ont dès leur prochaine page.
+Trois niveaux : l'architecture **trois tiers**.
 
 ```scene
 lesson: assets/architectures.scene.json
 step: client-leger
 ```
 
-## Plusieurs programmes qui collaborent : le n tiers
+La mise à jour change tout : le technicien installe la nouvelle version **une seule fois**, sur le serveur web, et les trois postes l'ont dès leur prochaine page.
 
-La bibliothèque grandit encore. Elle veut une recherche dans le catalogue, un mail automatique aux lecteurs en retard, l'encaissement des amendes. On pourrait tout ajouter dans l'appli Prêts, mais elle deviendrait énorme : la moindre modification de la recherche obligerait à remettre en route tout le programme, prêts compris.
+## Le n tiers : on compte les machines
 
-Pensez à un restaurant. Au début, un cuisinier seul fait tout : les entrées, les plats, les desserts, la vaisselle. Quand la salle se remplit, on passe à une **brigade** : chacun son poste, et ils se passent les assiettes. Le restaurant sert plus de monde, et on peut remplacer le pâtissier sans fermer la cuisine.
-
-Les programmes font de même. Chaque tâche devient un programme à part, parfois sur sa propre machine : **Recherche** trouve les livres du catalogue, **Paiement** encaisse les amendes, **Mails de retard** tourne seul chaque nuit et écrit aux lecteurs concernés. L'appli Prêts ne fait plus tout : elle demande aux autres. Le rôle « décider » est désormais réparti entre plusieurs programmes. Comme le nombre de niveaux n'est plus fixé, on parle d'architecture **n tiers**.
-
-Le schéma montre trois de ces collaborations : une recherche, le paiement d'une amende, puis l'envoi des mails de retard pendant la nuit, sans personne devant l'écran.
+Le « n » de **n tiers** compte les **machines**, les serveurs par lesquels passe une demande, pas les programmes ni les couches de code. Dans la très grande majorité des cas, il reste **une seule base de données**, même si elle est parfois répartie sur plusieurs machines : on parle alors d'un **cluster** de base de données.
 
 ```scene
 lesson: assets/architectures.scene.json
 step: n-tiers
 ```
 
-Chaque programme a une seule tâche : on peut le modifier, le remplacer ou lui donner une machine plus puissante sans toucher aux autres. En contrepartie, il y a plus de machines à surveiller et plus d'échanges entre programmes.
+Deux exemples courants :
+
+| Tiers | Les machines, dans l'ordre |
+|---|---|
+| **4 tiers** | le navigateur ; un serveur web en façade, qui envoie les fichiers fixes et passe le reste (on l'appelle souvent *reverse proxy*) ; le serveur d'application, qui applique les règles ; le serveur de base de données |
+| **5 tiers** | les mêmes, plus un serveur pour une tâche à part : l'envoi des mails, une file d'attente de messages, ou un serveur d'intégration qui relie l'appli à d'autres logiciels |
+
+Chaque machine de plus a une tâche précise, et on peut lui donner plus de puissance sans toucher aux autres. En contrepartie, il y a plus de machines à surveiller.
 
 > 📖 [La relation client-serveur (MDN)](https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview) · [Comment fonctionne le Web (MDN)](https://developer.mozilla.org/fr/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works)
 
@@ -109,28 +128,24 @@ Un programme tenu par une autre organisation, dont on se sert à distance, est u
 
 > 💡 **Remarque.** La plupart de ces échanges passent aujourd'hui par le web. Comment, ce sera l'objet du module sur le réseau.
 
-## Récap
+## Pour aller plus loin : services et micro-services
 
-- Tout programme tient trois rôles : afficher, décider, stocker. Son architecture dit où vit chacun.
-- **Un poste** : les trois rôles sur la même machine ; simple, mais les données ne se partagent pas.
-- **Client lourd** (deux tiers) : l'appli installée sur chaque poste, la base de données sur un serveur ; les données sont partagées, mais chaque mise à jour se fait poste par poste.
-- **Client léger** (trois tiers) : afficher dans le navigateur, décider sur le serveur web, stocker dans la base ; rien à installer sur les postes.
-- **n tiers** : plusieurs programmes qui collaborent, chacun sa tâche, comme une brigade en cuisine.
-- **Service externe** : un programme tenu par quelqu'un d'autre, dont on se sert à travers son **API**.
-
-Le schéma pose la bibliothèque sous ses quatre formes, côte à côte. Reste une question : comment ces programmes se parlent-ils, d'une machine à l'autre ? Ce sera l'objet d'un module sur le réseau, à venir.
+Les grandes applications vont plus loin que le n tiers : elles se découpent en **services**. Pensez à un restaurant qui passe du cuisinier seul à une **brigade** : chacun son poste, et ils se passent les assiettes.
 
 ```scene
 lesson: assets/architectures.scene.json
-step: recap
+step: services
 ```
 
-Trois questions pour vérifier ce que vous avez retenu.
+Chaque service a une seule tâche et, souvent, **ses propres données** : Recherche a son catalogue, Paiement ses amendes. Les services se parlent par leurs API, comme avec un service externe, et l'application mélange services internes et externes. On parle d'architecture **orientée services** (*SOA*), ou de **micro-services** quand ils sont nombreux et petits. On peut modifier ou remplacer un service sans toucher aux autres ; en échange, il faut des outils et une organisation pour déployer et surveiller tous ces programmes.
+
+## Quatre questions pour vérifier ce que vous avez retenu
 
 ```quiz
 title: "Les architectures d'un programme"
 tracksProgress: false
 showNotice: false
+place: stage
 questions:
   - prompt: "La bibliothèque a installé son appli de prêts sur deux postes, chacun avec ses propres données. Quel problème rencontre-t-elle ?"
     answers:
@@ -153,6 +168,30 @@ questions:
       - "Sur le serveur web, dans l'appli"
     correct: 3
     explanation: "Le navigateur affiche (tiers présentation), le serveur web décide (tiers métier) et la base de données stocke (tiers données)."
+  - prompt: "Une demande passe par le navigateur, un serveur web en façade, un serveur d'application et un serveur de base de données. Combien de tiers ?"
+    answers:
+      - "Quatre : on compte les machines par lesquelles passe la demande"
+      - "Trois : présentation, métier, données"
+      - "Un seul, puisqu'il n'y a qu'une base de données"
+    correct: 1
+    explanation: "Le « n » du n tiers compte les machines, pas les rôles ni les programmes : ici quatre, avec une seule base."
+```
+
+## Récap
+
+- Une application tient trois rôles : afficher, décider, stocker. Son architecture dit où vit chacun.
+- **Un poste** : les trois rôles sur la même machine. Sur plusieurs postes, les données ne se partagent pas.
+- **Deux tiers**, avec un **client lourd** : l'appli installée sur chaque poste, en client-serveur avec la base ; les données sont partagées, mais chaque mise à jour se fait poste par poste.
+- **Trois tiers**, avec un **client léger** : afficher dans le navigateur, décider sur le serveur web (le backend), stocker dans la base ; rien à installer sur les postes.
+- **n tiers** : n compte les machines par lesquelles passe une demande ; la base reste en général une seule.
+- **Service externe** : un programme tenu par quelqu'un d'autre, dont on se sert à travers son **API**.
+- **Pour aller plus loin** : des services, chacun sa tâche et ses données (architecture orientée services, micro-services).
+
+Le schéma pose la bibliothèque sous ses formes, côte à côte, avec une zone pour aller plus loin. Reste une question : comment ces programmes se parlent-ils, d'une machine à l'autre ? Ce sera l'objet d'un module sur le réseau, à venir.
+
+```scene
+lesson: assets/architectures.scene.json
+step: recap
 ```
 
 ```ack
