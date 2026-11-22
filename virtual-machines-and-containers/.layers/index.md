@@ -32,7 +32,7 @@ Sur le poste, Node.js 22 ; sur le serveur, Node.js 18, installé il y a longtemp
 
 ## Une machine virtuelle : un ordinateur entier, simulé
 
-Première solution : simuler des ordinateurs. Un logiciel, l'**hyperviseur**, programme sur un poste ou partie du système sur un serveur, fabrique sur une seule machine réelle plusieurs **machines virtuelles** (*virtual machines*, VM), chacune avec son matériel virtuel : processeur, mémoire, disque.
+Première solution : simuler des ordinateurs. Un logiciel, l'**hyperviseur**, fabrique sur une seule machine réelle plusieurs **machines virtuelles** (*virtual machines*, VM), chacune avec son matériel virtuel : processeur, mémoire, disque.
 
 ```scene
 lesson: assets/vm-containers.scene.json
@@ -40,6 +40,13 @@ step: machines-virtuelles
 ```
 
 Chaque machine virtuelle a **son propre noyau** et son propre système d'exploitation : c'est un ordinateur complet, en logiciel. On peut y installer ce qu'on veut, Node.js 18 dans l'une, Node.js 22 dans l'autre, et même faire tourner Linux dans une fenêtre d'un Mac. La machine réelle, qui accueille les autres, s'appelle l'**hôte**. Le prix : chaque machine virtuelle réserve de la mémoire et du disque pour tout un système, et démarre comme un ordinateur.
+
+L'hyperviseur existe sous deux formes, et la scène les dessine de la même façon :
+
+| Hyperviseur | Où il vit | Exemples |
+|---|---|---|
+| **type 1** | intégré au système de la machine, sur les serveurs | KVM (dans Linux), Hyper-V, VMware ESXi |
+| **type 2** | un logiciel installé sur un système existant, sur un poste | VirtualBox, VMware Workstation |
 
 > 💡 **Remarque.** La « machine virtuelle Java » du bit sur la compilation n'a que le nom en commun : c'est un programme qui lit du bytecode, pas un ordinateur simulé.
 
@@ -52,9 +59,9 @@ lesson: assets/vm-containers.scene.json
 step: conteneurs
 ```
 
-Pas de matériel simulé, pas de système entier à démarrer : un conteneur démarre comme un programme, et une machine en fait tourner bien plus que de machines virtuelles. Un **outil de conteneurs** les crée et les isole, comme l'hyperviseur pour les machines virtuelles. En échange, l'isolation est moins forte, puisque tous les conteneurs partagent le **même noyau**, et un conteneur fait pour Linux a besoin d'un noyau Linux.
+Les conteneurs sont créés, démarrés et isolés par un **moteur de conteneurs** (Docker, Podman), un programme installé sur la machine, comme l'hyperviseur pour les machines virtuelles. Mais le moteur ne simule rien : les programmes des conteneurs s'adressent **directement au noyau de l'hôte**. Pas de matériel simulé, pas de système entier à démarrer : un conteneur démarre comme un programme, et une machine en fait tourner bien plus que de machines virtuelles. En échange, l'isolation est moins forte, puisque tous les conteneurs partagent le **même noyau**, et un conteneur fait pour Linux a besoin d'un noyau Linux.
 
-> 💡 **Remarque.** Sur Mac ou sous Windows, il n'y a pas de noyau Linux. L'outil de conteneurs y fait donc tourner une petite machine virtuelle Linux, qui accueille les conteneurs : machines virtuelles et conteneurs se combinent déjà sur votre poste.
+> 💡 **Remarque.** Sur Mac ou sous Windows, il n'y a pas de noyau Linux. Le moteur de conteneurs y fait donc tourner une petite machine virtuelle Linux, qui accueille les conteneurs : machines virtuelles et conteneurs se combinent déjà sur votre poste.
 
 ## Machine virtuelle ou conteneur
 
@@ -80,7 +87,7 @@ lesson: assets/vm-containers.scene.json
 step: dev-prod
 ```
 
-Une copie du même conteneur tourne sur le serveur, quel que soit le Node.js qui y est installé : l'appli n'en dépend plus. Sur le poste et en production, c'est-à-dire sur le serveur des vrais utilisateurs, **la même appli avec les mêmes versions** : beaucoup moins de surprises. L'outil de conteneurs le plus connu s'appelle **Docker** ; le contenu [Pourquoi les conteneurs](https://byte-layers.com/fr/bits/containers-why) le présente, avec les images et les registres qui permettent de partager ces boîtes, et ce qu'un conteneur ne règle pas.
+Le serveur a lui aussi un moteur de conteneurs, et une copie du même conteneur y tourne, quel que soit le Node.js installé sur le serveur : l'appli n'en dépend plus. Sur le poste et en production, c'est-à-dire sur le serveur des vrais utilisateurs, **la même appli avec les mêmes versions** : beaucoup moins de surprises. Le moteur de conteneurs le plus connu s'appelle **Docker** ; le contenu [Pourquoi les conteneurs](https://byte-layers.com/fr/bits/containers-why) le présente, avec les images et les registres qui permettent de partager ces boîtes, et ce qu'un conteneur ne règle pas.
 
 > 📖 [Machine virtuelle (Wikipédia)](https://fr.wikipedia.org/wiki/Machine_virtuelle) · [Qu'est-ce qu'un conteneur ? (Docker, en anglais)](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)
 

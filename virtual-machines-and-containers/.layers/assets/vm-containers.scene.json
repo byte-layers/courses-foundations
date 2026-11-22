@@ -19,7 +19,7 @@
   },
   {
    "tone": "g",
-   "label": "runtime ou outil"
+   "label": "programme ou outil"
   },
   {
    "tone": "b",
@@ -136,9 +136,14 @@
    "kind": "program",
    "in": "sk",
    "at": [
-    -0.65,
-    -0.65,
+    -0.1,
+    1.5,
     0.55
+   ],
+   "size": [
+    1.1,
+    1.1,
+    0.6
    ],
    "tone": "g",
    "title": "Node.js 18",
@@ -194,7 +199,27 @@
    ],
    "tone": "g",
    "title": "hyperviseur",
-   "detail": "L'**hyperviseur** est un programme qui simule des ordinateurs complets, et leur partage le vrai matériel."
+   "sub": "intégré ou installé",
+   "detail": "L'**hyperviseur** simule des ordinateurs complets et leur partage le vrai matériel. Il est soit **intégré au système** de la machine (*type 1* : KVM dans Linux, Hyper-V, VMware ESXi), soit un **logiciel installé** sur un système existant (*type 2* : VirtualBox, VMware Workstation)."
+  },
+  {
+   "id": "eng",
+   "kind": "layer",
+   "in": "hk",
+   "at": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "size": [
+    4.8,
+    4.8,
+    0.3
+   ],
+   "tone": "g",
+   "title": "moteur de conteneurs",
+   "sub": "Docker, Podman",
+   "detail": "Le **moteur de conteneurs** (Docker, Podman) est un programme installé sur la machine : il crée, démarre et isole les conteneurs. Les programmes dans les conteneurs, eux, s'adressent **directement au noyau de l'hôte** : le moteur ne simule rien."
   },
   {
    "id": "vm0hw",
@@ -305,11 +330,11 @@
   {
    "id": "c0",
    "kind": "layer",
-   "in": "hk",
+   "in": "eng",
    "at": [
     -1.05,
     1.85,
-    0.55
+    0.3
    ],
    "size": [
     1.2,
@@ -340,11 +365,11 @@
   {
    "id": "c1",
    "kind": "layer",
-   "in": "hk",
+   "in": "eng",
    "at": [
     0.4,
     0.4,
-    0.55
+    0.3
    ],
    "size": [
     1.2,
@@ -375,11 +400,11 @@
   {
    "id": "c2",
    "kind": "layer",
-   "in": "hk",
+   "in": "eng",
    "at": [
     1.85,
     -1.05,
-    0.55
+    0.3
    ],
    "size": [
     1.2,
@@ -408,12 +433,47 @@
    "detail": "Le programme qui tourne dans le conteneur, avec sa version de Node.js."
   },
   {
+   "id": "peng",
+   "kind": "layer",
+   "in": "pk",
+   "at": [
+    0.2,
+    0.2,
+    0.55
+   ],
+   "size": [
+    3.6,
+    2.4,
+    0.3
+   ],
+   "tone": "g",
+   "detail": "Le moteur de conteneurs, installé sur le poste."
+  },
+  {
+   "id": "seng",
+   "kind": "layer",
+   "in": "sk",
+   "at": [
+    -0.05,
+    -0.95,
+    0.55
+   ],
+   "size": [
+    3.4,
+    2.4,
+    0.3
+   ],
+   "tone": "g",
+   "detail": "Le moteur de conteneurs, installé sur le serveur."
+  },
+  {
    "id": "box",
    "kind": "layer",
+   "in": "peng",
    "at": [
-    -3.25,
-    2.25,
-    1.5
+    0.0,
+    0.0,
+    0.3
    ],
    "size": [
     3.0,
@@ -463,10 +523,11 @@
   {
    "id": "box2",
    "kind": "layer",
+   "in": "seng",
    "at": [
-    3.05,
-    -2.45,
-    1.5
+    0.0,
+    0.0,
+    0.3
    ],
    "size": [
     3.0,
@@ -691,10 +752,22 @@
     {
      "do": "scene",
      "show": [
+      "eng"
+     ],
+     "say": "Un programme, le moteur de conteneurs, est installé sur la machine.",
+     "ms": 900
+    },
+    {
+     "do": "wait",
+     "ms": 500
+    },
+    {
+     "do": "scene",
+     "show": [
       "c0",
       "c0app"
      ],
-     "say": "Un conteneur se pose directement sur le noyau de la machine.",
+     "say": "Il crée un conteneur : pas de matériel simulé, pas de noyau à lui.",
      "ms": 900
     },
     {
@@ -715,7 +788,7 @@
        "value": "1, partagé"
       }
      ],
-     "say": "Trois conteneurs, isolés les uns des autres, et un seul noyau, partagé.",
+     "say": "Trois conteneurs, isolés les uns des autres : leurs programmes utilisent tous le noyau de l'hôte.",
      "ms": 1000
     },
     {
@@ -744,6 +817,7 @@
     "shw",
     "sk",
     "snode",
+    "peng",
     "box",
     "bapp",
     "bnode"
@@ -770,11 +844,12 @@
     {
      "do": "scene",
      "show": [
+      "seng",
       "box2",
       "b2app",
       "b2node"
      ],
-     "say": "Une copie de la même boîte part sur le serveur.",
+     "say": "Le serveur a lui aussi un moteur de conteneurs : une copie de la même boîte y part.",
      "ms": 1200
     },
     {
@@ -787,6 +862,10 @@
       {
        "id": "box2",
        "label": "marche"
+      },
+      {
+       "id": "snode",
+       "label": "pas utilisé"
       }
      ],
      "hud": [
