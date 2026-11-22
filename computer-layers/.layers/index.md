@@ -230,7 +230,7 @@ open: ranger.sh
 files:
   ranger.sh: |
     #!/bin/bash
-    # range le dossier : photos, sauvegarde de la facture, tmp supprimé
+    # range le dossier
   IMG_001.jpg: ""
   IMG_002.jpg: ""
   facture.pdf: ""
