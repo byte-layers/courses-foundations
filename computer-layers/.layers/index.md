@@ -107,6 +107,35 @@ step: commandes
 
 Ces commandes, vous allez maintenant les taper vous-même, dans un terminal simulé, dans la page.
 
+## Taper vos premières commandes dans un terminal
+
+Le terminal du plateau tourne **dans la page** : rien ne touche votre ordinateur. Votre dossier personnel y contient deux dossiers, `Documents` et `Images`, et l'arbre, à côté du terminal, montre où vous en êtes.
+
+Tapez les commandes une par une, chacune suivie d'Entrée, et regardez ce que le terminal répond :
+
+1. `pwd`, qui affiche `/home/apprenant` : sur le plateau, vous êtes l'utilisateur `apprenant` ;
+2. `ls`, pour voir les deux dossiers ;
+3. `cd Documents`, puis `ls` à nouveau : le dossier courant a changé ;
+4. `cat notes.txt`, pour lire le fichier ;
+5. `mkdir projets`, puis `ls` : le nouveau dossier apparaît, dans le terminal et dans l'arbre.
+
+```playground
+runtime: shell
+title: Premières commandes
+cwd: "~"
+show: [files, terminal]
+files:
+  Documents/notes.txt: acheter du pain
+  Images/vacances.jpg: ""
+verify:
+  - label: le dossier `projets` existe dans `Documents`
+    dir: Documents/projets
+    hint: "entrez dans le dossier avec `cd Documents`, puis créez `projets` avec `mkdir projets`"
+solution: assets/premiers-pas.solution.sh
+```
+
+Seule la dernière commande laisse une trace dans le dossier : c'est elle que le contrôle vérifie. Les autres ne font que lire. Si une commande répond `No such file or directory`, le nom est mal écrit ou vous n'êtes pas dans le bon dossier : `pwd` vous dit où vous êtes.
+
 ## Ranger un dossier en commandes : mv, cp et rm
 
 Ranger un dossier, à la souris, c'est créer des dossiers, glisser des fichiers dedans, en copier, jeter ce qui ne sert plus. Dans le terminal, trois commandes de plus suffisent.
