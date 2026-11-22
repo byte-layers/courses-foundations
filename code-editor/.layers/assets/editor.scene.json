@@ -1,0 +1,367 @@
+{
+ "format": "bl-scenes/0.3",
+ "id": "code-editor",
+ "title": "De l'éditeur de texte à l'éditeur de code",
+ "lang": "fr",
+ "kit": "feuillete",
+ "entities": [
+  {
+   "id": "you",
+   "kind": "actor",
+   "at": [
+    8.5,
+    3.5
+   ],
+   "label": "vous"
+  },
+  {
+   "id": "notepad",
+   "kind": "node",
+   "at": [
+    -1.25,
+    3.25
+   ],
+   "tone": "v",
+   "title": "éditeur de texte",
+   "sub": "Bloc-notes, TextEdit",
+   "detail": "Un **éditeur de texte** enregistre les caractères que vous tapez, sans mise en forme. Celui du système suffit pour écrire un script, mais il ne vous aide en rien."
+  },
+  {
+   "id": "term",
+   "kind": "node",
+   "at": [
+    3.25,
+    -1.25
+   ],
+   "tone": "i",
+   "title": "terminal",
+   "detail": "Le **terminal**, dans sa propre fenêtre : c'est là que vous lancez le script."
+  },
+  {
+   "id": "fiche",
+   "kind": "file",
+   "at": [
+    -4.0,
+    -4.0
+   ],
+   "tone": "y",
+   "title": "fiche.sh",
+   "icon": "sh",
+   "detail": "Le script, rangé sur le disque. L'éditeur l'écrit, `bash` le lit : les deux travaillent sur **le même fichier**."
+  },
+  {
+   "id": "ide",
+   "kind": "zone",
+   "at": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    7,
+    6
+   ],
+   "label": "éditeur de code"
+  },
+  {
+   "id": "code",
+   "kind": "node",
+   "in": "ide",
+   "at": [
+    -1.3,
+    0.9
+   ],
+   "tone": "v",
+   "title": "zone d'édition",
+   "sub": "couleurs · n° de ligne",
+   "detail": "La **zone d'édition** : le fichier ouvert, en couleurs, avec les numéros de ligne. Un onglet par fichier ouvert."
+  },
+  {
+   "id": "iterm",
+   "kind": "node",
+   "in": "ide",
+   "at": [
+    1.4,
+    -0.8
+   ],
+   "tone": "i",
+   "title": "terminal intégré",
+   "detail": "Le **terminal intégré** : un vrai terminal, ouvert sur le dossier, dans la même fenêtre que la zone d'édition."
+  }
+ ],
+ "steps": [
+  {
+   "id": "bloc-notes",
+   "label": "Bloc-notes",
+   "title": "Deux fenêtres, aucune aide",
+   "body": [
+    "Vous écrivez `fiche.sh` dans l'éditeur de texte du système, vous l'enregistrez, puis vous passez dans le terminal pour le lancer."
+   ],
+   "labels": "left",
+   "show": [
+    "you",
+    "notepad",
+    "term",
+    "fiche"
+   ],
+   "links": [
+    {
+     "from": "you",
+     "to": "notepad",
+     "dashed": true
+    },
+    {
+     "from": "you",
+     "to": "term",
+     "dashed": true
+    },
+    {
+     "from": "notepad",
+     "to": "fiche"
+    },
+    {
+     "from": "term",
+     "to": "fiche",
+     "dashed": true
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "editor",
+     "title": "fiche.sh — Bloc-notes",
+     "lang": "text",
+     "lines": [
+      "#!/bin/bash",
+      "# fiche.sh : la fiche de ma machine",
+      "echo \"Machine : $(hostname)\"",
+      "echo \"Utilisateur : $(whoami)",
+      "echo \"Date : $(date)\"",
+      "df -h ~"
+     ]
+    },
+    {
+     "kind": "terminal",
+     "title": "alice@pc-alice — bash",
+     "prompt": "alice@pc-alice",
+     "cwd": "~/byte-layers/foundations"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 700
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "notepad",
+      "fiche"
+     ],
+     "label": "enregistrer",
+     "explain": [
+      "Vous tapez le script dans l'**éditeur de texte** : tout a la même couleur, rien ne ressort.",
+      "Vous l'enregistrez : l'éditeur écrit `fiche.sh` sur le disque."
+     ]
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "you",
+       "at": [
+        8.0,
+        2.0
+       ]
+      }
+     ],
+     "say": "Pour le lancer, vous changez de fenêtre : le terminal.",
+     "ms": 900
+    },
+    {
+     "do": "type",
+     "text": "bash fiche.sh"
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "term",
+      "fiche"
+     ],
+     "label": "bash fiche.sh",
+     "kind": "read",
+     "explain": [
+      "Vous tapez `bash fiche.sh` dans le terminal.",
+      "`bash` exécute la ligne 3, puis s'arrête : un guillemet n'est pas fermé."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Machine : pc-alice"
+    },
+    {
+     "do": "output",
+     "text": "fiche.sh: line 5: unexpected EOF while looking for"
+    },
+    {
+     "do": "output",
+     "text": "  matching `\"'"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "you",
+       "at": [
+        8.5,
+        3.5
+       ]
+      }
+     ],
+     "say": "Le message parle de la ligne 5 ; la faute est à la ligne 4, et rien ne la signale dans l'éditeur.",
+     "ms": 900
+    },
+    {
+     "do": "wait",
+     "ms": 2200
+    }
+   ]
+  },
+  {
+   "id": "editeur-de-code",
+   "label": "Éditeur de code",
+   "title": "Une fenêtre, le numéro de ligne",
+   "body": [
+    "Dans un éditeur de code, le même fichier s'affiche en couleurs, et le terminal est dans la même fenêtre."
+   ],
+   "labels": "left",
+   "show": [
+    "you",
+    "ide",
+    "code",
+    "iterm",
+    "fiche"
+   ],
+   "links": [
+    {
+     "from": "you",
+     "to": "code",
+     "dashed": true
+    },
+    {
+     "from": "you",
+     "to": "iterm",
+     "dashed": true
+    },
+    {
+     "from": "code",
+     "to": "fiche"
+    },
+    {
+     "from": "iterm",
+     "to": "fiche",
+     "dashed": true
+    }
+   ],
+   "widgets": [
+    {
+     "kind": "editor",
+     "title": "fiche.sh — éditeur de code",
+     "lang": "bash",
+     "lines": [
+      "#!/bin/bash",
+      "# fiche.sh : la fiche de ma machine",
+      "echo \"Machine : $(hostname)\"",
+      "echo \"Utilisateur : $(whoami)",
+      "echo \"Date : $(date)\"",
+      "df -h ~"
+     ]
+    },
+    {
+     "kind": "terminal",
+     "title": "alice@pc-alice — bash",
+     "prompt": "alice@pc-alice",
+     "cwd": "~/byte-layers/foundations"
+    }
+   ],
+   "script": [
+    {
+     "do": "wait",
+     "ms": 900
+    },
+    {
+     "do": "type",
+     "text": "bash fiche.sh"
+    },
+    {
+     "do": "send",
+     "path": [
+      "you",
+      "iterm",
+      "fiche"
+     ],
+     "label": "bash fiche.sh",
+     "kind": "read",
+     "explain": [
+      "Sans quitter la fenêtre, vous lancez le script dans le **terminal intégré**.",
+      "`bash` lit le même fichier, et bute au même endroit."
+     ]
+    },
+    {
+     "do": "output",
+     "text": "Machine : pc-alice"
+    },
+    {
+     "do": "output",
+     "text": "fiche.sh: line 5: unexpected EOF while looking for"
+    },
+    {
+     "do": "output",
+     "text": "  matching `\"'"
+    },
+    {
+     "do": "prompt"
+    },
+    {
+     "do": "line",
+     "n": 5
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "code",
+       "label": "ligne 5"
+      }
+     ],
+     "say": "Les numéros de ligne mènent tout droit à la ligne 5 citée par bash."
+    },
+    {
+     "do": "wait",
+     "ms": 1200
+    },
+    {
+     "do": "line",
+     "n": 4
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "code",
+       "label": "guillemet oublié, ligne 4"
+      }
+     ],
+     "say": "Juste au-dessus, la ligne 4 : son guillemet de fin manque."
+    },
+    {
+     "do": "wait",
+     "ms": 2400
+    }
+   ]
+  }
+ ]
+}
