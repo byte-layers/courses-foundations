@@ -119,22 +119,13 @@ Le lab qui suit ce contenu vous fait installer un runtime et lancer votre premie
 
 > 📖 [Qu'est-ce que JavaScript ? (MDN)](https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/What_is_JavaScript) · [Introduction à Node.js (en anglais)](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs) · [Compiler et lancer un premier programme Java (Oracle, en anglais)](https://dev.java/learn/getting-started/) · [Les concepts de webpack (en anglais)](https://webpack.js.org/concepts/)
 
-## Récap
-
-- Le **code source** est un texte écrit par une personne ; le processeur n'exécute que du **code machine**.
-- **Interprété** : un programme, l'interpréteur, lit le code source ligne à ligne et le fait exécuter ; une modification se voit au lancement suivant.
-- **Compilé** : le compilateur traduit tout le code source en un **binaire** ; le noyau le charge et le processeur l'exécute sans programme pour le lire, mais il faut recompiler après chaque modification, et le binaire ne marche que pour un processeur et un système.
-- **Bytecode** : Java compile vers un code intermédiaire, que la **machine virtuelle Java** lit sur chaque système.
-- Le **runtime**, c'est le programme qu'il faut installer pour en exécuter un autre : `bash`, la JVM, Node.js.
-
-Jusqu'ici, chaque programme tourne en entier sur votre machine. Ceux que vous utilisez tous les jours, un site web ou une application de banque, se répartissent souvent entre votre machine et d'autres : c'est l'objet du contenu [Les architectures d'un programme](https://byte-layers.com/fr/bits/program-architectures).
-
-Trois questions pour vérifier ce que vous avez retenu.
+## Trois questions pour vérifier ce que vous avez retenu
 
 ```quiz
 title: "Compilé ou interprété"
 tracksProgress: false
 showNotice: false
+place: stage
 questions:
   - prompt: "Vous modifiez une ligne d'un script `bash`, puis vous le relancez. Que se passe-t-il ?"
     answers:
@@ -158,6 +149,16 @@ questions:
     correct: 3
     explanation: "Un programme interprété ou en bytecode a besoin du programme qui le lit : bash pour un script, la JVM pour Java, Node.js pour du JavaScript. C'est son runtime."
 ```
+
+## Récap
+
+- Le **code source** est un texte écrit par une personne ; le processeur n'exécute que du **code machine**.
+- **Interprété** : un programme, l'interpréteur, lit le code source ligne à ligne et le fait exécuter ; une modification se voit au lancement suivant.
+- **Compilé** : le compilateur traduit tout le code source en un **binaire** ; le noyau le charge et le processeur l'exécute sans programme pour le lire, mais il faut recompiler après chaque modification, et le binaire ne marche que pour un processeur et un système.
+- **Bytecode** : Java compile vers un code intermédiaire, que la **machine virtuelle Java** lit sur chaque système.
+- Le **runtime**, c'est le programme qu'il faut installer pour en exécuter un autre : `bash`, la JVM, Node.js.
+
+Jusqu'ici, chaque programme tourne en entier sur votre machine. Ceux que vous utilisez tous les jours, un site web ou une application de banque, se répartissent souvent entre votre machine et d'autres : c'est l'objet du contenu [Les architectures d'un programme](https://byte-layers.com/fr/bits/program-architectures).
 
 ```ack
 J'ai compris
