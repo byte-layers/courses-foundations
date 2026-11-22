@@ -63,7 +63,9 @@ step: editeur-de-code
 
 Le terminal est **dans la même fenêtre**, et les **numéros de ligne** mènent tout droit à la ligne citée par `bash`. On ajoute le guillemet, on enregistre, on relance, sans changer de fenêtre.
 
-Les **couleurs** distinguent les commandes, les textes entre guillemets et les commentaires : on parle de **coloration syntaxique**. Dans un vrai éditeur de code, le guillemet oublié se voit aussi à elles : les lignes qui suivent la ligne 4 changent de couleur. Le schéma, qui colore chaque ligne à part, ne le montre pas.
+Les **couleurs** distinguent les commandes, les textes entre guillemets et les commentaires : on parle de **coloration syntaxique**. Le guillemet oublié se voit aussi à elles : à partir de la ligne 4, tout prend la couleur d'un texte entre guillemets, et l'éditeur souligne la faute avant même qu'on lance le script. Voici à quoi ressemble la fenêtre :
+
+![La fenêtre d'un éditeur de code : l'explorateur à gauche, fiche.sh ouvert en couleurs avec la ligne 4 soulignée, le terminal intégré en bas avec l'erreur de bash](assets/ide-window.svg)
 
 ## Les outils essentiels d'un IDE
 

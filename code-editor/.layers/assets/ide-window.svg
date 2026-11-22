@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" width="760" height="440" role="img" aria-labelledby="t d">
+  <title id="t">La fenêtre d'un éditeur de code</title>
+  <desc id="d">Une seule fenêtre : à gauche l'explorateur du dossier foundations, au centre fiche.sh ouvert en couleurs avec les numéros de ligne et un guillemet souligné à la ligne 4, en bas le terminal intégré qui affiche l'erreur de bash.</desc>
+  <style>
+    .ui { font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; }
+    .s { font-family: Manrope, system-ui, sans-serif; }
+    .code { font-size: 13px; }
+    .n { fill: #6c6f93; } .c { fill: #7f849c; font-style: italic; } .k { fill: #89b4fa; } .str { fill: #a6e3a1; } .t { fill: #cdd6f4; }
+    .lbl { font-size: 11px; letter-spacing: .06em; fill: #9399b2; }
+    .tag { font-size: 12px; font-weight: 700; fill: #1e1e2e; }
+  </style>
+  <!-- fenêtre -->
+  <rect x="0.5" y="0.5" width="759" height="439" rx="10" fill="#1e1e2e" stroke="#45475a"/>
+  <path d="M0.5 10.5a10 10 0 0 1 10-10h739a10 10 0 0 1 10 10V32H0.5z" fill="#181825"/>
+  <circle cx="20" cy="16" r="5" fill="#f38ba8"/><circle cx="38" cy="16" r="5" fill="#f9e2af"/><circle cx="56" cy="16" r="5" fill="#a6e3a1"/>
+  <text x="380" y="20" text-anchor="middle" class="ui" font-size="12" fill="#9399b2">fiche.sh — foundations</text>
+  <!-- explorateur -->
+  <rect x="0.5" y="32" width="170" height="384" fill="#181825"/>
+  <text x="14" y="54" class="ui lbl">EXPLORATEUR</text>
+  <text x="14" y="78" class="ui" font-size="12" fill="#cdd6f4">⌄ foundations</text>
+  <rect x="8" y="88" width="156" height="22" rx="4" fill="#313244"/>
+  <text x="30" y="103" class="ui" font-size="12" fill="#f9e2af">$</text><text x="44" y="103" class="ui" font-size="12" fill="#cdd6f4">fiche.sh</text>
+  <text x="30" y="127" class="ui" font-size="12" fill="#89b4fa">#</text><text x="44" y="127" class="ui" font-size="12" fill="#bac2de">notes.md</text>
+  <line x1="170.5" y1="32" x2="170.5" y2="416" stroke="#313244"/>
+  <!-- onglets -->
+  <rect x="171" y="32" width="588" height="30" fill="#181825"/>
+  <rect x="171" y="32" width="120" height="30" fill="#1e1e2e"/>
+  <rect x="171" y="32" width="120" height="2" fill="#f5c2e7"/>
+  <text x="186" y="52" class="ui" font-size="12" fill="#cdd6f4">fiche.sh  ×</text>
+  <!-- zone d'édition -->
+  <g class="ui code">
+    <text x="194" y="88" class="n" text-anchor="end">1</text><text x="210" y="88" class="c">#!/bin/bash</text>
+    <text x="194" y="110" class="n" text-anchor="end">2</text><text x="210" y="110" class="c"># fiche.sh : la fiche de ma machine</text>
+    <text x="194" y="132" class="n" text-anchor="end">3</text><text x="210" y="132"><tspan class="k">echo</tspan><tspan class="str"> "Machine : $(hostname)"</tspan></text>
+    <rect x="171" y="141" width="588" height="20" fill="#f38ba8" fill-opacity=".08"/>
+    <text x="194" y="154" class="n" text-anchor="end">4</text><text x="210" y="154"><tspan class="k">echo</tspan><tspan class="str"> "Utilisateur : $(whoami)</tspan></text>
+    <text x="194" y="176" class="n" text-anchor="end">5</text><text x="210" y="176" class="str">echo "Date : $(date)"</text>
+    <text x="194" y="198" class="n" text-anchor="end">6</text><text x="210" y="198" class="str">df -h ~</text>
+  </g>
+  <!-- vague rouge sous le guillemet ouvrant de la ligne 4 -->
+  <path d="M250 158 q2 3 4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0 t4 0" fill="none" stroke="#f38ba8" stroke-width="1.4"/>
+  <!-- terminal intégré -->
+  <line x1="171" y1="246.5" x2="759" y2="246.5" stroke="#45475a"/>
+  <text x="186" y="268" class="ui lbl">TERMINAL</text>
+  <rect x="186" y="272" width="62" height="2" fill="#f5c2e7"/>
+  <g class="ui" font-size="12">
+    <text x="186" y="298"><tspan fill="#a6e3a1">alice@pc-alice</tspan><tspan fill="#cdd6f4">:</tspan><tspan fill="#89b4fa">~/byte-layers/foundations</tspan><tspan fill="#cdd6f4">$ bash fiche.sh</tspan></text>
+    <text x="186" y="318" fill="#cdd6f4">Machine : pc-alice</text>
+    <text x="186" y="338" fill="#f38ba8">fiche.sh: line 5: unexpected EOF while looking for matching `"'</text>
+    <text x="186" y="358"><tspan fill="#a6e3a1">alice@pc-alice</tspan><tspan fill="#cdd6f4">:</tspan><tspan fill="#89b4fa">~/byte-layers/foundations</tspan><tspan fill="#cdd6f4">$ </tspan><tspan fill="#f5e0dc">▍</tspan></text>
+  </g>
+  <!-- barre d'état -->
+  <path d="M0.5 416H759.5v13.5a10 10 0 0 1-10 10H10.5a10 10 0 0 1-10-10z" fill="#8f93f5"/>
+  <text x="14" y="432" class="ui" font-size="11" fill="#1e1e2e">⚠ 1 problème</text>
+  <text x="746" y="432" text-anchor="end" class="ui" font-size="11" fill="#1e1e2e">Ln 4 · Bash</text>
+  <!-- repères des quatre outils -->
+  <g class="s">
+    <rect x="22" y="380" width="128" height="24" rx="12" fill="#f5c2e7"/><text x="86" y="396" text-anchor="middle" class="tag">explorateur</text>
+    <rect x="600" y="70" width="140" height="24" rx="12" fill="#f5c2e7"/><text x="670" y="86" text-anchor="middle" class="tag">zone d'édition</text>
+    <rect x="600" y="256" width="140" height="24" rx="12" fill="#f5c2e7"/><text x="670" y="272" text-anchor="middle" class="tag">terminal intégré</text>
+    <rect x="560" y="146" width="180" height="24" rx="12" fill="#a6e3a1"/><text x="650" y="162" text-anchor="middle" class="tag">support du langage</text>
+  </g>
+</svg>
