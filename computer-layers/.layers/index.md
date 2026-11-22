@@ -306,7 +306,7 @@ questions:
       - "Le shell affiche le texte ; le terminal comprend les commandes"
     correct: 1
     explanation: "Le terminal est la fenêtre de texte, il ne comprend rien à ce qu'il transmet. Le shell, par exemple bash, lit la ligne et lance le bon programme."
-  - prompt: "Pourquoi retire-t-on l'interface graphique d'un serveur ?"
+  - prompt: "Pourquoi retire-t-on souvent l'interface graphique d'un serveur ?"
     answers:
       - "Parce qu'un serveur n'a pas de noyau"
       - "Parce que personne ne regarde son écran : sa mémoire sert à son travail, et il y a moins de logiciels à mettre à jour"
