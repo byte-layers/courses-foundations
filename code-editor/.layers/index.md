@@ -18,24 +18,26 @@ Un programme est un texte, et il existe des outils faits pour écrire ce texte-l
 
 Un script peut s'écrire dans n'importe quel outil qui enregistre du texte. Mais tous ne conviennent pas, et certains aident bien plus que d'autres : pour taper, pour trouver une faute, pour lancer le programme. Ce contenu présente l'outil que les développeurs utilisent.
 
-## Traitement de texte, éditeur de texte, éditeur de code
+## Trois outils, trois usages
 
-Tapons la même ligne, `echo "Bonjour"`, dans trois outils, et regardons ce que chacun enregistre.
+Un script et un document ne s'écrivent pas avec le même outil. Voici trois outils, et le fichier que chacun enregistre.
 
 ```scene
 lesson: assets/ide.scene.json
 step: traitement
 ```
 
-Word ou LibreOffice Writer sont des **traitements de texte** : ils enregistrent vos mots **et leur mise en forme** (gras, polices, marges), et remplacent les guillemets droits `"` par des guillemets typographiques `« »`. Ce fichier n'est plus un texte que `bash` sait lire.
+Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**. Certains s'ouvrent dans le terminal (`nano`, `vi`), d'autres dans une fenêtre (le Bloc-notes sous Windows, TextEdit sous macOS, gedit sous Linux). C'est assez pour un petit script.
 
-Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**. Chaque système en a un : le Bloc-notes sous Windows, TextEdit sous macOS.
+Un **traitement de texte** (Word, LibreOffice Writer) fait des **documents** : le texte, sa mise en forme, les commentaires, la mise en page pour l'impression. Un script n'y passe pas bien : les guillemets droits `"` deviennent des guillemets typographiques `« »`, que `bash` ne reconnaît pas.
 
-| Outil | Ce qu'il enregistre | Pour un programme |
-|---|---|---|
-| **Traitement de texte** (Word, Writer) | vos mots et leur mise en forme | ne convient pas |
-| **Éditeur de texte** (Bloc-notes, TextEdit) | les caractères tapés, sans mise en forme | convient, sans aide |
-| **Éditeur de code** | les caractères tapés, sans mise en forme | convient, et vous aide à écrire |
+Un **éditeur de code** enregistre le même texte brut qu'un éditeur de texte, et ajoute des **outils pour programmer** : les erreurs soulignées, un terminal intégré pour lancer le script, l'exécution pas à pas. Il en existe en fenêtre (VS Code) et dans le terminal (Neovim, avec des extensions).
+
+| Outil | Exemples | Ce qu'il enregistre | Pour un script |
+|---|---|---|---|
+| **Éditeur de texte** | nano, vi, Bloc-notes, gedit | du texte brut | convient, sans aide |
+| **Traitement de texte** | Word, Writer | un document mis en forme | ne convient pas |
+| **Éditeur de code** | VS Code, Neovim | du texte brut | convient, et aide à écrire, lancer, déboguer |
 
 > ⚠️ **Si vous utilisez TextEdit**, il se comporte par défaut comme un traitement de texte : texte enrichi, guillemets typographiques, corrections automatiques. Avant d'y écrire un script, passez le document en texte brut (**Format > Convertir au format texte**) et décochez les guillemets et tirets intelligents dans **TextEdit > Réglages**.
 

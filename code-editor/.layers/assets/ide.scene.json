@@ -15,134 +15,86 @@
   },
   {
    "tone": "g",
-   "label": "aide de l'éditeur"
+   "label": "outils de l'IDE"
   }
  ],
  "entities": [
   {
-   "id": "wp",
+   "id": "te",
    "kind": "node",
    "at": [
     -11.5,
-    -5.5
+    -6.2
    ],
    "tone": "v",
    "size": [
-    8.4,
+    8.6,
+    2.2,
+    1
+   ],
+   "title": "éditeur de texte",
+   "sub": "nano, vi · Bloc-notes, gedit",
+   "detail": "Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**. Certains s'ouvrent dans le terminal (`nano`, `vi`), d'autres dans une fenêtre (Bloc-notes, gedit)."
+  },
+  {
+   "id": "wp",
+   "kind": "node",
+   "at": [
+    0,
+    -6.2
+   ],
+   "tone": "v",
+   "size": [
+    8.6,
     2.2,
     1
    ],
    "title": "traitement de texte",
    "sub": "Word, Writer",
-   "detail": "Un **traitement de texte** met en forme un document : gras, polices, marges. Il enregistre tout cela avec vos mots."
-  },
-  {
-   "id": "te",
-   "kind": "node",
-   "at": [
-    0,
-    -5.5
-   ],
-   "tone": "v",
-   "size": [
-    8.4,
-    2.2,
-    1
-   ],
-   "title": "éditeur de texte",
-   "sub": "Bloc-notes, TextEdit",
-   "detail": "Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**."
+   "detail": "Un **traitement de texte** fait partie d'une suite bureautique : il sert à écrire des documents mis en forme."
   },
   {
    "id": "ce",
    "kind": "node",
    "at": [
     11.5,
-    -5.5
+    -6.2
    ],
    "tone": "v",
    "size": [
-    8.4,
+    8.6,
     2.2,
     1
    ],
-   "title": "éditeur de code",
-   "sub": "VS Code",
-   "detail": "Un **éditeur de code** enregistre le même texte brut, et aide à écrire et à lancer le programme."
-  },
-  {
-   "id": "f-wp",
-   "kind": "layer",
-   "at": [
-    -11.5,
-    2.2
-   ],
-   "tone": "r",
-   "size": [
-    9.4,
-    6.4,
-    1
-   ],
-   "title": "bonjour.docx"
-  },
-  {
-   "id": "f-wp-txt",
-   "kind": "file",
-   "at": [
-    0,
-    -0.4
-   ],
-   "tone": "y",
-   "size": [
-    7.6,
-    1.2,
-    1
-   ],
-   "in": "f-wp",
-   "title": "echo « Bonjour »",
-   "detail": "Les guillemets droits sont devenus des guillemets **typographiques** : `bash` ne les prend pas pour des guillemets."
-  },
-  {
-   "id": "f-wp-fmt",
-   "kind": "program",
-   "at": [
-    0,
-    1.4
-   ],
-   "tone": "r",
-   "size": [
-    7.6,
-    1.2,
-    1
-   ],
-   "in": "f-wp",
-   "title": "police, gras, marges…"
+   "title": "éditeur de code, IDE",
+   "sub": "VS Code · Neovim",
+   "detail": "Un **éditeur de code** (ou **IDE**) enregistre le même texte brut qu'un éditeur de texte, et ajoute des outils pour programmer. Il en existe en fenêtre (VS Code) et dans le terminal (Neovim avec des extensions)."
   },
   {
    "id": "f-te",
    "kind": "layer",
    "at": [
-    0,
-    2.2
+    -11.5,
+    2.4
    ],
    "tone": "y",
    "size": [
     9.4,
-    6.4,
+    9.0,
     1
    ],
    "title": "bonjour.sh"
   },
   {
-   "id": "f-te-txt",
+   "id": "f-te-1",
    "kind": "file",
    "at": [
     0,
-    -0.4
+    -1.6
    ],
    "tone": "y",
    "size": [
-    7.6,
+    7.8,
     1.2,
     1
    ],
@@ -150,30 +102,109 @@
    "title": "echo \"Bonjour\""
   },
   {
+   "id": "f-wp",
+   "kind": "layer",
+   "at": [
+    0,
+    2.4
+   ],
+   "tone": "r",
+   "size": [
+    9.4,
+    9.0,
+    1
+   ],
+   "title": "mon-document.docx"
+  },
+  {
+   "id": "f-wp-1",
+   "kind": "file",
+   "at": [
+    0,
+    -1.6
+   ],
+   "tone": "y",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "le texte"
+  },
+  {
+   "id": "f-wp-2",
+   "kind": "program",
+   "at": [
+    0,
+    0.0
+   ],
+   "tone": "r",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "mise en forme"
+  },
+  {
+   "id": "f-wp-3",
+   "kind": "program",
+   "at": [
+    0,
+    1.6
+   ],
+   "tone": "r",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "commentaires, notes"
+  },
+  {
+   "id": "f-wp-4",
+   "kind": "program",
+   "at": [
+    0,
+    3.2
+   ],
+   "tone": "r",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-wp",
+   "title": "mise en page, impression"
+  },
+  {
    "id": "f-ce",
    "kind": "layer",
    "at": [
     11.5,
-    2.2
+    2.4
    ],
    "tone": "y",
    "size": [
     9.4,
-    6.4,
+    9.0,
     1
    ],
    "title": "bonjour.sh"
   },
   {
-   "id": "f-ce-txt",
+   "id": "f-ce-1",
    "kind": "file",
    "at": [
     0,
-    -0.4
+    -1.6
    ],
    "tone": "y",
    "size": [
-    7.6,
+    7.8,
     1.2,
     1
    ],
@@ -181,21 +212,55 @@
    "title": "echo \"Bonjour\""
   },
   {
-   "id": "f-ce-help",
+   "id": "f-ce-2",
    "kind": "program",
    "at": [
     0,
-    1.4
+    0.0
    ],
    "tone": "g",
    "size": [
-    7.6,
+    7.8,
     1.2,
     1
    ],
    "in": "f-ce",
-   "title": "couleurs, n° de ligne, terminal",
-   "detail": "Cette aide est dans l'**éditeur**, pas dans le fichier : le fichier reste du texte brut."
+   "title": "erreurs soulignées",
+   "detail": "On parle de **linting** : l'éditeur relit le script et souligne les fautes avant qu'on le lance."
+  },
+  {
+   "id": "f-ce-3",
+   "kind": "program",
+   "at": [
+    0,
+    1.6
+   ],
+   "tone": "g",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "terminal intégré : lancer",
+   "detail": "Le script se lance dans un **terminal intégré**, ou d'un clic, sans changer de fenêtre."
+  },
+  {
+   "id": "f-ce-4",
+   "kind": "program",
+   "at": [
+    0,
+    3.2
+   ],
+   "tone": "g",
+   "size": [
+    7.8,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "pas à pas",
+   "detail": "Le **débogueur** exécute le script ligne par ligne, pour suivre ce qu'il fait."
   },
   {
    "id": "win",
@@ -416,13 +481,13 @@
   {
    "id": "traitement",
    "label": "Trois outils",
-   "title": "Ce que chaque outil enregistre",
+   "title": "Trois outils, trois usages",
    "body": [
-    "La même ligne, `echo \"Bonjour\"`, tapée dans trois outils. Seul le fichier du traitement de texte n'est pas du texte brut."
+    "Un script et un document ne s'écrivent pas avec le même outil. Chaque colonne montre un outil et le fichier qu'il enregistre."
    ],
    "show": [
-    "wp",
     "te",
+    "wp",
     "ce"
    ],
    "links": [],
@@ -434,41 +499,8 @@
     {
      "do": "scene",
      "show": [
-      "f-wp",
-      "f-wp-txt",
-      "f-wp-fmt"
-     ],
-     "link": [
-      {
-       "from": "wp",
-       "to": "f-wp"
-      }
-     ],
-     "say": "Le traitement de texte enregistre vos mots et leur mise en forme, et change les guillemets en « »."
-    },
-    {
-     "do": "wait",
-     "ms": 1800
-    },
-    {
-     "do": "scene",
-     "set": [
-      {
-       "id": "wp",
-       "label": "pas pour un programme"
-      }
-     ],
-     "say": "Pour un document, très bien ; pour un programme, non : ce n'est plus du texte brut."
-    },
-    {
-     "do": "wait",
-     "ms": 1800
-    },
-    {
-     "do": "scene",
-     "show": [
       "f-te",
-      "f-te-txt"
+      "f-te-1"
      ],
      "link": [
       {
@@ -476,21 +508,56 @@
        "to": "f-te"
       }
      ],
-     "say": "L'éditeur de texte enregistre les caractères tapés, rien de plus : du texte brut."
+     "say": "Un éditeur de texte, dans le terminal ou dans une fenêtre : il enregistre le script, rien d'autre."
     },
     {
      "do": "wait",
-     "ms": 1400
+     "ms": 1200
     },
     {
      "do": "scene",
      "set": [
       {
        "id": "te",
-       "label": "convient, sans aide"
+       "label": "que le texte"
       }
      ],
-     "say": "Il convient pour un programme, mais il ne vous aide en rien."
+     "say": "Du texte brut : c'est assez pour un petit script."
+    },
+    {
+     "do": "wait",
+     "ms": 1600
+    },
+    {
+     "do": "scene",
+     "show": [
+      "f-wp",
+      "f-wp-1",
+      "f-wp-2",
+      "f-wp-3",
+      "f-wp-4"
+     ],
+     "link": [
+      {
+       "from": "wp",
+       "to": "f-wp"
+      }
+     ],
+     "say": "Un traitement de texte fait des documents : le texte, sa mise en forme, les commentaires, l'impression."
+    },
+    {
+     "do": "wait",
+     "ms": 1600
+    },
+    {
+     "do": "scene",
+     "set": [
+      {
+       "id": "wp",
+       "label": "pas pour un script"
+      }
+     ],
+     "say": "Un script n'y passe pas bien : il change les guillemets et ajoute sa mise en forme."
     },
     {
      "do": "wait",
@@ -500,7 +567,7 @@
      "do": "scene",
      "show": [
       "f-ce",
-      "f-ce-txt"
+      "f-ce-1"
      ],
      "link": [
       {
@@ -508,24 +575,26 @@
        "to": "f-ce"
       }
      ],
-     "say": "L'éditeur de code enregistre le même texte brut…"
+     "say": "Un éditeur de code enregistre le même script, en texte brut…"
     },
     {
      "do": "wait",
-     "ms": 1400
+     "ms": 1200
     },
     {
      "do": "scene",
      "show": [
-      "f-ce-help"
+      "f-ce-2",
+      "f-ce-3",
+      "f-ce-4"
      ],
      "set": [
       {
        "id": "ce",
-       "label": "convient, et vous aide"
+       "label": "écrire, lancer, déboguer"
       }
      ],
-     "say": "…et vous aide à l'écrire et à le lancer : couleurs, numéros de ligne, terminal."
+     "say": "…et ajoute des outils : erreurs soulignées, terminal intégré pour le lancer, exécution pas à pas."
     },
     {
      "do": "wait",
