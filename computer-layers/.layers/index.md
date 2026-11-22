@@ -7,11 +7,11 @@ tags:
   - os
   - terminal
 difficulty: beginner
-duration: 30
+duration: 40
 requires: "0.8.0"
 ---
 
-Un ordinateur est fait de couches posées les unes sur les autres, et chacune ne parle qu'à ses voisines. Vous saurez ce que fait chaque couche, pourquoi un serveur se passe d'interface graphique, ce que sont un terminal et un shell, à quoi ressemblent les premières commandes et ce qu'est un script. Ce contenu est écrit pour quelqu'un qui n'a jamais ouvert de terminal : chaque section a son schéma animé, que le bouton ▶ Jouer ouvre en grand, et trois sections vous font taper les commandes dans un terminal simulé, dans la page.
+Un ordinateur est fait de couches posées les unes sur les autres, et chacune ne parle qu'à ses voisines. Vous saurez ce que fait chaque couche, pourquoi un serveur se passe d'interface graphique, ce que sont un terminal et un shell, à quoi ressemblent les premières commandes et ce qu'est un script. Ce contenu est écrit pour quelqu'un qui n'a jamais ouvert de terminal : la plupart des sections ont leur schéma animé, que le bouton ▶ Jouer ouvre en grand, et trois sections vous font taper les commandes dans un terminal simulé, dans la page.
 
 **Prérequis** : aucun.
 
@@ -109,7 +109,7 @@ Ces commandes, vous allez maintenant les taper vous-même, dans un terminal simu
 
 ## Taper vos premières commandes dans un terminal
 
-Le terminal du plateau tourne **dans la page** : rien ne touche votre ordinateur. Votre dossier personnel y contient deux dossiers, `Documents` et `Images`, et l'arbre, à côté du terminal, montre où vous en êtes.
+Le terminal du plateau tourne **dans la page** : rien ne touche votre ordinateur. Votre dossier personnel y contient deux dossiers, `Documents` et `Images`, et l'arbre, à côté du terminal, montre ce que contient votre dossier personnel.
 
 Tapez les commandes une par une, chacune suivie d'Entrée, et regardez ce que le terminal répond :
 
@@ -146,9 +146,9 @@ Ranger un dossier, à la souris, c'est créer des dossiers, glisser des fichiers
 | `cp facture.pdf sauvegarde/` | copie `facture.pdf` dans `sauvegarde` : l'original reste en place (*copy*) |
 | `rm -r tmp` | supprime le dossier `tmp` et tout ce qu'il contient (*remove*, `-r` pour un dossier) |
 
-> ⚠️ **`rm` ne passe pas par la corbeille** : ce qu'il supprime est perdu. Sur le plateau, rien ne risque rien, et ↺ **Recommencer** remet le dossier comme au départ.
+> ⚠️ **`rm` ne passe pas par la corbeille** : ce qu'il supprime est perdu. Sur le plateau, vous ne risquez rien, et ↺ **Recommencer** remet le dossier comme au départ.
 
-Le dossier `rangement`, dans `~/byte-layers/foundations`, est en désordre : deux photos, une facture, des notes et un dossier `tmp` qui ne sert plus. Commencez par `ls` pour voir ce qu'il contient ; l'arbre, à côté du terminal, change à chaque commande.
+Le dossier `rangement`, dans `~/byte-layers/foundations`, est en désordre : deux photos, une facture, des notes et un dossier `tmp` qui ne sert plus. Commencez par `ls` pour voir ce qu'il contient ; l'arbre, à côté du terminal, change à chaque commande. Créez chaque dossier avec `mkdir` **avant** d'y déplacer ou d'y copier un fichier : sur le plateau, `mv` vers un dossier qui n'existe pas renomme le fichier au lieu de le ranger (un vrai terminal refuserait).
 
 ```playground
 runtime: shell
@@ -164,16 +164,13 @@ files:
 verify:
   - label: les deux photos sont dans un dossier `photos`
     file: [photos/IMG_001.jpg, photos/IMG_002.jpg]
-    hint: "créez le dossier avec `mkdir photos`, puis `mv IMG_001.jpg IMG_002.jpg photos/`"
+    hint: "créez le dossier avec `mkdir photos`, puis `mv IMG_001.jpg IMG_002.jpg photos/` ; si `ls` montre un fichier `photos` et non un dossier, ↺ Recommencer"
   - label: il ne reste plus de photo hors de `photos`
     absent: [IMG_001.jpg, IMG_002.jpg]
     hint: "`mv` déplace, `cp` copie : si une photo est encore là, déplacez-la avec `mv`"
-  - label: une copie de la facture est dans `sauvegarde`
-    file: sauvegarde/facture.pdf
-    hint: "créez le dossier avec `mkdir sauvegarde`, puis `cp facture.pdf sauvegarde/`"
-  - label: la facture d'origine est toujours là
-    file: facture.pdf
-    hint: "la facture s'est déplacée : remettez-la avec `mv sauvegarde/facture.pdf .`, puis copiez-la avec `cp`"
+  - label: la facture est copiée dans `sauvegarde`, l'originale reste en place
+    file: [sauvegarde/facture.pdf, facture.pdf]
+    hint: "créez le dossier avec `mkdir sauvegarde`, puis `cp facture.pdf sauvegarde/` ; si la facture s'est déplacée, remettez-la avec `mv sauvegarde/facture.pdf .` (le point désigne le dossier courant) ; si `ls` montre un fichier `sauvegarde`, ↺ Recommencer"
   - label: le dossier `tmp` est supprimé
     absent: tmp
     hint: "`rm -r tmp` supprime le dossier et ce qu'il contient"
@@ -200,7 +197,7 @@ Chaque ligne a un rôle précis.
 | Ligne | Rôle |
 |---|---|
 | `#!/bin/bash` | indique quel programme doit lire le fichier : ici `bash` |
-| `# mon premier programme` | un commentaire : le shell ignore toute ligne qui commence par `#`, elle sert au lecteur |
+| `# mon premier programme` | un commentaire : après la première, le shell ignore toute ligne qui commence par `#`, elle sert au lecteur |
 | `echo "Bonjour $USER !"` | `echo` affiche un texte ; `$USER` est une **variable**, remplacée par votre nom d'utilisateur |
 | `date` | affiche la date et l'heure, comme si vous tapiez la commande |
 | `mkdir -p ~/byte-layers/demo` | crée le dossier `demo` dans `byte-layers` ; l'option `-p` crée aussi `byte-layers` s'il n'existe pas encore |
@@ -217,9 +214,9 @@ Ces six lignes sont déjà un programme.
 
 ## Ranger un dossier avec un script, et le rejouer
 
-Le rangement de tout à l'heure, il faudrait le retaper chaque fois que le dossier se remet en désordre. Rangé dans un script, il se rejoue d'une seule commande. Sur le plateau, `ranger.sh` est ouvert dans un éditeur, au-dessus du terminal : écrivez-y, une par ligne, les commandes qui rangent le dossier, puis lancez-le dans le terminal avec `bash ranger.sh`.
+Le rangement de tout à l'heure, il faudrait le retaper chaque fois que le dossier se remet en désordre. Rangé dans un script, il se rejoue d'une seule commande. Sur le plateau, `ranger.sh` est ouvert dans un éditeur, au-dessus du terminal : écrivez-y, une par ligne, les commandes qui rangent le dossier, puis lancez-le dans le terminal avec `bash ranger.sh`. Cette forme demande à `bash` de lire le fichier : pas besoin de `chmod +x`, et `./ranger.sh` répondrait `Permission denied` tant que le fichier n'est pas exécutable.
 
-Utilisez `mkdir -p` plutôt que `mkdir` : le script doit pouvoir être relancé alors que les dossiers existent déjà, et `-p` ne dit rien dans ce cas.
+Utilisez `mkdir -p` plutôt que `mkdir` : le script doit pouvoir être relancé alors que les dossiers existent déjà, et `-p` évite alors un message d'erreur.
 
 ```playground
 runtime: shell
@@ -237,16 +234,16 @@ files:
   notes.txt: acheter du pain
   tmp/cache.bin: x
 verify:
-  - label: "`ranger.sh` contient les commandes du rangement"
+  - label: "`ranger.sh` contient au moins une commande `mv`"
     file: ranger.sh
     includes: /\bmv\b/
     hint: "écrivez dans l'éditeur les commandes de la section « Ranger un dossier en commandes », une par ligne"
-  - label: vous avez lancé le script, et le dossier est rangé
+  - label: le dossier est rangé
     file: [photos/IMG_001.jpg, photos/IMG_002.jpg, sauvegarde/facture.pdf]
-    hint: "lancez `bash ranger.sh` dans le terminal"
+    hint: "lancez `bash ranger.sh` dans le terminal ; si c'est fait, lisez ce qu'il a répondu : `mkdir -p` doit venir avant `mv` et `cp`"
   - label: rejoué sur un dossier en désordre tout neuf, le script le range aussi
-    run: "mkdir -p /tmp/essai/tmp && cd /tmp/essai && touch IMG_001.jpg IMG_002.jpg facture.pdf tmp/cache.bin && bash ~/byte-layers/foundations/rangement/ranger.sh && test -f photos/IMG_002.jpg && test -f sauvegarde/facture.pdf && test -f facture.pdf && test ! -e tmp"
-    hint: "le script doit tout faire seul : créer `photos` et `sauvegarde` avec `mkdir -p`, déplacer les photos, copier la facture, supprimer `tmp`"
+    run: "rm -rf /tmp/essai && mkdir -p /tmp/essai/tmp && cd /tmp/essai && touch IMG_001.jpg IMG_002.jpg facture.pdf tmp/cache.bin && bash ~/byte-layers/foundations/rangement/ranger.sh && test -f photos/IMG_002.jpg && test -f sauvegarde/facture.pdf && test -f facture.pdf && test ! -e tmp"
+    hint: "le script doit tout faire seul : créer `photos` et `sauvegarde` avec `mkdir -p`, déplacer les photos, copier la facture, supprimer `tmp` ; pas de `cd` ni de chemin en `~/` dans le script : il range le dossier où on le lance"
 solution: assets/ranger-script.solution.sh
 ```
 
@@ -263,6 +260,7 @@ Le dernier contrôle fait ce que vous feriez demain : il recrée un dossier en d
 - Un serveur se passe d'interface graphique : on s'y connecte avec `ssh` et on travaille dans le shell.
 - Le terminal affiche, le shell comprend. L'explorateur et le terminal font le même travail, l'un à la souris, l'autre en texte.
 - Une commande, c'est un nom, des options et des arguments ; un script, ce sont des commandes rangées dans un fichier.
+- `mv` déplace, `cp` copie, `rm` supprime sans passer par la corbeille ; un script rejoue ces commandes autant de fois qu'il faut.
 
 Le schéma reprend la pile entière, avec ses deux chemins : le clic de souris et le script lancé dans le terminal.
 
