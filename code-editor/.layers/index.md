@@ -18,9 +18,9 @@ Un programme est un texte, et il existe des outils faits pour écrire ce texte-l
 
 Un script peut s'écrire dans n'importe quel outil qui enregistre du texte. Mais tous ne conviennent pas, et certains aident bien plus que d'autres : pour taper, pour trouver une faute, pour lancer le programme. Ce contenu présente l'outil que les développeurs utilisent.
 
-## Un traitement de texte n'est pas un éditeur de texte
+## Traitement de texte, éditeur de texte, éditeur de code
 
-Tapons la même ligne, `echo "Bonjour"`, dans deux outils, puis demandons à `bash` de lire chaque fichier.
+Tapons la même ligne, `echo "Bonjour"`, dans trois outils, et regardons ce que chacun enregistre.
 
 ```scene
 lesson: assets/ide.scene.json

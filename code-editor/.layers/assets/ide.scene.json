@@ -12,29 +12,24 @@
   {
    "tone": "r",
    "label": "mise en forme"
+  },
+  {
+   "tone": "g",
+   "label": "aide de l'éditeur"
   }
  ],
  "entities": [
   {
-   "id": "you",
-   "kind": "actor",
-   "at": [
-    -15,
-    0
-   ],
-   "label": "vous"
-  },
-  {
    "id": "wp",
    "kind": "node",
    "at": [
-    -8,
-    -4.5
+    -11.5,
+    -5.5
    ],
    "tone": "v",
    "size": [
-    5.4,
-    2.0,
+    8.4,
+    2.2,
     1
    ],
    "title": "traitement de texte",
@@ -45,13 +40,13 @@
    "id": "te",
    "kind": "node",
    "at": [
-    -8,
-    4.5
+    0,
+    -5.5
    ],
    "tone": "v",
    "size": [
-    5.4,
-    2.0,
+    8.4,
+    2.2,
     1
    ],
    "title": "éditeur de texte",
@@ -59,99 +54,148 @@
    "detail": "Un **éditeur de texte** enregistre les caractères tapés, rien de plus : du **texte brut**."
   },
   {
-   "id": "docx",
+   "id": "ce",
+   "kind": "node",
+   "at": [
+    11.5,
+    -5.5
+   ],
+   "tone": "v",
+   "size": [
+    8.4,
+    2.2,
+    1
+   ],
+   "title": "éditeur de code",
+   "sub": "VS Code",
+   "detail": "Un **éditeur de code** enregistre le même texte brut, et aide à écrire et à lancer le programme."
+  },
+  {
+   "id": "f-wp",
    "kind": "layer",
    "at": [
-    2.5,
-    -4.5
+    -11.5,
+    2.2
    ],
    "tone": "r",
    "size": [
-    9.0,
-    5.2,
+    9.4,
+    6.4,
     1
    ],
    "title": "bonjour.docx"
   },
   {
-   "id": "docx-txt",
+   "id": "f-wp-txt",
    "kind": "file",
    "at": [
     0,
-    -0.2
+    -0.4
    ],
-   "tone": "r",
+   "tone": "y",
    "size": [
-    6.6,
+    7.6,
     1.2,
     1
    ],
-   "in": "docx",
+   "in": "f-wp",
    "title": "echo « Bonjour »",
    "detail": "Les guillemets droits sont devenus des guillemets **typographiques** : `bash` ne les prend pas pour des guillemets."
   },
   {
-   "id": "docx-fmt",
+   "id": "f-wp-fmt",
    "kind": "program",
    "at": [
     0,
-    1.6
+    1.4
    ],
    "tone": "r",
    "size": [
-    6.6,
-    1.1,
+    7.6,
+    1.2,
     1
    ],
-   "in": "docx",
+   "in": "f-wp",
    "title": "police, gras, marges…"
   },
   {
-   "id": "sh",
+   "id": "f-te",
    "kind": "layer",
    "at": [
-    2.5,
-    4.5
+    0,
+    2.2
    ],
    "tone": "y",
    "size": [
-    9.0,
-    4.0,
+    9.4,
+    6.4,
     1
    ],
    "title": "bonjour.sh"
   },
   {
-   "id": "sh-txt",
+   "id": "f-te-txt",
    "kind": "file",
    "at": [
     0,
-    0.5
+    -0.4
    ],
    "tone": "y",
    "size": [
-    6.6,
+    7.6,
     1.2,
     1
    ],
-   "in": "sh",
+   "in": "f-te",
    "title": "echo \"Bonjour\""
   },
   {
-   "id": "bash",
-   "kind": "node",
+   "id": "f-ce",
+   "kind": "layer",
    "at": [
-    13.5,
-    0
+    11.5,
+    2.2
    ],
-   "tone": "b",
+   "tone": "y",
    "size": [
-    4.2,
-    2.0,
+    9.4,
+    6.4,
     1
    ],
-   "title": "bash",
-   "sub": "lit le script"
+   "title": "bonjour.sh"
+  },
+  {
+   "id": "f-ce-txt",
+   "kind": "file",
+   "at": [
+    0,
+    -0.4
+   ],
+   "tone": "y",
+   "size": [
+    7.6,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "echo \"Bonjour\""
+  },
+  {
+   "id": "f-ce-help",
+   "kind": "program",
+   "at": [
+    0,
+    1.4
+   ],
+   "tone": "g",
+   "size": [
+    7.6,
+    1.2,
+    1
+   ],
+   "in": "f-ce",
+   "title": "couleurs, n° de ligne, terminal",
+   "detail": "Cette aide est dans l'**éditeur**, pas dans le fichier : le fichier reste du texte brut."
   },
   {
    "id": "win",
@@ -371,29 +415,17 @@
  "steps": [
   {
    "id": "traitement",
-   "label": "Traitement de texte",
-   "title": "Le même texte, deux fichiers",
+   "label": "Trois outils",
+   "title": "Ce que chaque outil enregistre",
    "body": [
-    "La même ligne tapée dans un traitement de texte, puis dans un éditeur de texte. `bash` lit chaque fichier."
+    "La même ligne, `echo \"Bonjour\"`, tapée dans trois outils. Seul le fichier du traitement de texte n'est pas du texte brut."
    ],
    "show": [
-    "you",
     "wp",
     "te",
-    "bash"
+    "ce"
    ],
-   "links": [
-    {
-     "from": "you",
-     "to": "wp",
-     "dashed": true
-    },
-    {
-     "from": "you",
-     "to": "te",
-     "dashed": true
-    }
-   ],
+   "links": [],
    "script": [
     {
      "do": "wait",
@@ -402,64 +434,31 @@
     {
      "do": "scene",
      "show": [
-      "docx"
+      "f-wp",
+      "f-wp-txt",
+      "f-wp-fmt"
      ],
      "link": [
       {
        "from": "wp",
-       "to": "docx"
+       "to": "f-wp"
       }
      ],
-     "say": "Vous tapez la même ligne dans un traitement de texte : echo \"Bonjour\"."
-    },
-    {
-     "do": "send",
-     "path": [
-      "you",
-      "wp",
-      "docx"
-     ],
-     "label": "echo \"Bonjour\""
-    },
-    {
-     "do": "scene",
-     "show": [
-      "docx-txt",
-      "docx-fmt"
-     ],
-     "say": "Il enregistre vos mots et leur mise en forme, et change les guillemets droits en « »."
+     "say": "Le traitement de texte enregistre vos mots et leur mise en forme, et change les guillemets en « »."
     },
     {
      "do": "wait",
-     "ms": 1600
-    },
-    {
-     "do": "scene",
-     "link": [
-      {
-       "from": "docx",
-       "to": "bash"
-      }
-     ]
-    },
-    {
-     "do": "send",
-     "path": [
-      "docx",
-      "bash"
-     ],
-     "label": "illisible",
-     "tone": "r"
+     "ms": 1800
     },
     {
      "do": "scene",
      "set": [
       {
-       "id": "bash",
-       "label": "ne comprend pas"
+       "id": "wp",
+       "label": "pas pour un programme"
       }
      ],
-     "say": "bash ne sait pas lire ce fichier : ce n'est plus du texte brut."
+     "say": "Pour un document, très bien ; pour un programme, non : ce n'est plus du texte brut."
     },
     {
      "do": "wait",
@@ -468,37 +467,16 @@
     {
      "do": "scene",
      "show": [
-      "sh"
+      "f-te",
+      "f-te-txt"
      ],
      "link": [
       {
        "from": "te",
-       "to": "sh"
+       "to": "f-te"
       }
      ],
-     "set": [
-      {
-       "id": "bash",
-       "label": null
-      }
-     ],
-     "say": "Dans un éditeur de texte, la même ligne."
-    },
-    {
-     "do": "send",
-     "path": [
-      "you",
-      "te",
-      "sh"
-     ],
-     "label": "echo \"Bonjour\""
-    },
-    {
-     "do": "scene",
-     "show": [
-      "sh-txt"
-     ],
-     "say": "Il enregistre les caractères tapés, rien de plus : du texte brut."
+     "say": "L'éditeur de texte enregistre les caractères tapés, rien de plus : du texte brut."
     },
     {
      "do": "wait",
@@ -506,35 +484,52 @@
     },
     {
      "do": "scene",
-     "link": [
-      {
-       "from": "sh",
-       "to": "bash"
-      }
-     ]
-    },
-    {
-     "do": "send",
-     "path": [
-      "sh",
-      "bash"
-     ],
-     "label": "Bonjour",
-     "tone": "y"
-    },
-    {
-     "do": "scene",
      "set": [
       {
-       "id": "bash",
-       "label": "affiche Bonjour"
+       "id": "te",
+       "label": "convient, sans aide"
       }
      ],
-     "say": "bash lit le fichier et affiche Bonjour."
+     "say": "Il convient pour un programme, mais il ne vous aide en rien."
     },
     {
      "do": "wait",
-     "ms": 2600
+     "ms": 1800
+    },
+    {
+     "do": "scene",
+     "show": [
+      "f-ce",
+      "f-ce-txt"
+     ],
+     "link": [
+      {
+       "from": "ce",
+       "to": "f-ce"
+      }
+     ],
+     "say": "L'éditeur de code enregistre le même texte brut…"
+    },
+    {
+     "do": "wait",
+     "ms": 1400
+    },
+    {
+     "do": "scene",
+     "show": [
+      "f-ce-help"
+     ],
+     "set": [
+      {
+       "id": "ce",
+       "label": "convient, et vous aide"
+      }
+     ],
+     "say": "…et vous aide à l'écrire et à le lancer : couleurs, numéros de ligne, terminal."
+    },
+    {
+     "do": "wait",
+     "ms": 2800
     }
    ]
   },
