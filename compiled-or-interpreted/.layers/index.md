@@ -7,7 +7,7 @@ tags:
   - computer
 difficulty: beginner
 duration: 12
-requires: "0.6.0"
+requires: "0.8.0"
 ---
 
 Un programme commence par un texte, que quelqu'un écrit ; le processeur, lui, n'exécute que des nombres. Vous saurez ce que sont le code source et le code machine, les trois chemins qui mènent de l'un à l'autre (un interpréteur, un compilateur, ou les deux avec Java), ce qu'il faut refaire quand on modifie un programme, et ce qu'est un runtime, le programme qu'il faut installer pour en faire tourner un autre.
@@ -20,18 +20,25 @@ Dans le contenu sur les couches, vous avez vu le shell exécuter `hello.sh`, un 
 
 ## Le code source et le code machine
 
-Le texte d'un programme, écrit par une personne, s'appelle le **code source**. Il est écrit dans un **langage de programmation**, avec ses mots et ses règles : le langage de `bash` pour `hello.sh`, et d'autres que vous croiserez, comme C (un langage ancien, encore très utilisé pour les systèmes d'exploitation), Java ou JavaScript. Le code source se lit avec n'importe quel éditeur de texte : ce sont des mots, des signes, des retours à la ligne.
+Le processeur ne comprend qu'une langue : le **code machine**, des instructions très simples (additionner deux nombres, ranger un nombre en mémoire) écrites sous forme de nombres. Vous, vous écrivez un programme dans un **langage de programmation**, un texte que l'on peut lire : c'est le **code source**. Entre les deux, il faut toujours un **traducteur**. Toute la différence entre les langages tient à une question : **quand** la traduction a lieu.
 
-Le processeur ne lit pas ce texte. Il exécute des **instructions**, des ordres très simples (additionner deux nombres, ranger un nombre en mémoire, passer à une autre instruction), écrits sous forme de nombres : c'est le **code machine**. Chaque famille de processeurs a le sien : les processeurs Intel et AMD de la plupart des PC n'ont pas les mêmes instructions que les puces des Mac récents. Un programme en code machine dépend aussi du système d'exploitation, puisqu'il passe par son noyau.
+```scene
+lesson: assets/traduction.scene.json
+step: traduction
+```
 
-| | Code source | Code machine |
+| Code source | Traduit quand | Par quoi |
 |---|---|---|
-| Qui l'écrit | une personne | un programme, à partir du code source |
-| À quoi il ressemble | du texte : `echo "Bonjour"` | des nombres, illisibles pour nous |
-| Qui le lit | une personne, un éditeur, un autre programme | le processeur |
-| Où il marche | partout où un programme sait le lire | sur une famille de processeurs et un système d'exploitation |
+| `hello.sh` | pendant l'exécution, ligne à ligne | `bash`, un **interpréteur** déjà installé sur le système |
+| `hello.py` (ou `.js`, `.php`) | pendant l'exécution | l'interpréteur du langage, à installer : Python, Node.js, PHP |
+| `Bonjour.java` | avant, vers une langue intermédiaire, puis pendant | le compilateur `javac`, puis la machine virtuelle Java |
+| `bonjour.c` | une fois pour toutes, avant | un **compilateur**, qui produit un fichier de code machine |
 
-Entre les deux, il faut donc toujours un programme qui fasse le passage. Il y a trois façons de s'y prendre. Les schémas qui suivent ne gardent que deux couches de la pile, le matériel et le noyau : les programmes qui tournent sont posés sur le noyau, les fichiers restent au sol, sur le disque.
+Imaginez un livre écrit en français, pour un lecteur qui ne lit que le chinois. Soit on traduit tout le livre avant de le lui donner : c'est **compilé**. Soit un traducteur, assis à côté de lui, traduit phrase par phrase, à chaque lecture : c'est **interprété**. Java traduit d'abord dans une langue intermédiaire, qu'un second traducteur relit pour chaque lecteur.
+
+**Interprété ne veut pas dire « pas traduit »** : un script `bash` ou un programme Python ne parle pas directement au processeur. Il y a toujours un traducteur ; la seule question, c'est quand il travaille.
+
+Les sections qui suivent reprennent chaque chemin. Leurs schémas ne gardent que deux couches de la pile, le matériel et le noyau : les programmes qui tournent sont posés sur le noyau, les fichiers restent au sol, sur le disque.
 
 ## Interprété : un programme lit le script ligne à ligne
 
