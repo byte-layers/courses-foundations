@@ -13,7 +13,7 @@ Les contenus de base de byte_layers, pour qui débute : ce qu'est un ordinateur,
 | `virtual-machines-and-containers/` | Machines virtuelles et conteneurs : plusieurs machines sur une seule | bit |
 | `intro-review/` | Quiz de fin d'introduction : du matériel aux conteneurs | bit |
 
-Ensemble, ils forment l'introduction à l'informatique, à lire dans l'ordre du tableau. Chaque contenu a son tag, de la forme `<dossier>/vN`. Les bits demandent l'extension 0.8.0 (schémas animés au format `bl-scenes/0.3`, quiz et terminal sur le plateau) ; les labs, 0.4.0. Si vous essayez les commandes, les fichiers vont dans `~/byte-layers/`.
+Ensemble, ils forment l'introduction à l'informatique, à lire dans l'ordre du tableau. La stack `stacks/intro-informatique/` les réunit en quatre couches (tag `stacks/intro-informatique/vN`). Chaque contenu a son tag, de la forme `<dossier>/vN`. Les bits demandent l'extension 0.8.0 (schémas animés au format `bl-scenes/0.3`, quiz et terminal sur le plateau) ; les labs, 0.4.0. Si vous essayez les commandes, les fichiers vont dans `~/byte-layers/`.
 
 ## Régénérer un schéma animé
 

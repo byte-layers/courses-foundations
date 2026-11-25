@@ -1,0 +1,26 @@
+title: "Introduction à l'informatique"
+description: "Comprendre ce qui se passe sous vos fenêtres, du matériel aux conteneurs : les couches d'un ordinateur, le terminal et votre premier script, l'éditeur de code, la compilation, les architectures d'un programme, puis les machines virtuelles et les conteneurs."
+level: beginner
+tags: [computer, shell, programming, containers]
+prerequisites: "Aucun : savoir se servir d'un ordinateur à la souris."
+layers:
+  - title: "L'ordinateur en couches"
+    summary: "Du matériel au terminal, puis votre premier script sur votre machine"
+    contents:
+      - { slug: computer-layers, role: read-first }
+      - { slug: first-script-lab }
+  - title: "Écrire et exécuter du code"
+    summary: "L'éditeur de code, la différence entre compilé et interprété, et votre poste de développeur"
+    contents:
+      - { slug: code-editor }
+      - { slug: compiled-or-interpreted }
+      - { slug: dev-setup-lab }
+  - title: "Où tourne un programme"
+    summary: "Du poste seul au n tiers, puis plusieurs machines sur une seule"
+    contents:
+      - { slug: program-architectures }
+      - { slug: virtual-machines-and-containers }
+  - title: "Faire le point"
+    summary: "Un quiz de fin qui reprend l'introduction, du matériel aux conteneurs"
+    contents:
+      - { slug: intro-review, role: proof }
