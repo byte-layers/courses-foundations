@@ -152,9 +152,9 @@ nt_show = [
 NT_LINKS = [L("nav1", "front"), L("front", "appsrv"), L("appsrv", "db"), L("appsrv", "mail"), L("mail", "lecteur")]
 steps.append({
     "id": "n-tiers", "label": "n tiers", "chapter": "n tiers", "title": "Le n tiers : on compte les machines",
-    "body": ["Le « n » de **n tiers** compte les machines, les serveurs, pas les programmes. Ici, cinq : le poste, un serveur web en façade, le serveur d'application, la base de données et un serveur pour les mails.",
-             "Une seule base, et chaque machine a sa tâche."],
-    "callout": {"title": "idée clé", "text": "n tiers = le nombre de machines de l'architecture."},
+    "body": ["Le « n » de **n tiers** compte les niveaux de machines, pas les programmes. Ici, cinq : le poste, un serveur web en façade, le serveur d'application, la base de données et un serveur pour les mails.",
+             "Une seule base, et chaque machine a sa tâche. Trois copies d'un même serveur, pour tenir la charge, resteraient **un seul tiers**."],
+    "callout": {"title": "idée clé", "text": "n tiers = le nombre de niveaux de machines traversés."},
     "hud": [{"label": "tiers", "value": 5}],
     "show": nt_show,
     "links": NT_LINKS,
@@ -232,7 +232,7 @@ svc_show = [
 steps.append({
     "id": "services", "label": "Services", "chapter": "aller plus loin", "title": "Aller plus loin : des services, chacun ses données",
     "body": ["Une grande application se découpe en **services** : Prêts, Recherche, Paiement, Mails. Chacun a une seule tâche et **ses propres données** ; ils se parlent par leurs API, comme avec un service externe.",
-             "On parle d'architecture **orientée services**, ou de **micro-services** quand ils sont nombreux et petits."],
+             "On parle d'architecture **orientée services** (SOA), et de **micro-services** quand chaque service se **déploie seul**, avec ses données."],
     "callout": {"title": "le prix", "text": "Plus de programmes à déployer et à surveiller : il faut des outils et une organisation pour ça."},
     "hud": [{"label": "services", "value": 4}, {"label": "bases", "value": 3}],
     "show": svc_show,
@@ -286,7 +286,7 @@ r5 = [
 ]
 rc.update({
     "title": "La bibliothèque sous ses formes",
-    "body": ["- **Un poste** : les trois rôles sur la même machine ; les données ne se partagent pas.\n- **Deux tiers**, client lourd : l'appli sur chaque poste, la base sur un serveur ; mise à jour poste par poste.\n- **Trois tiers**, client léger : afficher dans le navigateur, décider sur le serveur web, stocker dans la base.\n- **n tiers** : n compte les machines ; la base reste une seule.\n- **Plus loin** : des services, chacun sa tâche et ses données."],
+    "body": ["- **Un poste** : les trois rôles sur la même machine ; les données ne se partagent pas.\n- **Deux tiers**, client lourd : l'appli sur chaque poste, la base sur un serveur ; mise à jour poste par poste.\n- **Trois tiers**, client léger : afficher dans le navigateur, décider sur le serveur web, stocker dans la base.\n- **n tiers** : n compte les niveaux de machines ; la base reste une seule.\n- **Plus loin** : des services, chacun sa tâche et ses données."],
     "hud": [{"label": "formes", "value": "4 + 1"}],
     "show": keep + r4 + r5,
     "links": [L("r2a", "r2d"), {"path": ["r3n", "r3w", "r3d"]}, {"path": ["r4n", "r4f", "r4w", "r4d"]},
