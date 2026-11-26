@@ -41,12 +41,12 @@ step: poste-seul
 
 Une application se présente sous deux formes, et les deux noms reviendront dans la suite :
 
-| Forme | Comment on la lance | Nom |
-|---|---|---|
-| un programme installé sur le poste | elle s'ouvre dans sa propre fenêtre | **client lourd** |
-| une application web | elle s'ouvre dans le navigateur | **client léger** |
+| Nom | Ce que c'est |
+|---|---|
+| **client lourd** | un programme installé sur le poste, qui s'ouvre dans sa propre fenêtre |
+| **client léger** | une application web, qui s'ouvre dans le navigateur |
 
-Le navigateur est lui-même un client lourd, déjà installé sur tous les postes : il sert à ouvrir les clients légers.
+Le navigateur est lui-même une sorte de client lourd, déjà installé sur tous les postes : il sert à ouvrir les clients légers.
 
 ## Un programme sur plusieurs postes : comment gérer les données
 
@@ -76,15 +76,15 @@ Un prêt saisi au poste 1 se lit au poste 3. Le prix : quand une nouvelle versio
 
 ## Trois tiers, avec un client léger
 
-On passe en mode **client léger**. Avec le client lourd, un technicien devait installer et mettre à jour l'appli sur chaque poste. Avec le client léger, l'appli Prêts devient une **application web** : elle fonctionne directement dans le **navigateur** (Firefox, Chrome, Edge, Safari). Le navigateur, lui, est un client lourd, physiquement installé sur le poste, et il l'est déjà partout.
+On passe en mode **client léger**. Avec le client lourd, un technicien devait installer et mettre à jour l'appli sur chaque poste. Avec le client léger, l'appli Prêts devient une **application web** : elle fonctionne directement dans le **navigateur** (Firefox, Chrome, Edge, Safari). Le navigateur, lui, est une sorte de client lourd, physiquement installé sur le poste, et il l'est déjà partout.
 
 On reste en client-serveur, mais avec une machine de plus au milieu : un **serveur web**. C'est lui qui fait tourner l'appli Prêts, applique les règles et fait les traitements ; on l'appelle aussi le **backend**. Le navigateur ne parle pas à la base : il demande au serveur web, qui demande à la base.
 
-| Rôle | Où il vit | Nom du niveau |
-|---|---|---|
-| afficher | le navigateur, sur chaque poste | tiers **présentation** |
-| décider | l'appli Prêts, sur le serveur web | tiers **métier** |
-| stocker | la base de données, sur son serveur | tiers **données** |
+| Tiers | Son rôle, et où il vit |
+|---|---|
+| **présentation** | afficher, dans le navigateur de chaque poste |
+| **métier** | décider, dans l'appli Prêts sur le serveur web |
+| **données** | stocker, dans la base de données sur son serveur |
 
 Trois niveaux : l'architecture **trois tiers**.
 
@@ -104,7 +104,7 @@ lesson: assets/architectures.scene.json
 step: n-tiers
 ```
 
-Le « n » de **n tiers** compte les **machines**, les serveurs par lesquels passe une demande, pas les programmes ni les couches de code. Ici, **cinq**. Il reste **une seule base de données**, même si elle est parfois répartie sur plusieurs machines : on parle alors d'un **cluster** de base de données.
+Le « n » de **n tiers** compte les **niveaux de machines** par lesquels passe une demande, pas les programmes ni les couches de code. Ici, **cinq**. Si l'on met trois copies identiques du serveur d'application pour tenir la charge, cela reste **un seul tiers** : on compte les niveaux, pas les exemplaires. Il reste **une seule base de données**, même si elle est parfois répartie sur plusieurs machines : on parle alors d'un **cluster** de base de données.
 
 Retirez le serveur de mails et vous obtenez l'autre forme courante :
 
@@ -139,7 +139,9 @@ lesson: assets/architectures.scene.json
 step: services
 ```
 
-Chaque service a une seule tâche et, souvent, **ses propres données** : Recherche a son catalogue, Paiement ses amendes. Les services se parlent par leurs API, comme avec un service externe, et l'application mélange services internes et externes. On parle d'architecture **orientée services** (*SOA*), ou de **micro-services** quand ils sont nombreux et petits. On peut modifier ou remplacer un service sans toucher aux autres ; en échange, il faut des outils et une organisation pour déployer et surveiller tous ces programmes.
+Chaque service a une seule tâche et, souvent, **ses propres données** : Recherche a son catalogue, Paiement ses amendes. Les services se parlent par leurs API, comme avec un service externe. On parle d'architecture **orientée services** (*SOA*) ; dans les grandes entreprises, elle relie souvent des applications entières par un bus central (*ESB*).
+
+Les **micro-services** poussent l'idée plus loin : chaque service se **déploie seul**, avec ses données, sans attendre les autres. En théorie, ce n'est ni la taille ni le nombre qui font un micro-service. En pratique, découper trop fin multiplie les programmes à déployer et à surveiller, sans rien gagner.
 
 ## Quatre questions pour vérifier ce que vous avez retenu
 
@@ -170,13 +172,13 @@ questions:
       - "Sur le serveur web, dans l'appli"
     correct: 3
     explanation: "Le navigateur affiche (tiers présentation), le serveur web décide (tiers métier) et la base de données stocke (tiers données)."
-  - prompt: "Une demande passe par le navigateur, un serveur web en façade, un serveur d'application et un serveur de base de données. Combien de tiers ?"
+  - prompt: "Une demande passe par le navigateur, un serveur web en façade, un serveur d'application et un serveur de base de données, chacun sur sa machine. Combien de tiers, en comptant les niveaux de machines comme dans ce contenu ?"
     answers:
-      - "Quatre : on compte les machines par lesquelles passe la demande"
-      - "Trois : présentation, métier, données"
+      - "Quatre : un niveau par machine traversée"
+      - "Trois, parce qu'il y a trois rôles : afficher, décider, stocker"
       - "Un seul, puisqu'il n'y a qu'une base de données"
     correct: 1
-    explanation: "Le « n » du n tiers compte les machines, pas les rôles ni les programmes : ici quatre, avec une seule base."
+    explanation: "On compte ici les niveaux de machines : quatre, avec une seule base. Les rôles, eux, restent trois. Certains rangent le serveur en façade avec la présentation et parlent encore de trois tiers : c'est une autre convention, qui ne change rien à l'architecture."
 ```
 
 ## Récap
@@ -185,11 +187,11 @@ questions:
 - **Un poste** : les trois rôles sur la même machine. Sur plusieurs postes, les données ne se partagent pas.
 - **Deux tiers**, avec un **client lourd** : l'appli installée sur chaque poste, en client-serveur avec la base ; les données sont partagées, mais chaque mise à jour se fait poste par poste.
 - **Trois tiers**, avec un **client léger** : afficher dans le navigateur, décider sur le serveur web (le backend), stocker dans la base ; rien à installer sur les postes.
-- **n tiers** : n compte les machines par lesquelles passe une demande ; la base reste en général une seule.
+- **n tiers** : n compte les niveaux de machines par lesquels passe une demande (trois copies d'un serveur = un seul tiers) ; la base reste en général une seule.
 - **Service externe** : un programme tenu par quelqu'un d'autre, dont on se sert à travers son **API**.
-- **Pour aller plus loin** : des services, chacun sa tâche et ses données (architecture orientée services, micro-services).
+- **Pour aller plus loin** : des services, chacun sa tâche et ses données (architecture orientée services) ; des **micro-services** quand chacun se déploie seul.
 
-Le schéma pose la bibliothèque sous ses formes, côte à côte, avec une zone pour aller plus loin. Reste une question : comment ces programmes se parlent-ils, d'une machine à l'autre ? Ce sera l'objet d'un module sur le réseau, à venir.
+Le schéma pose la bibliothèque sous ses formes, côte à côte, avec une zone pour aller plus loin. Restent deux questions. Comment le code est-il rangé à l'intérieur d'un tiers ? C'est l'objet de [Tiers, couches et MVC](https://byte-layers.com/fr/bits/tiers-layers-mvc). Et que faire quand le trafic monte ? Voir [Tenir la charge](https://byte-layers.com/fr/bits/scaling-load-balancing).
 
 ```scene
 lesson: assets/architectures.scene.json
